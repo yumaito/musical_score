@@ -6,12 +6,13 @@ require 'musical_score/version'
 Gem::Specification.new do |spec|
   spec.name          = "musical_score"
   spec.version       = MusicalScore::VERSION
-  spec.authors       = ["Yuma Itor"]
+  spec.platform      = Gem::Platform::RUBY
+  spec.authors       = ["Yuma Ito"]
   spec.email         = ["yumaito0@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage      = "https://github.com/yumaito/musical_score"
+  spec.summary       = "Ruby library for  analysing a musical score"
+  spec.description   = "Ruby library for analysing a musical score. See README.md"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
