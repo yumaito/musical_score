@@ -6,7 +6,7 @@ require 'musical_score/version'
 Gem::Specification.new do |spec|
   spec.name          = "musical_score"
   spec.version       = MusicalScore::VERSION
-  spec.authors       = ["ItoYuma-macbookair"]
+  spec.authors       = ["Yuma Itor"]
   spec.email         = ["yumaito0@gmail.com"]
 
   spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
