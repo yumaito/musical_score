@@ -1,4 +1,6 @@
-module MusicalScore::Element
-    class Attribute
+module MusicalScore
+    module Element
+        class Attribute
+        end
     end
 end

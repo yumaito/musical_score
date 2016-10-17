@@ -1,4 +1,6 @@
-module MusicalScore::Element
-    class Measure
+module MusicalScore
+    module Element
+        class Measure
+        end
     end
 end
