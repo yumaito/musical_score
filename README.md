@@ -1,5 +1,7 @@
 # MusicalScore
 
+[![Build Status](https://travis-ci.org/yumaito/musical_score.svg?branch=master)](https://travis-ci.org/yumaito/musical_score)
+
 Library for representing and analysing musical score.
 
 ## Installation
