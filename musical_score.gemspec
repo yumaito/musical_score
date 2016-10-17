@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["yumaito0@gmail.com"]
 
   spec.homepage      = "https://github.com/yumaito/musical_score"
-  spec.summary       = "Ruby library for  analysing a musical score"
+  spec.summary       = "Ruby library for analysing a musical score."
   spec.description   = "Ruby library for analysing a musical score. See README.md"
   spec.license       = "MIT"
 
