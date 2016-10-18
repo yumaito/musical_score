@@ -35,6 +35,10 @@ module MusicalScore
                 @octave = octave
             end
 
+            def note_number
+                result = (12 * octave) + @@key[step] + alter
+                return result
+            end
         end
     end
 end

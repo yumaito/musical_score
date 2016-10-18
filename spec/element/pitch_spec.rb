@@ -52,4 +52,14 @@ describe MusicalScore::Element::Pitch do
             end
         end
     end
+    describe 'note_number' do
+        let(:pitch) { MusicalScore::Element::Pitch.new(:C, 0, 3) }
+        it 'C3 returns correct note number' do
+            expect(pitch.note_number).to eq 36
+        end
+        let(:pitch_d) { MusicalScore::Element::Pitch.new(:D, 1, 3) }
+        it 'D#3 returns correct note number' do
+            expect(pitch_d.note_number).to eq 39
+        end
+    end
 end
