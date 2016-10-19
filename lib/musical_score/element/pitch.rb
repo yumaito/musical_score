@@ -1,6 +1,7 @@
 module MusicalScore
     module Element
         class Pitch
+            include Comparable
             # pitch names
             @@key = {
                 :C => 0,
@@ -12,6 +13,8 @@ module MusicalScore
                 :B => 11
             }
             attr_accessor :step, :alter, :octave
+
+            # constructor
             def initialize(step, alter, octave)
                 # Check arguments
                 unless (@@key.key?(step.to_sym))
@@ -35,6 +38,21 @@ module MusicalScore
                 @octave = octave
             end
 
+            def <=> (other)
+                self.note_number <=> other.note_number
+            end
+
+            # Given a note_number like MIDI note_number, return the Pitch object
+            def self.new_note_number(note_number)
+                step_key_num   = note_number % 12
+                octave         = note_number / 12
+                candidate_keys = @@key.keys.select{ |item| step_key_num >= @@key[item] }
+                key            = candidate_keys.max_by{ |item| @@key[item] }
+
+                return MusicalScore::Element::Pitch.new(key, step_key_num-@@key[key], octave)
+            end
+
+            # returns note_number
             def note_number
                 result = (12 * octave) + @@key[step] + alter
                 return result

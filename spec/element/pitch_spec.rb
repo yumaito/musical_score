@@ -52,6 +52,37 @@ describe MusicalScore::Element::Pitch do
             end
         end
     end
+
+    describe 'Comparable' do
+        let(:c3) { MusicalScore::Element::Pitch.new(:C, 0, 3)}
+        let(:c3_2) { MusicalScore::Element::Pitch.new(:C, 0, 3)}
+        let(:d2) { MusicalScore::Element::Pitch.new(:D, 0, 2)}
+        let(:c4) { MusicalScore::Element::Pitch.new(:C, 0, 4)}
+        it 'c3 = c3' do
+            expect(c3 == c3_2).to be_truthy
+        end
+        it 'c3 > d2' do
+            expect(c3 > d2).to be_truthy
+        end
+        it 'c3 < c4' do
+            expect(c3 < c4).to be_truthy
+        end
+    end
+
+    describe 'new_note_number' do
+        let(:note) { MusicalScore::Element::Pitch.new_note_number(60)}
+        it 'create new note from note number 60' do
+            expect(note.step).to eq :C
+            expect(note.alter).to eq 0
+            expect(note.octave).to eq 5
+        end
+        let(:note) { MusicalScore::Element::Pitch.new_note_number(39)}
+        it 'create new note from note number 39' do
+            expect(note.step).to eq :D
+            expect(note.alter).to eq 1
+            expect(note.octave).to eq 3
+        end
+    end
     describe 'note_number' do
         let(:pitch) { MusicalScore::Element::Pitch.new(:C, 0, 3) }
         it 'C3 returns correct note number' do
