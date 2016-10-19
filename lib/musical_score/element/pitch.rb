@@ -39,6 +39,42 @@ module MusicalScore
                 result = (12 * octave) + @@key[step] + alter
                 return result
             end
+
+            def alter_key_name
+
+            end
+
+            def to_s(sharp_flat = :default)
+                if (sharp_flat == :sharp)
+
+                elsif (sharp_flat == :flat)
+
+                else
+                    result = "%s%s%d" % [@step.to_s, self.alter_to_s, @octave]
+                    return result
+                end
+            end
+
+            private
+
+            def alter_to_s
+                num = @alter.abs
+                if (num == 0)
+                    return ""
+                elsif (num < 0)
+                    result = ''
+                    num.times do |i|
+                        result += 'b'
+                    end
+                    return result
+                else
+                    result = ''
+                    num.times do |i|
+                        result += '#'
+                    end
+                    return result
+                end
+            end
         end
     end
 end
