@@ -43,11 +43,22 @@ module MusicalScore
             end
 
             # Given a note_number like MIDI note_number, return the Pitch object
-            def self.new_note_number(note_number)
+            def self.new_note_sharp(note_number)
                 step_key_num   = note_number % 12
                 octave         = note_number / 12
+                # calculate step and alter
                 candidate_keys = @@key.keys.select{ |item| step_key_num >= @@key[item] }
                 key            = candidate_keys.max_by{ |item| @@key[item] }
+
+                return MusicalScore::Element::Pitch.new(key, step_key_num-@@key[key], octave)
+            end
+
+            def self.new_note_flat(note_number)
+                step_key_num   = note_number % 12
+                octave         = note_number / 12
+                # calculate step and alter
+                candidate_keys = @@key.keys.select{ |item| step_key_num <= @@key[item] }
+                key            = candidate_keys.min_by{ |item| @@key[item] }
 
                 return MusicalScore::Element::Pitch.new(key, step_key_num-@@key[key], octave)
             end

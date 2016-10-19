@@ -69,26 +69,48 @@ describe MusicalScore::Element::Pitch do
         end
     end
 
-    describe 'new_note_number' do
-        let(:note1) { MusicalScore::Element::Pitch.new_note_number(60)}
+    describe 'new_note_sharp' do
+        let(:note1) { MusicalScore::Element::Pitch.new_note_sharp(60)}
         it 'create new note from note number 60' do
             expect(note1.step).to eq :C
             expect(note1.alter).to eq 0
             expect(note1.octave).to eq 5
         end
-        let(:note2) { MusicalScore::Element::Pitch.new_note_number(39)}
+        let(:note2) { MusicalScore::Element::Pitch.new_note_sharp(39)}
         it 'create new note from note number 39' do
             expect(note2.step).to eq :D
             expect(note2.alter).to eq 1
             expect(note2.octave).to eq 3
         end
-        let(:note3) { MusicalScore::Element::Pitch.new_note_number(71)}
-        it 'create new note from note number 71' do
-            expect(note3.step).to eq :B
-            expect(note3.alter).to eq 0
+        let(:note3) { MusicalScore::Element::Pitch.new_note_sharp(70)}
+        it 'create new note from note number 70' do
+            expect(note3.step).to eq :A
+            expect(note3.alter).to eq 1
             expect(note3.octave).to eq 5
         end
     end
+
+    describe 'new_note_flat' do
+        let(:note1) { MusicalScore::Element::Pitch.new_note_flat(60)}
+        it 'create new note from note number 60' do
+            expect(note1.step).to eq :C
+            expect(note1.alter).to eq 0
+            expect(note1.octave).to eq 5
+        end
+        let(:note2) { MusicalScore::Element::Pitch.new_note_flat(39)}
+        it 'create new note from note number 39' do
+            expect(note2.step).to eq :E
+            expect(note2.alter).to eq -1
+            expect(note2.octave).to eq 3
+        end
+        let(:note3) { MusicalScore::Element::Pitch.new_note_flat(70)}
+        it 'create new note from note number 70' do
+            expect(note3.step).to eq :B
+            expect(note3.alter).to eq -1
+            expect(note3.octave).to eq 5
+        end
+    end
+
     describe 'note_number' do
         let(:pitch) { MusicalScore::Element::Pitch.new(:C, 0, 3) }
         it 'C3 returns correct note number' do
