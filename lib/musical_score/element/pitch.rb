@@ -69,18 +69,13 @@ module MusicalScore
                 return result
             end
 
-            def alter_key_name
-
-            end
-
-            def to_s(sharp_flat = :default)
-                if (sharp_flat == :sharp)
-
-                elsif (sharp_flat == :flat)
-
-                else
-                    result = "%s%s%d" % [@step.to_s, self.alter_to_s, @octave]
+            # Given argument ":note_str",  return note string like "D##"
+            def to_s(note_str)
+                if note_str == :note_str
+                    result = "%s%s%d" % [@step.to_s, alter_to_s, @octave]
                     return result
+                else
+                    return self.to_s
                 end
             end
 
@@ -90,7 +85,7 @@ module MusicalScore
                 num = @alter.abs
                 if (num == 0)
                     return ""
-                elsif (num < 0)
+                elsif (@alter < 0)
                     result = ''
                     num.times do |i|
                         result += 'b'
