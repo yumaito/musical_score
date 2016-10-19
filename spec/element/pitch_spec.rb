@@ -70,17 +70,23 @@ describe MusicalScore::Element::Pitch do
     end
 
     describe 'new_note_number' do
-        let(:note) { MusicalScore::Element::Pitch.new_note_number(60)}
+        let(:note1) { MusicalScore::Element::Pitch.new_note_number(60)}
         it 'create new note from note number 60' do
-            expect(note.step).to eq :C
-            expect(note.alter).to eq 0
-            expect(note.octave).to eq 5
+            expect(note1.step).to eq :C
+            expect(note1.alter).to eq 0
+            expect(note1.octave).to eq 5
         end
-        let(:note) { MusicalScore::Element::Pitch.new_note_number(39)}
+        let(:note2) { MusicalScore::Element::Pitch.new_note_number(39)}
         it 'create new note from note number 39' do
-            expect(note.step).to eq :D
-            expect(note.alter).to eq 1
-            expect(note.octave).to eq 3
+            expect(note2.step).to eq :D
+            expect(note2.alter).to eq 1
+            expect(note2.octave).to eq 3
+        end
+        let(:note3) { MusicalScore::Element::Pitch.new_note_number(71)}
+        it 'create new note from note number 71' do
+            expect(note3.step).to eq :B
+            expect(note3.alter).to eq 0
+            expect(note3.octave).to eq 5
         end
     end
     describe 'note_number' do
