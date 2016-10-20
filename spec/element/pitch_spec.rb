@@ -144,4 +144,11 @@ describe MusicalScore::Element::Pitch do
             expect(note5.to_s(true)).to eq 'Abb3'
         end
     end
+
+    describe 'clone' do
+        let(:note) { MusicalScore::Element::Pitch.new(:C, 0, 5)}
+        it 'creates different instance' do
+            expect(note.clone.equal?(note)).to be_falsey
+        end
+    end
 end
