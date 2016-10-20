@@ -1,5 +1,5 @@
 module MusicalScore
-    module Elemen
+    module Element
         SHARP = :sharp
         FLAT  = :flat
     end
