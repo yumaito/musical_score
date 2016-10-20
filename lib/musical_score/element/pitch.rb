@@ -15,6 +15,10 @@ module MusicalScore
             attr_accessor :step, :alter, :octave
 
             # constructor
+            # @param step [Symbol] The key of the pitch described as "C", "D", "E", etc.
+            # @param alter [Integer] The number of sharp (positive number) or flat (negative number).
+            # @param octave [Integer] The octave number
+            #
             def initialize(step, alter, octave)
                 # Check arguments
                 unless (@@key.key?(step.to_sym))
