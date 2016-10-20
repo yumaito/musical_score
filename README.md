@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.org/yumaito/musical_score.svg?branch=master)](https://travis-ci.org/yumaito/musical_score)
 
 Library for representing and analysing musical score.
+This library is implemented along with the definitions of [MusicXML](http://www.musicxml.com/) mainly.
+The goal of this project is handling any kind of musical score, such as MIDI.
 
 ## Installation
 
