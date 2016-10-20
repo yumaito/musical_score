@@ -150,5 +150,8 @@ describe MusicalScore::Element::Pitch do
         it 'creates different instance' do
             expect(note.clone.equal?(note)).to be_falsey
         end
+        it '== shows equal' do
+            expect(note == note.clone).to be_truthy
+        end
     end
 end
