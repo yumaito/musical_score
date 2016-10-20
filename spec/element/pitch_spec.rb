@@ -129,19 +129,19 @@ describe MusicalScore::Element::Pitch do
         let(:note4) { MusicalScore::Element::Pitch.new(:B, -1, 3)}
         let(:note5) { MusicalScore::Element::Pitch.new(:A, -2, 3)}
         it 'returns C5' do
-            expect(note1.to_s(:note_str)).to eq 'C5'
+            expect(note1.to_s(true)).to eq 'C5'
         end
         it 'reteurns D#3' do
-            expect(note2.to_s(:note_str)).to eq 'D#3'
+            expect(note2.to_s(true)).to eq 'D#3'
         end
         it 'returns D##3' do
-            expect(note3.to_s(:note_str)).to eq 'D##3'
+            expect(note3.to_s(true)).to eq 'D##3'
         end
         it 'reteurns Bb3' do
-            expect(note4.to_s(:note_str)).to eq 'Bb3'
+            expect(note4.to_s(true)).to eq 'Bb3'
         end
         it 'returns Abb3' do
-            expect(note5.to_s(:note_str)).to eq 'Abb3'
+            expect(note5.to_s(true)).to eq 'Abb3'
         end
     end
 end
