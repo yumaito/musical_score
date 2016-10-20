@@ -15,6 +15,14 @@ module MusicalScore
             attr_accessor :step, :alter, :octave
 
             # constructor
+            #
+            # @example create Pitch object
+            #  MusicalScore::Element::Pitch.new(:C, 0, 3) # => C3
+            #
+            # @param step [Symbol] The key of the pitch described as "C", "D", "E", etc.
+            # @param alter [Integer] The number of sharp (positive number) or flat (negative number).
+            # @param octave [Integer] The octave number
+            #
             def initialize(step, alter, octave)
                 # Check arguments
                 unless (@@key.key?(step.to_sym))
@@ -38,11 +46,23 @@ module MusicalScore
                 @octave = octave
             end
 
+            # Pitch is comparable
+            #
+            # @example
+            #  a = MusicalScore::Element::Pitch.new(:C, 0, 3)
+            #  b = MusicalScore::Element::Pitch.new(:D, 0 ,3)
+            #  a < b # => true
             def <=> (other)
                 self.note_number <=> other.note_number
             end
 
-            # Given a note_number like MIDI note_number, return the Pitch object
+            # Given a note_number like MIDI note_number, return the Pitch object with positive number of alter
+            #
+            # @example
+            #  a = MusicalScore::Element::Pitch.new_note_sharp(70)
+            #  a # => [:step => :A, :alter => 1, :octave => 5 ]
+            # @param note_number [Ingteger] note_number
+            # @return [MusicalScore::Element::Pitch]
             def self.new_note_sharp(note_number)
                 step_key_num   = note_number % 12
                 octave         = note_number / 12
@@ -53,6 +73,14 @@ module MusicalScore
                 return MusicalScore::Element::Pitch.new(key, step_key_num-@@key[key], octave)
             end
 
+            # Given a note_number like MIDI note_number, return the Pitch object with negative number of alter
+            #
+            # @example
+            #  a = MusicalScore::Element::Pitch.new_note_sharp(70)
+            #  a # => [:step => :B, :alter => -1, :octave => 5 ]
+            #
+            # @param note_number [Ingteger] note_number
+            # @return [MusicalScore::Element::Pitch]
             def self.new_note_flat(note_number)
                 step_key_num   = note_number % 12
                 octave         = note_number / 12
@@ -63,15 +91,18 @@ module MusicalScore
                 return MusicalScore::Element::Pitch.new(key, step_key_num-@@key[key], octave)
             end
 
-            # returns note_number
+            # @return [Integer] note_number
             def note_number
                 result = (12 * octave) + @@key[step] + alter
                 return result
             end
 
-            # Given argument ":note_str",  return note string like "D##"
-            def to_s(note_str)
-                if note_str == :note_str
+            # Given argument true, return note string like "D##"
+            #
+            # @param is_note_str [Boolean]
+            # @return [String]
+            def to_s(is_note_str = false)
+                if is_note_str
                     result = "%s%s%d" % [@step.to_s, alter_to_s, @octave]
                     return result
                 else
