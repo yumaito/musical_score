@@ -3,7 +3,7 @@ require 'spec_helper'
 describe MusicalScore::Element::Attribute::Clef do
     describe 'initialize' do
         let(:clef) { MusicalScore::Element::Attribute::Clef.new(:G)}
-        it 'valid case' do
+        it 'success case' do
             expect(clef.sign).to eq :G
             expect(clef.line).to eq 0
             expect(clef.clef_octave_change).to eq 0
