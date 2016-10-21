@@ -1,6 +1,6 @@
 module MusicalScore
     module Element
-        class Attribute
+        module Attribute
         end
     end
 end
