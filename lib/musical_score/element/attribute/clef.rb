@@ -12,6 +12,9 @@ module MusicalScore
                 # @param line [Integer] The number of line from the bottom of the staff, which the sign note is defined at the line.
                 # @param clef_octave_change [Integer] The number of clef changes, which is written either an octave higher or lower than sounding pitch
                 def initialize(sign, line = 0, clef_octave_change = 0)
+                    unless (@@sign.include?(sign.to_sym))
+                        raise MusicalScore::Element::InvalidClefSign, "\"#{sign}\" is not a kind of clef sign."
+                    end
                     @sign               = sign
                     @line               = line
                     @clef_octave_change = clef_octave_change
