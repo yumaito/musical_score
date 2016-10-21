@@ -13,7 +13,7 @@ module MusicalScore
                 # @param clef_octave_change [Integer] The number of clef changes, which is written either an octave higher or lower than sounding pitch
                 def initialize(sign, line = 0, clef_octave_change = 0)
                     unless (@@sign.include?(sign.to_sym))
-                        raise MusicalScore::Element::InvalidClefSign, "\"#{sign}\" is not a kind of clef sign."
+                        raise MusicalScore::InvalidClefSign, "\"#{sign}\" is not a kind of clef sign."
                     end
                     @sign               = sign
                     @line               = line
