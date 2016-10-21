@@ -26,19 +26,19 @@ module MusicalScore
             def initialize(step, alter = 0, octave)
                 # Check arguments
                 unless (@@key.key?(step.to_sym))
-                    raise MusicalScore::InvalidNote, "\"#{step}\" is not a kind of note key"
+                    raise MusicalScore::InvalidNote, "[#{step}] is not a kind of note key"
                 end
                 unless (alter.kind_of?(Integer))
-                    raise TypeError, "\"#{alter}\" is not a kind of Integer"
+                    raise TypeError, "[#{alter}] is not a kind of Integer"
                 end
                 unless ([-2, -1, 0, 1, 2].include?(alter))
-                    raise ArgumentError, "\"#{alter}\" is invalid"
+                    raise ArgumentError, "[#{alter}] is invalid"
                 end
                 unless (octave.kind_of?(Integer))
-                    raise TypeError, "\"#{alter}\" is not a kind of Integer"
+                    raise TypeError, "[#{alter}] is not a kind of Integer"
                 end
                 if (octave < 0)
-                    raise ArgumentError, "\"#{octave}\" must be zero or more"
+                    raise ArgumentError, "[#{octave}] must be zero or more"
                 end
 
                 @step   = step.to_sym
