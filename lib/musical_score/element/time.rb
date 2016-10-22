@@ -12,6 +12,7 @@ module MusicalScore
                 @beat_type = beat_type
             end
 
+            # @return [String] describe the time object in a fraction style
             def to_s
                 return "%d/%d" % [@beats, @beat_type]
             end

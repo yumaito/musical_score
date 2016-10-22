@@ -14,13 +14,16 @@ module MusicalScore
                 unless (@@mode.include?(mode.to_sym))
                     raise MusicalScore::InvalidKeyMode, "[#{mode}] is not a kind of key mode"
                 end
-                unless (fifths.between?(-7,7))
+                unless (fifths.between?(-7, 7))
                     raise ArgumentError,  "[fifths] must be between -7 and 7"
                 end
                 @fifths = fifths
                 @mode   = mode
             end
 
+            # detect tonic in major scale and minor scale, and pithes that has sharp or flat
+            #
+            # @return [Hash] { :major_pitch => Pitch, :minor_pitch => Pitch, :altered_pitches => Array of Pitch }
             def tonic_key_and_altered_pitches
                 if @fifths >= 0
                     pitch_number = @@circle_of_fifths[@fifths]
