@@ -1,5 +1,5 @@
 module MusicalScore
-    module Element
+    module Attribute
         class Time
             attr_reader :beats, :beat_type
 

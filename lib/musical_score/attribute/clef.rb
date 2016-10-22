@@ -1,5 +1,5 @@
 module MusicalScore
-    module Element
+    module Attribute
         class Clef
 
             @@sign = [:G, :F, :C, :percussion, :TAB, :jianpu, :none]
