@@ -10,4 +10,6 @@ module MusicalScore
     RELATED_KEY_SLIDE_NUMBER = 9
 
     AVAILABLE_NUMBERS_OF_ALTER = [-2, -1, 0, 1, 2]
+
+    START_STOP_CONTINUE = [ :start, :stop, :continue ]
 end
