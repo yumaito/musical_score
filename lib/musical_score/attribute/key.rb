@@ -14,7 +14,7 @@ module MusicalScore
                 unless (@@mode.include?(mode.to_sym))
                     raise MusicalScore::InvalidKeyMode, "[#{mode}] is not a kind of key mode"
                 end
-                unless (fifths.between?(-7, 7))
+                unless (fifths.between?(-NUMBER_OF_FIFTHS, NUMBER_OF_FIFTHS))
                     raise ArgumentError,  "[fifths] must be between -7 and 7"
                 end
                 @fifths = fifths
@@ -29,13 +29,12 @@ module MusicalScore
                     pitch_number = @@circle_of_fifths[@fifths]
                     major_pitch = MusicalScore::Note::Pitch.new_note_sharp(pitch_number)
 
-                    minor_number = (pitch_number + 9) % 12
+                    minor_number = (pitch_number + RELATED_KEY_SLIDE_NUMBER) % NUMBER_OF_NOTES
                     minor_pitch  = MusicalScore::Note::Pitch.new_note_sharp(minor_number)
 
-                    shap_start_index = 11
                     altered_pitches  = Array.new
                     @fifths.times do |i|
-                        count = (i + shap_start_index) % 12
+                        count = (i + SHARP_START_INDEX) % NUMBER_OF_NOTES
                         altered_pitches.push(MusicalScore::Note::Pitch.new_note_sharp(@@circle_of_fifths[count]))
                     end
                     return { :major_pitch => major_pitch, :minor_pitch => minor_pitch, :altered_pitches => altered_pitches }
@@ -45,13 +44,12 @@ module MusicalScore
                     pitch_number = reversed[fif-1]
                     major_pitch = MusicalScore::Note::Pitch.new_note_flat(pitch_number)
 
-                    minor_number = (pitch_number + 9) % 12
+                    minor_number = (pitch_number + RELATED_KEY_SLIDE_NUMBER) % NUMBER_OF_NOTES
                     minor_pitch  = MusicalScore::Note::Pitch.new_note_flat(minor_number)
 
-                    flat_start_index = 6
                     altered_pitches  = Array.new
                     fif.times do |i|
-                        count = (i + flat_start_index) % 12
+                        count = (i + FLAT_START_INDEX) % NUMBER_OF_NOTES
                         altered_pitches.push(MusicalScore::Note::Pitch.new_note_flat(reversed[count]))
                     end
                     return { :major_pitch => major_pitch, :minor_pitch => minor_pitch, :altered_pitches => altered_pitches }

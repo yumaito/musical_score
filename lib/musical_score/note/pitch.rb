@@ -31,7 +31,7 @@ module MusicalScore
                 unless (alter.kind_of?(Integer))
                     raise TypeError, "[#{alter}] is not a kind of Integer"
                 end
-                unless ([-2, -1, 0, 1, 2].include?(alter))
+                unless (AVAILABLE_NUMBERS_OF_ALTER.include?(alter))
                     raise ArgumentError, "[#{alter}] is invalid"
                 end
                 unless (octave.kind_of?(Integer))
@@ -64,8 +64,8 @@ module MusicalScore
             # @param note_number [Ingteger] note_number
             # @return [MusicalScore::Note::Pitch]
             def self.new_note_sharp(note_number)
-                step_key_num   = note_number % 12
-                octave         = note_number / 12
+                step_key_num   = note_number % NUMBER_OF_NOTES
+                octave         = note_number / NUMBER_OF_NOTES
                 # calculate step and alter
                 candidate_keys = @@key.keys.select{ |item| step_key_num >= @@key[item] }
                 key            = candidate_keys.max_by{ |item| @@key[item] }
@@ -82,8 +82,8 @@ module MusicalScore
             # @param note_number [Ingteger] note_number
             # @return [MusicalScore::Note::Pitch]
             def self.new_note_flat(note_number)
-                step_key_num   = note_number % 12
-                octave         = note_number / 12
+                step_key_num   = note_number % NUMBER_OF_NOTES
+                octave         = note_number / NUMBER_OF_NOTES
                 # calculate step and alter
                 candidate_keys = @@key.keys.select{ |item| step_key_num <= @@key[item] }
                 key            = candidate_keys.min_by{ |item| @@key[item] }
@@ -93,7 +93,7 @@ module MusicalScore
 
             # @return [Integer] note_number
             def note_number
-                result = (12 * octave) + @@key[step] + alter
+                result = (NUMBER_OF_NOTES * octave) + @@key[step] + alter
                 return result
             end
 
