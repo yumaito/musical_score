@@ -5,6 +5,7 @@ require "musical_score/element/pitch"
 require "musical_score/element/const"
 require "musical_score/element/clef"
 require "musical_score/element/time"
+require "musical_score/element/key"
 
 module MusicalScore
     module Element
