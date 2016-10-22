@@ -13,7 +13,7 @@ module MusicalScore
             end
 
             def to_s
-                return "%d / %d" % [@beats, @beat_type]
+                return "%d/%d" % [@beats, @beat_type]
             end
         end
     end

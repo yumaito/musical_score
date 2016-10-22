@@ -10,8 +10,8 @@ describe MusicalScore::Element::Time do
     end
     describe 'to_s' do
         let(:time) { MusicalScore::Element::Time.new(6, 8)}
-        it 'returns 6 / 8' do
-            expect(time.to_s).to eq '6 / 8'
+        it 'returns 6/8' do
+            expect(time.to_s).to eq '6/8'
         end
     end
 end
