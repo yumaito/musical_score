@@ -21,10 +21,29 @@ module MusicalScore
                 @mode   = mode
             end
 
-            def scale_name
+            def altered_pitches
                 if @fifths >= 0
                     pitch_number = @@circle_of_fifths[@fifths]
+                    pitch = MusicalScore::Element::Pitch.new_note_sharp(pitch_number)
+                    shap_start_index = 11
+                    altered_pitches = Array.new
+                    @fifths.times do |i|
+                        count = (i + shap_start_index) % 12
+                        altered_pitches.push(MusicalScore::Element::Pitch.new_note_sharp(@@circle_of_fifths[count]))
+                    end
+                    return { :pitch => pitch, :altered_pitches => altered_pitches }
                 else
+                    reversed = @@circle_of_fifths.reverse
+                    fif      = @fifths.abs
+                    pitch_number = reversed[fif-1]
+                    pitch = MusicalScore::Element::Pitch.new_note_flat(pitch_number)
+                    flat_start_index = 6
+                    altered_pitches = Array.new
+                    fif.times do |i|
+                        count = (i + flat_start_index) % 12
+                        altered_pitches.push(MusicalScore::Element::Pitch.new_note_flat(reversed[count]))
+                    end
+                    return { :pitch => pitch, :altered_pitches => altered_pitches }
                 end
             end
         end

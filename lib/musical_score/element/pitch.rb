@@ -23,7 +23,7 @@ module MusicalScore
             # @param alter [Integer] The number of sharp (positive number) or flat (negative number).
             # @param octave [Integer] The octave number
             #
-            def initialize(step, alter = 0, octave)
+            def initialize(step, alter = 0, octave = 0)
                 # Check arguments
                 unless (@@key.key?(step.to_sym))
                     raise MusicalScore::InvalidNote, "[#{step}] is not a kind of note key"
