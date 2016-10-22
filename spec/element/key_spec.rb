@@ -18,16 +18,18 @@ describe MusicalScore::Element::Key do
 
     describe 'altered_pitches' do
         let(:c_major) { MusicalScore::Element::Key.new(0, :major)}
-        let(:altered_pitches) {c_major.altered_pitches}
+        let(:altered_pitches) {c_major.tonic_key_and_altered_pitches}
         it 'C major' do
-            expect(altered_pitches[:pitch]).to eq MusicalScore::Element::Pitch.new(:C)
+            expect(altered_pitches[:major_pitch]).to eq MusicalScore::Element::Pitch.new(:C)
+            expect(altered_pitches[:minor_pitch]).to eq MusicalScore::Element::Pitch.new(:A)
             expect(altered_pitches[:altered_pitches].size).to eq 0
         end
 
         let(:e_major) { MusicalScore::Element::Key.new(4, :major)}
-        let(:altered_pitches_e) {e_major.altered_pitches}
+        let(:altered_pitches_e) {e_major.tonic_key_and_altered_pitches}
         it 'E major' do
-            expect(altered_pitches_e[:pitch]).to eq MusicalScore::Element::Pitch.new(:E)
+            expect(altered_pitches_e[:major_pitch]).to eq MusicalScore::Element::Pitch.new(:E)
+            expect(altered_pitches_e[:minor_pitch]).to eq MusicalScore::Element::Pitch.new(:C, 1)
             expect(altered_pitches_e[:altered_pitches]).to match([
                 MusicalScore::Element::Pitch.new(:F),
                 MusicalScore::Element::Pitch.new(:C),
@@ -37,9 +39,10 @@ describe MusicalScore::Element::Key do
         end
 
         let(:c_sharp_major) { MusicalScore::Element::Key.new(7, :major)}
-        let(:altered_pitches_cs) { c_sharp_major.altered_pitches }
+        let(:altered_pitches_cs) { c_sharp_major.tonic_key_and_altered_pitches }
         it 'C sharp major' do
-            expect(altered_pitches_cs[:pitch]).to eq MusicalScore::Element::Pitch.new(:C, 1)
+            expect(altered_pitches_cs[:major_pitch]).to eq MusicalScore::Element::Pitch.new(:C, 1)
+            expect(altered_pitches_cs[:minor_pitch]).to eq MusicalScore::Element::Pitch.new(:A, 1)
             expect(altered_pitches_cs[:altered_pitches]).to match([
                 MusicalScore::Element::Pitch.new(:F),
                 MusicalScore::Element::Pitch.new(:C),
@@ -52,9 +55,10 @@ describe MusicalScore::Element::Key do
         end
 
         let(:e_flat_major) { MusicalScore::Element::Key.new(-3, :major)}
-        let(:altered_pitches_ef) { e_flat_major.altered_pitches }
+        let(:altered_pitches_ef) { e_flat_major.tonic_key_and_altered_pitches }
         it 'E flat major' do
-            expect(altered_pitches_ef[:pitch]).to eq MusicalScore::Element::Pitch.new(:E, -1)
+            expect(altered_pitches_ef[:major_pitch]).to eq MusicalScore::Element::Pitch.new(:E, -1)
+            expect(altered_pitches_ef[:minor_pitch]).to eq MusicalScore::Element::Pitch.new(:C)
             expect(altered_pitches_ef[:altered_pitches]).to match([
                 MusicalScore::Element::Pitch.new(:B),
                 MusicalScore::Element::Pitch.new(:E),
@@ -63,9 +67,10 @@ describe MusicalScore::Element::Key do
         end
 
         let(:g_flat_major) { MusicalScore::Element::Key.new(-6, :major)}
-        let(:altered_pitches_gf) { g_flat_major.altered_pitches }
+        let(:altered_pitches_gf) { g_flat_major.tonic_key_and_altered_pitches }
         it 'G flat major' do
-            expect(altered_pitches_gf[:pitch]).to eq MusicalScore::Element::Pitch.new(:G, -1)
+            expect(altered_pitches_gf[:major_pitch]).to eq MusicalScore::Element::Pitch.new(:G, -1)
+            expect(altered_pitches_gf[:minor_pitch]).to eq MusicalScore::Element::Pitch.new(:E, -1)
             expect(altered_pitches_gf[:altered_pitches]).to match([
                 MusicalScore::Element::Pitch.new(:B),
                 MusicalScore::Element::Pitch.new(:E),

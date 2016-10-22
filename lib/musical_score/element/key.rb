@@ -21,29 +21,37 @@ module MusicalScore
                 @mode   = mode
             end
 
-            def altered_pitches
+            def tonic_key_and_altered_pitches
                 if @fifths >= 0
                     pitch_number = @@circle_of_fifths[@fifths]
-                    pitch = MusicalScore::Element::Pitch.new_note_sharp(pitch_number)
+                    major_pitch = MusicalScore::Element::Pitch.new_note_sharp(pitch_number)
+
+                    minor_number = (pitch_number + 9) % 12
+                    minor_pitch  = MusicalScore::Element::Pitch.new_note_sharp(minor_number)
+
                     shap_start_index = 11
-                    altered_pitches = Array.new
+                    altered_pitches  = Array.new
                     @fifths.times do |i|
                         count = (i + shap_start_index) % 12
                         altered_pitches.push(MusicalScore::Element::Pitch.new_note_sharp(@@circle_of_fifths[count]))
                     end
-                    return { :pitch => pitch, :altered_pitches => altered_pitches }
+                    return { :major_pitch => major_pitch, :minor_pitch => minor_pitch, :altered_pitches => altered_pitches }
                 else
                     reversed = @@circle_of_fifths.reverse
                     fif      = @fifths.abs
                     pitch_number = reversed[fif-1]
-                    pitch = MusicalScore::Element::Pitch.new_note_flat(pitch_number)
+                    major_pitch = MusicalScore::Element::Pitch.new_note_flat(pitch_number)
+
+                    minor_number = (pitch_number + 9) % 12
+                    minor_pitch  = MusicalScore::Element::Pitch.new_note_flat(minor_number)
+
                     flat_start_index = 6
-                    altered_pitches = Array.new
+                    altered_pitches  = Array.new
                     fif.times do |i|
                         count = (i + flat_start_index) % 12
                         altered_pitches.push(MusicalScore::Element::Pitch.new_note_flat(reversed[count]))
                     end
-                    return { :pitch => pitch, :altered_pitches => altered_pitches }
+                    return { :major_pitch => major_pitch, :minor_pitch => minor_pitch, :altered_pitches => altered_pitches }
                 end
             end
         end
