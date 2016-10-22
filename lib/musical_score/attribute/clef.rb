@@ -14,7 +14,7 @@ module MusicalScore
                 unless (@@sign.include?(sign.to_sym))
                     raise MusicalScore::InvalidClefSign, "[#{sign}] is not a kind of clef sign."
                 end
-                @sign               = sign
+                @sign               = sign.to_sym
                 @line               = line
                 @clef_octave_change = clef_octave_change
             end

@@ -17,7 +17,7 @@ module MusicalScore
                 unless (fifths.between?(-NUMBER_OF_FIFTHS, NUMBER_OF_FIFTHS))
                     raise ArgumentError,  "[fifths] must be between -7 and 7"
                 end
-                @fifths = fifths
+                @fifths = fifths.to_sym
                 @mode   = mode
             end
 
