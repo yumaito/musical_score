@@ -1,6 +1,6 @@
 module MusicalScore
-    module Element
-        class Note
+    module Score
+        class Measure
         end
     end
 end
