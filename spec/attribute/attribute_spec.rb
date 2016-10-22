@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe MusicalScore::Element::Attribute do
+describe MusicalScore::Attribute::Attribute do
     describe 'initialize' do
         let(:attribute) {
-            MusicalScore::Element::Attribute.new do |attr|
+            MusicalScore::Attribute::Attribute.new do |attr|
                 attr.divisions = 24
-                attr.clef = MusicalScore::Element::Clef.new(:F)
-                attr.key = MusicalScore::Element::Key.new(4, :major)
-                attr.time = MusicalScore::Element::Time.new(4, 4)
+                attr.clef = MusicalScore::Attribute::Clef.new(:F)
+                attr.key = MusicalScore::Attribute::Key.new(4, :major)
+                attr.time = MusicalScore::Attribute::Time.new(4, 4)
             end
         }
         it 'success initializing' do
@@ -18,11 +18,11 @@ describe MusicalScore::Element::Attribute do
             expect(attribute.instruments).to eq 'Piano'
         end
         let(:attribute_guitar) {
-            MusicalScore::Element::Attribute.new do |attr|
+            MusicalScore::Attribute::Attribute.new do |attr|
                 attr.divisions = 24
-                attr.clef = MusicalScore::Element::Clef.new(:F)
-                attr.key = MusicalScore::Element::Key.new(4, :major)
-                attr.time = MusicalScore::Element::Time.new(4, 4)
+                attr.clef = MusicalScore::Attribute::Clef.new(:F)
+                attr.key = MusicalScore::Attribute::Key.new(4, :major)
+                attr.time = MusicalScore::Attribute::Time.new(4, 4)
                 attr.instruments = 'Guitar'
             end
         }

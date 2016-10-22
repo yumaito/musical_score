@@ -1,5 +1,5 @@
 module MusicalScore
-    module Element
+    module Note
         class Pitch
             include Comparable
             # pitch names
@@ -17,7 +17,7 @@ module MusicalScore
             # constructor
             #
             # @example create Pitch object
-            #  MusicalScore::Element::Pitch.new(:C, 0, 3) # => C3
+            #  MusicalScore::Note::Pitch.new(:C, 0, 3) # => C3
             #
             # @param step [Symbol] The key of the pitch described as "C", "D", "E", etc.
             # @param alter [Integer] The number of sharp (positive number) or flat (negative number).
@@ -49,8 +49,8 @@ module MusicalScore
             # Pitch is comparable
             #
             # @example
-            #  a = MusicalScore::Element::Pitch.new(:C, 0, 3)
-            #  b = MusicalScore::Element::Pitch.new(:D, 0 ,3)
+            #  a = MusicalScore::Note::Pitch.new(:C, 0, 3)
+            #  b = MusicalScore::Note::Pitch.new(:D, 0 ,3)
             #  a < b # => true
             def <=> (other)
                 self.note_number <=> other.note_number
@@ -59,10 +59,10 @@ module MusicalScore
             # Given a note_number like MIDI note_number, return the Pitch object with positive number of alter
             #
             # @example
-            #  a = MusicalScore::Element::Pitch.new_note_sharp(70)
+            #  a = MusicalScore::Note::Pitch.new_note_sharp(70)
             #  a # => [:step => :A, :alter => 1, :octave => 5 ]
             # @param note_number [Ingteger] note_number
-            # @return [MusicalScore::Element::Pitch]
+            # @return [MusicalScore::Note::Pitch]
             def self.new_note_sharp(note_number)
                 step_key_num   = note_number % 12
                 octave         = note_number / 12
@@ -70,17 +70,17 @@ module MusicalScore
                 candidate_keys = @@key.keys.select{ |item| step_key_num >= @@key[item] }
                 key            = candidate_keys.max_by{ |item| @@key[item] }
 
-                return MusicalScore::Element::Pitch.new(key, step_key_num-@@key[key], octave)
+                return MusicalScore::Note::Pitch.new(key, step_key_num-@@key[key], octave)
             end
 
             # Given a note_number like MIDI note_number, return the Pitch object with negative number of alter
             #
             # @example
-            #  a = MusicalScore::Element::Pitch.new_note_sharp(70)
+            #  a = MusicalScore::Note::Pitch.new_note_sharp(70)
             #  a # => [:step => :B, :alter => -1, :octave => 5 ]
             #
             # @param note_number [Ingteger] note_number
-            # @return [MusicalScore::Element::Pitch]
+            # @return [MusicalScore::Note::Pitch]
             def self.new_note_flat(note_number)
                 step_key_num   = note_number % 12
                 octave         = note_number / 12
@@ -88,7 +88,7 @@ module MusicalScore
                 candidate_keys = @@key.keys.select{ |item| step_key_num <= @@key[item] }
                 key            = candidate_keys.min_by{ |item| @@key[item] }
 
-                return MusicalScore::Element::Pitch.new(key, step_key_num-@@key[key], octave)
+                return MusicalScore::Note::Pitch.new(key, step_key_num-@@key[key], octave)
             end
 
             # @return [Integer] note_number
