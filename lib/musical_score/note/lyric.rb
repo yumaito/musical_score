@@ -11,7 +11,7 @@ module MusicalScore
             # @param text [String]
             # @param syllabic [Symbol]
             # @param is_extend [Boolean]
-            def initialize(text, syllabic, is_extend)
+            def initialize(text, syllabic, is_extend = false)
                 unless (@@syllabic.include?(syllabic.to_sym))
                     raise MusicalScore::InvalidSyllabic, "[#{syllabic}] is not a kind of syllabic"
                 end

@@ -7,6 +7,7 @@ require "musical_score/attribute/key"
 require "musical_score/attribute/time"
 require "musical_score/note/note"
 require "musical_score/note/pitch"
+require "musical_score/note/lyric"
 require "musical_score/score/measure"
 
 module MusicalScore

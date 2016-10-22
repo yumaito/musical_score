@@ -17,8 +17,8 @@ module MusicalScore
                 unless (fifths.between?(-NUMBER_OF_FIFTHS, NUMBER_OF_FIFTHS))
                     raise ArgumentError,  "[fifths] must be between -7 and 7"
                 end
-                @fifths = fifths.to_sym
-                @mode   = mode
+                @fifths = fifths
+                @mode   = mode.to_sym
             end
 
             # detect tonic in major scale and minor scale, and pithes that has sharp or flat
