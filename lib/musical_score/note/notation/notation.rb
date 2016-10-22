@@ -30,7 +30,7 @@ module MusicalScore
                     :mf,
                     :mp,
                     :p,
-                    :pp
+                    :pp,
                     :ppp,
                     :pppp,
                     :ppppp,
