@@ -16,7 +16,7 @@ module MusicalScore
             Contract KeywordArgs[
                 :duration          => Pos,
                 :tie               => Maybe[Enum[*TYPE_START_STOP]],
-                :dot               => Nat,
+                :dot               => Optional[Nat],
                 :lyric             => Optional[nil],
                 :pitch             => Optional[nil],
                 :rest              => true,
@@ -41,13 +41,16 @@ module MusicalScore
                 @pitch    = pitch
                 @rest     = rest
                 @type     = type
+                @time_modification = time_modification
+
+                set_actual_duration
             end
 
             # constructor for pitch note
             Contract KeywordArgs[
                 :duration          => Pos,
                 :tie               => Maybe[Enum[*TYPE_START_STOP]],
-                :dot               => Nat,
+                :dot               => Optional[Nat],
                 :lyric             => Maybe[MusicalScore::Note::Lyric],
                 :pitch             => MusicalScore::Note::Pitch,
                 :rest              => Optional[false],
@@ -72,8 +75,20 @@ module MusicalScore
                 @pitch    = pitch
                 @rest     = rest
                 @type     = type
+                @time_modification = time_modification
+
+                set_actual_duration
             end
 
+            private
+            def set_actual_duration
+                unless(@time_modification)
+                    @actual_duration = Rational(@duration, 1)
+                else
+                    total_duration = @duration * @time_modification.normal_notes
+                    @actual_duration = Rational(total_duration, @time_modification.actual_notes)
+                end
+            end
         end
     end
 end
