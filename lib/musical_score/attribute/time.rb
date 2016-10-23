@@ -1,12 +1,13 @@
+require 'contracts'
 module MusicalScore
     module Attribute
         class Time
+            include Contracts
             attr_reader :beats, :beat_type
 
             # constructor
             #
-            # @param beats [Integer]
-            # @param beat_type [Integer]
+            Contract Num, Num => Any
             def initialize(beats, beat_type)
                 @beats     = beats
                 @beat_type = beat_type
