@@ -41,7 +41,7 @@ module MusicalScore
                 @type     = type
             end
 
-            # constructor for pitched note
+            # constructor for pitch note
             Contract KeywordArgs[
                 :duration => Pos,
                 :tie      => Maybe[Enum[*TYPE_START_STOP]],

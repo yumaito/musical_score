@@ -30,7 +30,7 @@ describe MusicalScore::Note::Note do
                 type: MusicalScore::Note::Type.new("eighth")
             )
         }
-        it 'pitched note' do
+        it 'pitch note' do
             expect(note.duration).to eq 4
             expect(note.tie).to eq nil
             expect(note.dot).to eq 1
