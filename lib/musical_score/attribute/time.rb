@@ -7,8 +7,6 @@ module MusicalScore
 
             # constructor
             #
-            # @param beats [Integer]
-            # @param beat_type [Integer]
             Contract Num, Num => Any
             def initialize(beats, beat_type)
                 @beats     = beats

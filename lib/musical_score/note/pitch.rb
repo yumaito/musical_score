@@ -21,9 +21,9 @@ module MusicalScore
             # @example create Pitch object
             #  MusicalScore::Note::Pitch.new(:C, 0, 3) # => C3
             #
-            # @param step [Symbol] The key of the pitch described as "C", "D", "E", etc.
-            # @param alter [Integer] The number of sharp (positive number) or flat (negative number).
-            # @param octave [Integer] The octave number
+            # @param step The key of the pitch described as "C", "D", "E", etc.
+            # @param alter The number of sharp (positive number) or flat (negative number).
+            # @param octave The octave number
             #
             Contract Or[String, Symbol], Enum[*AVAILABLE_NUMBERS_OF_ALTER], Nat => Any
             def initialize(step, alter = 0, octave = 0)
@@ -52,8 +52,6 @@ module MusicalScore
             # @example
             #  a = MusicalScore::Note::Pitch.new_note_sharp(70)
             #  a # => [:step => :A, :alter => 1, :octave => 5 ]
-            # @param note_number [Ingteger] note_number
-            # @return [MusicalScore::Note::Pitch]
             Contract Nat => MusicalScore::Note::Pitch
             def self.new_note_sharp(note_number)
                 step_key_num   = note_number % NUMBER_OF_NOTES
@@ -71,8 +69,6 @@ module MusicalScore
             #  a = MusicalScore::Note::Pitch.new_note_sharp(70)
             #  a # => [:step => :B, :alter => -1, :octave => 5 ]
             #
-            # @param note_number [Ingteger] note_number
-            # @return [MusicalScore::Note::Pitch]
             Contract Nat => MusicalScore::Note::Pitch
             def self.new_note_flat(note_number)
                 step_key_num   = note_number % NUMBER_OF_NOTES
@@ -84,7 +80,6 @@ module MusicalScore
                 return MusicalScore::Note::Pitch.new(key, step_key_num-@@key[key], octave)
             end
 
-            # @return [Integer] note_number
             def note_number
                 result = (NUMBER_OF_NOTES * octave) + @@key[step] + alter
                 return result
@@ -92,8 +87,7 @@ module MusicalScore
 
             # Given argument true, return note string like "D##"
             #
-            # @param is_note_str [Boolean]
-            # @return [String]
+            Contract Maybe[Bool] => String
             def to_s(is_note_str = false)
                 if is_note_str
                     result = "%s%s%d" % [@step.to_s, alter_to_s, @octave]

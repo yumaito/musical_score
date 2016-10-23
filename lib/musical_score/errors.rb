@@ -1,5 +1,5 @@
 module MusicalScore
-    class InvalidNote < StandardError; end
-    class InvalidClefSign < StandardError; end
-    class InvalidKeyMode < StandardError; end
+    CUSTOM_VALIDATION_BETWEEN_VALUES = lambda {|arg, value1, value2,|
+        arg.between?(value1, value2)
+    }
 end

@@ -9,8 +9,8 @@ module MusicalScore
             attr_reader :fifths, :mode
             # constructor
             #
-            # @param fifths [Integer] The number of sharps (positive) or flats (negative)
-            # @param mode [Symbol] major or minor
+            # @param fifths The number of sharps (positive) or flats (negative)
+            # @param mode major or minor
             Contract Num, Enum[*@@mode] => Any
             def initialize(fifths, mode)
                 unless (fifths.between?(-NUMBER_OF_FIFTHS, NUMBER_OF_FIFTHS))
@@ -22,7 +22,6 @@ module MusicalScore
 
             # detect tonic in major scale and minor scale, and pithes that has sharp or flat
             #
-            # @return [Hash] { :major_pitch => Pitch, :minor_pitch => Pitch, :altered_pitches => Array of Pitch }
             Contract None => HashOf[Any, Any]
             def tonic_key_and_altered_pitches
                 if @fifths >= 0
