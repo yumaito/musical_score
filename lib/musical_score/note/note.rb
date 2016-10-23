@@ -9,6 +9,7 @@ module MusicalScore
     module Note
         class Note
             attr_accessor :duration, :tie, :dot, :lyric, :pitch, :rest, :type
+            attr_reader :actual_duration
             include Contracts
 
             # constructor for rest note
@@ -16,8 +17,8 @@ module MusicalScore
                 :duration => Pos,
                 :tie      => Maybe[Enum[*TYPE_START_STOP]],
                 :dot      => Nat,
-                :lyric    => nil,
-                :pitch    => nil,
+                :lyric    => Optional[nil],
+                :pitch    => Optional[nil],
                 :rest     => true,
                 :type     => MusicalScore::Note::Type,
             ] => Any
@@ -46,8 +47,8 @@ module MusicalScore
                 :tie      => Maybe[Enum[*TYPE_START_STOP]],
                 :dot      => Nat,
                 :lyric    => Maybe[MusicalScore::Note::Lyric],
-                :pitch    => Maybe[MusicalScore::Note::Pitch],
-                :rest     => false,
+                :pitch    => MusicalScore::Note::Pitch,
+                :rest     => Optional[false],
                 :type     => MusicalScore::Note::Type,
             ] => Any
             def initialize(
@@ -55,7 +56,7 @@ module MusicalScore
                 tie: nil,
                 dot: 0,
                 lyric: nil,
-                pitch: nil,
+                pitch:,
                 rest: false,
                 type:,
                 **rest_args
@@ -68,6 +69,7 @@ module MusicalScore
                 @rest     = rest
                 @type     = type
             end
+
         end
     end
 end
