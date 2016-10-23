@@ -10,7 +10,7 @@ describe MusicalScore::Note::Lyric do
         end
 
         it 'raise InvalidSyllabic' do
-            expect{ MusicalScore::Note::Lyric.new('lyric', :one) }.to raise_error(MusicalScore::InvalidSyllabic)
+            expect{ MusicalScore::Note::Lyric.new('lyric', :one) }.to raise_error(ArgumentError)
         end
     end
 end
