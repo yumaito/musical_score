@@ -3,7 +3,7 @@ module MusicalScore
     module Attribute
         class Clef
             include Contracts
-            @@sign = [:G, :F, :C, :percussion, :TAB, :jianpu, :none]
+            @@sign = %i(G F C percussion TAB jianpu none)
             attr_reader :sign, :line, :clef_octave_change
 
             # constructor

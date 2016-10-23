@@ -3,7 +3,7 @@ module MusicalScore
     module Note
         class Lyric
             include Contracts
-            @@syllabic = [ :single, :begin, :end, :middle ]
+            @@syllabic = %i(single begin end middle)
             attr_accessor :text, :syllabic, :is_extend
 
             # constructor

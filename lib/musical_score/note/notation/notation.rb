@@ -10,45 +10,64 @@ module MusicalScore
         module Notation
             class Notation
                 include Contracts
-                @@articulation = [
-                    :accent,
-                    :breath_mark,
-                    :caesura,
-                    :detached_legato,
-                    :doit,
-                    :falloff,
-                    :plop,
-                    :scoop,
-                    :spiccato,
-                    :staccatissimo,
-                    :staccato,
-                    :stress,
-                    :strong_accent,
-                    :tenuto,
-                    :unstress
-                ]
-                @@dynamics = [
-                    :f,
-                    :ff,
-                    :fff,
-                    :ffff,
-                    :fffff,
-                    :fp,
-                    :fz,
-                    :mf,
-                    :mp,
-                    :p,
-                    :pp,
-                    :ppp,
-                    :pppp,
-                    :ppppp,
-                    :rf,
-                    :rfz,
-                    :sf,
-                    :sffz,
-                    :sfpp,
-                    :sfz,
-                ]
+                @@articulation = %i(
+                    accent
+                    breath_mark
+                    caesura
+                    detached_legato
+                    doit
+                    falloff
+                    plop
+                    scoop
+                    spiccato
+                    staccatissimo
+                    staccato
+                    stress
+                    strong_accent
+                    tenuto
+                    unstress
+                )
+                @@dynamics = %i(
+                    f
+                    ff
+                    fff
+                    ffff
+                    fffff
+                    fp
+                    fz
+                    mf
+                    mp
+                    p
+                    pp
+                    ppp
+                    pppp
+                    ppppp
+                    rf
+                    rfz
+                    sf
+                    sffz
+                    sfpp
+                    sfz
+                )
+                attr_accessor :articulation, :dynamics, :tie, :tuplet
+                Contract KeywordArgs[
+                    :articulation => Maybe[Enum[*@@articulation]],
+                    :dynamics     => Maybe[Enum[*@@dynamics]],
+                    :tie          => Maybe[MusicalScore::Note::Notation::Tie],
+                    :tuplet       => Maybe[MusicalScore::Note::Notation::Tuplet],
+                ] => Any
+                def initialize(
+                    articulation: nil,
+                    dynamics: nil,
+                    tie: nil,
+                    tuplet: nil,
+                    **rest_args
+                )
+                    @articulation = articulation
+                    @dynamics     = dynamics
+                    @tie          = tie
+                    @tuplet       = tuplet
+                end
             end
         end
     end
