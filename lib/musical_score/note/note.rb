@@ -8,19 +8,20 @@ end
 module MusicalScore
     module Note
         class Note
-            attr_accessor :duration, :tie, :dot, :lyric, :pitch, :rest, :type
-            attr_reader :actual_duration
+            attr_accessor  :lyric
+            attr_reader :duration, :tie, :dot, :time_modification, :actual_duration, :pitch, :rest, :type
             include Contracts
 
             # constructor for rest note
             Contract KeywordArgs[
-                :duration => Pos,
-                :tie      => Maybe[Enum[*TYPE_START_STOP]],
-                :dot      => Nat,
-                :lyric    => Optional[nil],
-                :pitch    => Optional[nil],
-                :rest     => true,
-                :type     => MusicalScore::Note::Type,
+                :duration          => Pos,
+                :tie               => Maybe[Enum[*TYPE_START_STOP]],
+                :dot               => Nat,
+                :lyric             => Optional[nil],
+                :pitch             => Optional[nil],
+                :rest              => true,
+                :type              => MusicalScore::Note::Type,
+                :time_modification => Maybe[MusicalScore::Note::TimeModification],
             ] => Any
             def initialize(
                 duration:,
@@ -30,6 +31,7 @@ module MusicalScore
                 pitch: nil,
                 rest: true,
                 type:,
+                time_modification: nil,
                 **rest_args
                 )
                 @duration = duration
@@ -43,13 +45,14 @@ module MusicalScore
 
             # constructor for pitch note
             Contract KeywordArgs[
-                :duration => Pos,
-                :tie      => Maybe[Enum[*TYPE_START_STOP]],
-                :dot      => Nat,
-                :lyric    => Maybe[MusicalScore::Note::Lyric],
-                :pitch    => MusicalScore::Note::Pitch,
-                :rest     => Optional[false],
-                :type     => MusicalScore::Note::Type,
+                :duration          => Pos,
+                :tie               => Maybe[Enum[*TYPE_START_STOP]],
+                :dot               => Nat,
+                :lyric             => Maybe[MusicalScore::Note::Lyric],
+                :pitch             => MusicalScore::Note::Pitch,
+                :rest              => Optional[false],
+                :type              => MusicalScore::Note::Type,
+                :time_modification => Maybe[MusicalScore::Note::TimeModification],
             ] => Any
             def initialize(
                 duration:,
@@ -59,6 +62,7 @@ module MusicalScore
                 pitch:,
                 rest: false,
                 type:,
+                time_modification: nil,
                 **rest_args
                 )
                 @duration = duration
