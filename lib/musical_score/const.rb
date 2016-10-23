@@ -11,5 +11,5 @@ module MusicalScore
 
     AVAILABLE_NUMBERS_OF_ALTER = [-2, -1, 0, 1, 2]
 
-    START_STOP_CONTINUE = [ :start, :stop, :continue ]
+    TYPE_START_STOP_CONTINUE = [ :start, :stop, :continue ]
 end
