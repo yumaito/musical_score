@@ -54,7 +54,7 @@ module MusicalScore
             #  a # => [:step => :A, :alter => 1, :octave => 5 ]
             # @param note_number [Ingteger] note_number
             # @return [MusicalScore::Note::Pitch]
-            Contract Num => MusicalScore::Note::Pitch
+            Contract Nat => MusicalScore::Note::Pitch
             def self.new_note_sharp(note_number)
                 step_key_num   = note_number % NUMBER_OF_NOTES
                 octave         = note_number / NUMBER_OF_NOTES
@@ -73,7 +73,7 @@ module MusicalScore
             #
             # @param note_number [Ingteger] note_number
             # @return [MusicalScore::Note::Pitch]
-            Contract Num => MusicalScore::Note::Pitch
+            Contract Nat => MusicalScore::Note::Pitch
             def self.new_note_flat(note_number)
                 step_key_num   = note_number % NUMBER_OF_NOTES
                 octave         = note_number / NUMBER_OF_NOTES
