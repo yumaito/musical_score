@@ -62,7 +62,7 @@ module MusicalScore
                     tie: nil,
                     tuplet: nil,
                     **rest_args
-                )
+                    )
                     @articulation = articulation
                     @dynamics     = dynamics
                     @tie          = tie

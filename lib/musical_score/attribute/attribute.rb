@@ -27,7 +27,7 @@ module MusicalScore
                 time: MusicalScore::Attribute::Time.new(4, 4),
                 instruments: 'Piano',
                 **rest_args
-            )
+                )
                 @divisions   = divisions
                 @clef        = clef
                 @key         = key
