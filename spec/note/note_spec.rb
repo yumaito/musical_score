@@ -8,7 +8,7 @@ describe MusicalScore::Note::Note do
                 tie: nil,
                 dot: 0,
                 rest: true,
-                type: MusicalScore::Note::Type.new("quarter")
+                type: MusicalScore::Note::Type.new("quarter"),
             )
         }
         it 'rest note' do
