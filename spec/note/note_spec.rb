@@ -37,6 +37,7 @@ describe MusicalScore::Note::Note do
             expect(note.lyric.text).to eq "all"
             expect(note.rest).to be_falsey
             expect(note.type.size).to eq "eighth"
+            expect(note.actual_duration).to eq Rational(4, 1)
         end
 
         let(:triplet_note) {
