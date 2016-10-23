@@ -3,7 +3,7 @@ module MusicalScore
     module Attribute
         class Clef
             include Contracts
-            @@sign = [:G, :F, :C, :percussion, :TAB, :jianpu, :none]
+            @@sign = %i(G F C percussion TAB jianpu none)
             attr_reader :sign, :line, :clef_octave_change
 
             # constructor
@@ -13,7 +13,7 @@ module MusicalScore
             # @param clef_octave_change The number of clef changes, which is written either an octave higher or lower than sounding pitch
             Contract Enum[*@@sign], Pos, Num => Any
             def initialize(sign, line = 0, clef_octave_change = 0)
-                @sign               = sign
+                @sign               = sign.to_sym
                 @line               = line
                 @clef_octave_change = clef_octave_change
             end
