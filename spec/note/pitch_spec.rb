@@ -2,12 +2,6 @@ require 'spec_helper'
 
 describe MusicalScore::Note::Pitch do
     describe 'initialize' do
-        let(:pitch) { MusicalScore::Note::Pitch.new("C", 2, 3) }
-        it 'successfully create pitch' do
-            expect(pitch.step).to eq :C
-            expect(pitch.alter).to eq 2
-            expect(pitch.octave).to eq 3
-        end
 
         let(:pitch_with_symbol) { MusicalScore::Note::Pitch.new(:D, -2, 2) }
         it 'successfully create pitch with symbol' do
@@ -18,11 +12,11 @@ describe MusicalScore::Note::Pitch do
 
         # check error case
         it 'raise InvalidNote Error' do
-            expect{ MusicalScore::Note::Pitch.new(:R, 2, 2) }.to raise_error(MusicalScore::InvalidNote)
+            expect{ MusicalScore::Note::Pitch.new(:R, 2, 2) }.to raise_error(ArgumentError)
         end
         context 'step is lower case letter' do
             it 'raise InvalidNote Error' do
-                expect{ MusicalScore::Note::Pitch.new(:c, 0, 0) }.to raise_error(MusicalScore::InvalidNote)
+                expect{ MusicalScore::Note::Pitch.new(:c, 0, 0) }.to raise_error(ArgumentError)
             end
         end
         context 'alter is not integer' do

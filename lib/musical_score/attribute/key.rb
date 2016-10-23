@@ -11,11 +11,8 @@ module MusicalScore
             #
             # @param fifths The number of sharps (positive) or flats (negative)
             # @param mode major or minor
-            Contract Num, Enum[*@@mode] => Any
+            Contract Enum[*-NUMBER_OF_FIFTHS..NUMBER_OF_FIFTHS], Enum[*@@mode] => Any
             def initialize(fifths, mode)
-                unless (fifths.between?(-NUMBER_OF_FIFTHS, NUMBER_OF_FIFTHS))
-                    raise ArgumentError,  "[fifths] must be between -7 and 7"
-                end
                 @fifths = fifths
                 @mode   = mode
             end

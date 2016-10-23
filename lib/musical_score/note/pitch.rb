@@ -25,12 +25,8 @@ module MusicalScore
             # @param alter The number of sharp (positive number) or flat (negative number).
             # @param octave The octave number
             #
-            Contract Or[String, Symbol], Enum[*AVAILABLE_NUMBERS_OF_ALTER], Nat => Any
+            Contract Enum[*@@key.keys], Enum[*AVAILABLE_NUMBERS_OF_ALTER], Nat => Any
             def initialize(step, alter = 0, octave = 0)
-                # Check arguments
-                unless (@@key.key?(step.to_sym))
-                    raise MusicalScore::InvalidNote, "[#{step}] is not a kind of note key"
-                end
 
                 @step   = step.to_sym
                 @alter  = alter
