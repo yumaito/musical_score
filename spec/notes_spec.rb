@@ -15,7 +15,7 @@ describe MusicalScore::Notes do
         }
 
         it 'initialize' do
-            expect(notes).to match([ note, note, note ])
+            expect(notes.notes).to match([ note, note, note ])
         end
     end
 end
