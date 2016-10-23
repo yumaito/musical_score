@@ -9,6 +9,7 @@ module MusicalScore
     module Note
         module Notation
             class Notation
+                include Contracts
                 @@articulation = [
                     :accent,
                     :breath_mark,
