@@ -1,7 +1,9 @@
+require 'contracts'
 module MusicalScore
     module Note
         class Pitch
             include Comparable
+            include Contracts
             # pitch names
             @@key = {
                 :C => 0,
@@ -23,22 +25,11 @@ module MusicalScore
             # @param alter [Integer] The number of sharp (positive number) or flat (negative number).
             # @param octave [Integer] The octave number
             #
+            Contract Or[String, Symbol], Enum[*AVAILABLE_NUMBERS_OF_ALTER], Nat => Any
             def initialize(step, alter = 0, octave = 0)
                 # Check arguments
                 unless (@@key.key?(step.to_sym))
                     raise MusicalScore::InvalidNote, "[#{step}] is not a kind of note key"
-                end
-                unless (alter.kind_of?(Integer))
-                    raise TypeError, "[#{alter}] is not a kind of Integer"
-                end
-                unless (AVAILABLE_NUMBERS_OF_ALTER.include?(alter))
-                    raise ArgumentError, "[#{alter}] is invalid"
-                end
-                unless (octave.kind_of?(Integer))
-                    raise TypeError, "[#{alter}] is not a kind of Integer"
-                end
-                if (octave < 0)
-                    raise ArgumentError, "[#{octave}] must be zero or more"
                 end
 
                 @step   = step.to_sym
@@ -63,6 +54,7 @@ module MusicalScore
             #  a # => [:step => :A, :alter => 1, :octave => 5 ]
             # @param note_number [Ingteger] note_number
             # @return [MusicalScore::Note::Pitch]
+            Contract Num => MusicalScore::Note::Pitch
             def self.new_note_sharp(note_number)
                 step_key_num   = note_number % NUMBER_OF_NOTES
                 octave         = note_number / NUMBER_OF_NOTES
@@ -81,6 +73,7 @@ module MusicalScore
             #
             # @param note_number [Ingteger] note_number
             # @return [MusicalScore::Note::Pitch]
+            Contract Num => MusicalScore::Note::Pitch
             def self.new_note_flat(note_number)
                 step_key_num   = note_number % NUMBER_OF_NOTES
                 octave         = note_number / NUMBER_OF_NOTES

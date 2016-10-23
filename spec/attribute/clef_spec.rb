@@ -10,7 +10,7 @@ describe MusicalScore::Attribute::Clef do
         end
 
         it 'raise error' do
-            expect{ MusicalScore::Attribute::Clef.new(:D)}.to raise_error(MusicalScore::InvalidClefSign)
+            expect{ MusicalScore::Attribute::Clef.new(:D)}.to raise_error(ArgumentError)
         end
     end
 end

@@ -12,7 +12,7 @@ describe MusicalScore::Attribute::Key do
             expect{ MusicalScore::Attribute::Key.new(8, :major)}.to raise_error(ArgumentError)
         end
         it 'raise InvalidKeyMode' do
-            expect{ MusicalScore::Attribute::Key.new(6, :hoge)}.to raise_error(MusicalScore::InvalidKeyMode)
+            expect{ MusicalScore::Attribute::Key.new(6, :hoge)}.to raise_error(ArgumentError)
         end
     end
 

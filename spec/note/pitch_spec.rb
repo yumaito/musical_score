@@ -26,11 +26,11 @@ describe MusicalScore::Note::Pitch do
             end
         end
         context 'alter is not integer' do
-            it 'raise TypeError for string' do
-                expect{ MusicalScore::Note::Pitch.new(:C, "2", 0) }.to raise_error(TypeError)
+            it 'raise ArgumentError for string' do
+                expect{ MusicalScore::Note::Pitch.new(:C, "2", 0) }.to raise_error(ArgumentError)
             end
-            it 'raise TypeError for decimal value' do
-                expect{ MusicalScore::Note::Pitch.new(:C, 1.3, 0) }.to raise_error(TypeError)
+            it 'raise ArgumentError for decimal value' do
+                expect{ MusicalScore::Note::Pitch.new(:C, 1.3, 0) }.to raise_error(ArgumentError)
             end
         end
         context 'alter is out of range' do
@@ -39,11 +39,11 @@ describe MusicalScore::Note::Pitch do
             end
         end
         context 'octave is not integer' do
-            it 'raise TypeError for string' do
-                expect{ MusicalScore::Note::Pitch.new(:C, 0, "0") }.to raise_error(TypeError)
+            it 'raise ArgumentError for string' do
+                expect{ MusicalScore::Note::Pitch.new(:C, 0, "0") }.to raise_error(ArgumentError)
             end
-            it 'raise TypeError for decimal value' do
-                expect{ MusicalScore::Note::Pitch.new(:C, 0, 0.0) }.to raise_error(TypeError)
+            it 'raise ArgumentError for decimal value' do
+                expect{ MusicalScore::Note::Pitch.new(:C, 0, 0.0) }.to raise_error(ArgumentError)
             end
         end
         context 'octave is less than zero' do
