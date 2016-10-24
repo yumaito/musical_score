@@ -1,5 +1,4 @@
 require 'contracts'
-require 'pp'
 module MusicalScore
     class Notes
         include Contracts
