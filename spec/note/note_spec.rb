@@ -37,6 +37,32 @@ describe MusicalScore::Note::Note do
             expect(note.lyric.text).to eq "all"
             expect(note.rest).to be_falsey
             expect(note.type.size).to eq "eighth"
+            expect(note.actual_duration).to eq Rational(4, 1)
+        end
+
+        let(:triplet_note) {
+            MusicalScore::Note::Note.new(
+                duration: 2,
+                pitch: MusicalScore::Note::Pitch.new(:C),
+                type: MusicalScore::Note::Type.new("eighth"),
+                time_modification: MusicalScore::Note::TimeModification.new(3, 2)
+            )
+        }
+        it 'set actual duration' do
+            expect(triplet_note.actual_duration).to eq Rational(4, 3)
+        end
+
+        let(:pitch_rest) {
+            MusicalScore::Note::Note.new(
+                duration: 4,
+                tie: nil,
+                pitch: MusicalScore::Note::Pitch.new(:C),
+                rest: true,
+                type: MusicalScore::Note::Type.new("16th"),
+            )
+        }
+        it 'raise error' do
+            expect{ pitch_rest }.to raise_error(ArgumentError)
         end
     end
 end
