@@ -14,3 +14,25 @@ def create_notes(num)
     end
     return result
 end
+def create_rests(num)
+    result = Array.new
+    num.times do |index|
+        rest = MusicalScore::Note::Note.new(
+            duration: 4,
+            rest: true,
+            type: MusicalScore::Note::Type.new("quarter"),
+        )
+        result.push(rest)
+    end
+    return result
+end
+def create_notes_with_rest(num)
+    num_of_rest = num / 3
+    num_of_note = num - num_of_rest
+    notes = create_notes(num_of_note)
+    rests = create_rests(num_of_rest)
+
+    result = notes + rests
+    result.shuffle!
+    return result
+end

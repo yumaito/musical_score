@@ -15,5 +15,9 @@ module MusicalScore
                 local_location += note.actual_duration
             end
         end
+        def divide_to_notes_and_rests
+            divided_array = @notes.partition { |note| note.rest }
+            return { note: divided_array[1], rest: divided_array[0] }
+        end
     end
 end
