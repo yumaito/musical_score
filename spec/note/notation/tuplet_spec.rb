@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe MusicalScore::Note::Notation::Tuplet do
     describe 'initialize' do
-        let(:tuplet) { MusicalScore::Note::Notation::Tuplet.new(:start) }
         it 'success case' do
-            expect(tuplet.type).to eq :start
+            tuplet = MusicalScore::Note::Notation::Tuplet.new(:start)
+            expect(tuplet).to have_attributes(type: :start)
         end
 
         it 'error case' do
