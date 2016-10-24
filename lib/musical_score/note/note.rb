@@ -8,7 +8,7 @@ end
 module MusicalScore
     module Note
         class Note
-            attr_accessor  :lyric, :location
+            attr_accessor  :lyric, :global_location, :local_location
             attr_reader :duration, :tie, :dot, :time_modification, :actual_duration, :pitch, :rest, :type
             include Contracts
 

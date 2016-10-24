@@ -2,20 +2,23 @@ require 'spec_helper'
 
 describe MusicalScore::Notes do
     describe 'initialize' do
-        let(:note) {
-            MusicalScore::Note::Note.new(
-                duration: 4,
-                lyric: MusicalScore::Note::Lyric.new("all", :single),
-                pitch: MusicalScore::Note::Pitch.new(:C, 0, 3),
-                type: MusicalScore::Note::Type.new("quarter"),
-            )
+        let(:note_array) {
+            create_notes(3)
         }
         let(:notes) {
-            MusicalScore::Notes.new([ note, note, note ])
+            MusicalScore::Notes.new(note_array)
         }
 
         it 'initialize' do
-            expect(notes.notes).to match([ note, note, note ])
+            expect(notes.notes).to match(note_array)
+        end
+        it 'check local location' do
+            locations = notes.notes.collect{ |item| item.local_location }
+            expect(locations).to match([
+                Rational(0),
+                Rational(4),
+                Rational(8),
+            ])
         end
     end
 end
