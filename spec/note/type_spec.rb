@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe MusicalScore::Note::Type do
     describe 'initialize' do
-        let(:type) { MusicalScore::Note::Type.new("eighth")}
         it 'success case' do
-            expect(type.size).to eq "eighth"
+            type = MusicalScore::Note::Type.new("eighth")
+            expect(type).to have_attributes(size: "eighth")
         end
 
         it 'error case' do
