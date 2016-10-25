@@ -3,8 +3,8 @@ require 'spec_helper'
 describe MusicalScore::Note::Pitch do
     describe 'initialize' do
 
-        let(:pitch_with_symbol) { MusicalScore::Note::Pitch.new(:D, -2, 2) }
         it 'successfully create pitch with symbol' do
+            pitch_with_symbol = MusicalScore::Note::Pitch.new(:D, -2, 2)
             expect(pitch_with_symbol.step).to eq :D
             expect(pitch_with_symbol.alter).to eq -2
             expect(pitch_with_symbol.octave).to eq 2
@@ -64,20 +64,20 @@ describe MusicalScore::Note::Pitch do
     end
 
     describe 'new_note_sharp' do
-        let(:note1) { MusicalScore::Note::Pitch.new_note_sharp(60)}
         it 'create new note from note number 60' do
+            note1 = MusicalScore::Note::Pitch.new_note_sharp(60)
             expect(note1.step).to eq :C
             expect(note1.alter).to eq 0
             expect(note1.octave).to eq 5
         end
-        let(:note2) { MusicalScore::Note::Pitch.new_note_sharp(39)}
         it 'create new note from note number 39' do
+            note2 = MusicalScore::Note::Pitch.new_note_sharp(39)
             expect(note2.step).to eq :D
             expect(note2.alter).to eq 1
             expect(note2.octave).to eq 3
         end
-        let(:note3) { MusicalScore::Note::Pitch.new_note_sharp(70)}
         it 'create new note from note number 70' do
+            note3 = MusicalScore::Note::Pitch.new_note_sharp(70)
             expect(note3.step).to eq :A
             expect(note3.alter).to eq 1
             expect(note3.octave).to eq 5
@@ -85,20 +85,20 @@ describe MusicalScore::Note::Pitch do
     end
 
     describe 'new_note_flat' do
-        let(:note1) { MusicalScore::Note::Pitch.new_note_flat(60)}
         it 'create new note from note number 60' do
+            note1 = MusicalScore::Note::Pitch.new_note_flat(60)
             expect(note1.step).to eq :C
             expect(note1.alter).to eq 0
             expect(note1.octave).to eq 5
         end
-        let(:note2) { MusicalScore::Note::Pitch.new_note_flat(39)}
         it 'create new note from note number 39' do
+            note2 = MusicalScore::Note::Pitch.new_note_flat(39)
             expect(note2.step).to eq :E
             expect(note2.alter).to eq -1
             expect(note2.octave).to eq 3
         end
-        let(:note3) { MusicalScore::Note::Pitch.new_note_flat(70)}
         it 'create new note from note number 70' do
+            note3 = MusicalScore::Note::Pitch.new_note_flat(70)
             expect(note3.step).to eq :B
             expect(note3.alter).to eq -1
             expect(note3.octave).to eq 5
