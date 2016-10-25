@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe MusicalScore::Note::Notation::Tie do
     describe 'initialize' do
-        let(:tie) { MusicalScore::Note::Notation::Tie.new(:start) }
         it 'success case' do
-            expect(tie.type).to eq :start
+            tie = MusicalScore::Note::Notation::Tie.new(:start)
+            expect(tie).to have_attributes(type: :start)
         end
 
         it 'error case' do

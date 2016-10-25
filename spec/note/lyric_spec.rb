@@ -2,11 +2,9 @@ require 'spec_helper'
 
 describe MusicalScore::Note::Lyric do
     describe 'initialize' do
-        let(:lyric) { MusicalScore::Note::Lyric.new('lyric', :single) }
         it 'success case' do
-            expect(lyric.text).to eq 'lyric'
-            expect(lyric.syllabic).to eq :single
-            expect(lyric.is_extend).to be_falsy
+            lyric = MusicalScore::Note::Lyric.new('lyric', :single)
+            expect(lyric).to have_attributes(text: 'lyric', syllabic: :single, is_extend: false)
         end
 
         it 'raise InvalidSyllabic' do
