@@ -2,16 +2,14 @@ require 'spec_helper'
 
 describe MusicalScore::Note::Note do
     describe 'initialize' do
-        let(:rest) {
-            MusicalScore::Note::Note.new(
+        it 'rest note' do
+            rest = MusicalScore::Note::Note.new(
                 duration: 4,
                 tie: nil,
                 dot: 0,
                 rest: true,
                 type: MusicalScore::Note::Type.new("quarter"),
             )
-        }
-        it 'rest note' do
             expect(rest.duration).to eq 4
             expect(rest.tie).to eq nil
             expect(rest.lyric).to eq nil
@@ -20,8 +18,8 @@ describe MusicalScore::Note::Note do
             expect(rest.type.size).to eq "quarter"
         end
 
-        let(:note) {
-            MusicalScore::Note::Note.new(
+        it 'pitch note' do
+            note = MusicalScore::Note::Note.new(
                 duration: 4,
                 tie: nil,
                 dot: 1,
@@ -29,8 +27,6 @@ describe MusicalScore::Note::Note do
                 pitch: MusicalScore::Note::Pitch.new(:C),
                 type: MusicalScore::Note::Type.new("eighth")
             )
-        }
-        it 'pitch note' do
             expect(note.duration).to eq 4
             expect(note.tie).to eq nil
             expect(note.dot).to eq 1
@@ -40,15 +36,13 @@ describe MusicalScore::Note::Note do
             expect(note.actual_duration).to eq Rational(4, 1)
         end
 
-        let(:triplet_note) {
-            MusicalScore::Note::Note.new(
+        it 'set actual duration' do
+            triplet_note = MusicalScore::Note::Note.new(
                 duration: 2,
                 pitch: MusicalScore::Note::Pitch.new(:C),
                 type: MusicalScore::Note::Type.new("eighth"),
                 time_modification: MusicalScore::Note::TimeModification.new(3, 2)
             )
-        }
-        it 'set actual duration' do
             expect(triplet_note.actual_duration).to eq Rational(4, 3)
         end
 
