@@ -2,11 +2,9 @@ require 'spec_helper'
 
 describe MusicalScore::Attribute::Clef do
     describe 'initialize' do
-        let(:clef) { MusicalScore::Attribute::Clef.new(:G)}
         it 'success case' do
-            expect(clef.sign).to eq :G
-            expect(clef.line).to eq 0
-            expect(clef.clef_octave_change).to eq 0
+            clef = MusicalScore::Attribute::Clef.new(:G)
+            expect(clef).to have_attributes(sign: :G, line: 0, clef_octave_change: 0)
         end
 
         it 'raise error' do
