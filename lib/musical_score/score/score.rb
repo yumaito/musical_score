@@ -8,6 +8,8 @@ end
 module MusicalScore
     module Score
         class Score
+            include Contracts
+            attr_accessor :credit, :identification, :part_lit, :measure
         end
     end
 end
