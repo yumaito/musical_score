@@ -12,4 +12,5 @@ module MusicalScore
     AVAILABLE_NUMBERS_OF_ALTER = [-2, -1, 0, 1, 2]
     TYPE_START_STOP          = %i(start stop)
     TYPE_START_STOP_CONTINUE = %i(start stop continue)
+    TYPE_CREATOR             = %i(composer lyricist arranger)
 end
