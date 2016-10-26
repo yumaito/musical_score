@@ -9,12 +9,10 @@ module MusicalScore
     module Measure
         class Measure
             include Contracts
-            attr_reader :number,
-            attr_accessor :part
-            Contract Nat, MusicalScore::Measure::Part => Any
-            def initialize(number, part)
-                @number = number
-                @part   = part
+            attr_accessor :parts
+            Contract ArrayOf[MusicalScore::Measure::Part] => Any
+            def initialize(parts)
+                @parts = parts
             end
         end
     end

@@ -7,10 +7,10 @@ module MusicalScore
         class Part
             include Contracts
             attr_reader :attribute, :notes
-            Contract Optional[MusicalScore::Attribute::Attribute], MusicalScore::Notes => Any
-            def initialize(attribute, notes)
-                @attribute = attribute
+            Contract MusicalScore::Notes, Maybe[MusicalScore::Attribute::Attribute]=> Any
+            def initialize(notes, attribute = nil)
                 @notes     = notes
+                @attribute = attribute
             end
         end
     end
