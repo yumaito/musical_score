@@ -1,6 +1,7 @@
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
 require "musical_score"
 
+# create dummy notes
 def create_notes(num)
     result = Array.new
     num.times do |index|
@@ -14,6 +15,8 @@ def create_notes(num)
     end
     return result
 end
+
+# create dummy rests
 def create_rests(num)
     result = Array.new
     num.times do |index|
@@ -26,6 +29,9 @@ def create_rests(num)
     end
     return result
 end
+
+# create dummy notes and rests
+# (one third of num is rest note, and the order of notes and rests are shuffled)
 def create_notes_with_rest(num)
     num_of_rest = num / 3
     num_of_note = num - num_of_rest
@@ -35,4 +41,15 @@ def create_notes_with_rest(num)
     result = notes + rests
     result.shuffle!
     return result
+end
+
+def create_masures(num)
+    result = Array.new
+    num.times do |index|
+
+    end
+end
+
+# create one dummy measure
+def create_measure
 end
