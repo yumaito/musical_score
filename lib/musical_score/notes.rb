@@ -1,4 +1,5 @@
 require 'contracts'
+require 'musical_score/note/note'
 module MusicalScore
     class Notes
         include Contracts
