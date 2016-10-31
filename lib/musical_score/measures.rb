@@ -7,8 +7,7 @@ module MusicalScore
 
         Contract ArrayOf[MusicalScore::Measure::Measure] => Any
         def initialize(measures)
-            @maesures = measures
-            
+            @measures = measures
         end
     end
 end

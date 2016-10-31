@@ -46,10 +46,16 @@ end
 def create_masures(num)
     result = Array.new
     num.times do |index|
-
+        result.push(create_measure)
     end
+    return result
 end
 
 # create one dummy measure
 def create_measure
+    note_array   = create_notes(4)
+    notes        = MusicalScore::Notes.new(note_array)
+    part         = MusicalScore::Measure::Part.new(notes)
+    measure      = MusicalScore::Measure::Measure.new([ part ])
+    return measure
 end
