@@ -9,6 +9,9 @@ describe MusicalScore::IO do
         end
 
         it do
+            expect{ MusicalScore::IO.import("hoge") }.to raise_error(MusicalScore::InvalidFileType)
+        end
+        it do
             expect{ MusicalScore::IO.import("hoge.jpg") }.to raise_error(MusicalScore::InvalidFileType)
         end
     end
