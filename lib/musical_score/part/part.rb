@@ -6,13 +6,13 @@ Dir[File.expand_path('../', __FILE__) << '/**/*.rb'].each do |file|
     end
 end
 module MusicalScore
-    module Measure
-        class Measure
+    module Part
+        class Part
             include Contracts
-            attr_accessor :parts
-            Contract ArrayOf[MusicalScore::Measure::Part] => Any
-            def initialize(parts)
-                @parts = parts
+            attr_accessor :measures
+            Contract MusicalScore::Measures => Any
+            def initialize(measures)
+                @measures = measures
             end
         end
     end
