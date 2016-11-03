@@ -42,7 +42,6 @@ module MusicalScore
                     args[:identification] = identification
                 end
 
-                pp args
             end
         end
     end
