@@ -2,7 +2,7 @@ require 'contracts'
 module MusicalScore
     module Note
         module Notation
-            class Tie
+            class Tie < MusicalScore::ElementBase
                 include Contracts
                 attr_accessor :type
                 Contract Enum[*TYPE_START_STOP_CONTINUE] => Any

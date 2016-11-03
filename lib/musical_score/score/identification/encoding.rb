@@ -2,7 +2,7 @@ require 'contracts'
 module MusicalScore
     module Score
         module Identification
-            class Encoding
+            class Encoding < MusicalScore::ElementBase
                 include Contracts
                 attr_reader :type, :encoding_date, :encoding_description, :softwares, :supports
                 Contract String, Time, String, ArrayOf[String], ArrayOf[String] => Any
