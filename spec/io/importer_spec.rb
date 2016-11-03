@@ -14,5 +14,10 @@ describe MusicalScore::IO do
         it do
             expect{ MusicalScore::IO.import("hoge.jpg") }.to raise_error(MusicalScore::InvalidFileType)
         end
+
+        it do
+            path = File.expand_path('../../sample/grandfathers_clock.xml', __FILE__)
+            MusicalScore::IO::import(path)
+        end
     end
 end

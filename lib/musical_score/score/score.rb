@@ -27,6 +27,14 @@ module MusicalScore
                 @part_lit       = part_lit
                 @measures       = measures
             end
+
+            Contract REXML::Document => MusicalScore::Score::Score
+            def self.create_by_xml(xml_doc)
+                part = xml_doc.elements["//score-timewise"] ? xml_doc.elements["//score-timewise"] : xml_doc.elements["//score-partwise"]
+                identification_doc = part.elements["//identification"]
+                credit_doc         = part.elements["//credit"]
+                part_lit           = part.elements["//part_lit"]
+            end
         end
     end
 end
