@@ -1,7 +1,7 @@
 require 'spec_helper'
 module MusicalScore
     module Note
-        class Type
+        class Type < MusicalScore::ElementBase
             include Contracts
 
             @@size = %w(

@@ -3,8 +3,8 @@ require 'musical_score/attribute/attribute'
 require 'musical_score/notes'
 
 module MusicalScore
-    module Measure
-        class Part
+    module Part
+        class Measure < MusicalScore::ElementBase
             include Contracts
             attr_reader :attribute, :notes
             Contract MusicalScore::Notes, Maybe[MusicalScore::Attribute::Attribute]=> Any

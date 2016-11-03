@@ -1,7 +1,7 @@
 require 'contracts'
 module MusicalScore
     module Note
-        class Pitch
+        class Pitch < MusicalScore::ElementBase
             include Comparable
             include Contracts
             # pitch names

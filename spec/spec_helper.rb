@@ -1,5 +1,6 @@
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
 require "musical_score"
+require "rexml/document"
 
 # create dummy notes
 def create_notes(num)
@@ -43,7 +44,7 @@ def create_notes_with_rest(num)
     return result
 end
 
-def create_masures(num)
+def create_measures(num)
     result = Array.new
     num.times do |index|
         result.push(create_measure)
@@ -55,7 +56,34 @@ end
 def create_measure
     note_array   = create_notes(4)
     notes        = MusicalScore::Notes.new(note_array)
-    part         = MusicalScore::Measure::Part.new(notes)
-    measure      = MusicalScore::Measure::Measure.new([ part ])
+    measure      = MusicalScore::Part::Measure.new(notes)
     return measure
+end
+
+def create_partwise_part(measure_num)
+    measures = MusicalScore::Measures.new(create_measures(measure_num))
+    part     = MusicalScore::Part::Part.new(measures)
+    return part
+end
+
+def dummy_xml
+    xml = <<EOM
+<?xml version="1.0" encoding="UTF-8"?>
+<items>
+  <item id="123">AAA</item>
+  <item id="234">BBB</item>
+  <item id="345">CCC</item>
+  <obj>
+    <no>1</no>
+    <name>abc</name>
+  </obj>
+  <obj>
+    <no>2</no>
+    <name>bcd</name>
+  </obj>
+</items>
+EOM
+
+    doc = REXML::Document.new(xml)
+    return doc
 end

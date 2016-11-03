@@ -2,7 +2,7 @@ require 'contracts'
 module MusicalScore
     module Note
         module Notation
-            class Tuplet
+            class Tuplet < MusicalScore::ElementBase
                 include Contracts
                 attr_accessor :type
                 Contract Enum[*TYPE_START_STOP] => Any

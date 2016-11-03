@@ -8,7 +8,7 @@ end
 module MusicalScore
     module Note
         module Notation
-            class Notation
+            class Notation < MusicalScore::ElementBase
                 include Contracts
                 @@articulation = %i(
                     accent

@@ -7,25 +7,25 @@ Dir[File.expand_path('../', __FILE__) << '/**/*.rb'].each do |file|
 end
 module MusicalScore
     module Score
-        class Score
+        class Score < MusicalScore::ElementBase
             include Contracts
-            attr_accessor :credit, :identification, :part_lit, :measures
+            attr_accessor :credit, :identification, :part_list, :parts
             Contract KeywordArgs[
                 :credit         => Optional[String],
                 :identification => Optional[MusicalScore::Score::Identification::Identification],
-                :part_lit       => ArrayOf[MusicalScore::Score::Part::Part],
-                :measures       => MusicalScore::Measures,
+                :part_list      => ArrayOf[MusicalScore::Score::Part::Part],
+                :parts          => ArrayOf[MusicalScore::Part::Part],
             ] => Any
             def initialize(
                 credit: nil,
                 identification: nil,
-                part_lit:,
-                measures:
+                part_list:,
+                parts:
                 )
                 @credit         = credit
                 @identification = identification
-                @part_lit       = part_lit
-                @measures       = measures
+                @part_list      = part_list
+                @parts          = parts
             end
         end
     end

@@ -1,7 +1,7 @@
 require 'contracts'
 require 'musical_score/note/note'
 module MusicalScore
-    class Notes
+    class Notes < MusicalScore::ElementBase
         include Contracts
         attr_reader :notes
 

@@ -2,7 +2,7 @@ require 'contracts'
 module MusicalScore
     module Score
         module Identification
-            class Creator
+            class Creator < MusicalScore::ElementBase
                 attr_reader :name, :type
                 include Contracts
                 Contract String, Enum[*TYPE_CREATOR] => Any

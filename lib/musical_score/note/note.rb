@@ -7,7 +7,7 @@ Dir[File.expand_path('../', __FILE__) << '/**/*.rb'].each do |file|
 end
 module MusicalScore
     module Note
-        class Note
+        class Note < MusicalScore::ElementBase
             attr_accessor  :lyric, :global_location, :local_location
             attr_reader :duration, :tie, :dot, :time_modification, :actual_duration, :pitch, :rest, :type
             include Contracts
