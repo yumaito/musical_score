@@ -1,7 +1,7 @@
 require 'contracts'
 module MusicalScore
     module Attribute
-        class Time
+        class Time < MusicalScore::ElementBase
             include Contracts
             attr_reader :beats, :beat_type
 

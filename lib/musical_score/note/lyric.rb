@@ -1,7 +1,7 @@
 require 'contracts'
 module MusicalScore
     module Note
-        class Lyric
+        class Lyric < MusicalScore::ElementBase
             include Contracts
             @@syllabic = %i(single begin end middle)
             attr_accessor :text, :syllabic, :is_extend

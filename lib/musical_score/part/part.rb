@@ -7,7 +7,7 @@ Dir[File.expand_path('../', __FILE__) << '/**/*.rb'].each do |file|
 end
 module MusicalScore
     module Part
-        class Part
+        class Part < MusicalScore::ElementBase
             include Contracts
             attr_accessor :measures
             Contract MusicalScore::Measures => Any

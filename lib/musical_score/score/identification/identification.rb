@@ -8,7 +8,7 @@ end
 module MusicalScore
     module Score
         module Identification
-            class Identification
+            class Identification < MusicalScore::ElementBase
                 include Contracts
                 attr_reader :creators, :encodings
                 Contract ArrayOf[MusicalScore::Score::Identification::Creator], ArrayOf[MusicalScore::Score::Identification::Encoding] => Any
