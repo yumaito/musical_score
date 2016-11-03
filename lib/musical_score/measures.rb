@@ -1,11 +1,11 @@
 require 'contracts'
-require 'musical_score/measure/measure'
+require 'musical_score/part/measure'
 module MusicalScore
     class Measures
         include Contracts
         attr_reader :measures
 
-        Contract ArrayOf[MusicalScore::Measure::Measure] => Any
+        Contract ArrayOf[MusicalScore::Part::Measure] => Any
         def initialize(measures)
             @measures = measures
         end

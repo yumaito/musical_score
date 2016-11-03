@@ -43,7 +43,7 @@ def create_notes_with_rest(num)
     return result
 end
 
-def create_masures(num)
+def create_measures(num)
     result = Array.new
     num.times do |index|
         result.push(create_measure)
@@ -55,7 +55,12 @@ end
 def create_measure
     note_array   = create_notes(4)
     notes        = MusicalScore::Notes.new(note_array)
-    part         = MusicalScore::Measure::Part.new(notes)
-    measure      = MusicalScore::Measure::Measure.new([ part ])
+    measure      = MusicalScore::Part::Measure.new(notes)
     return measure
+end
+
+def create_partwise_part(measure_num)
+    measures = MusicalScore::Measures.new(create_measures(measure_num))
+    part     = MusicalScore::Part::Part.new(measures)
+    return part
 end
