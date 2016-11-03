@@ -31,7 +31,6 @@ module MusicalScore
             Contract REXML::Document => MusicalScore::Score::Score
             def self.create_by_xml(xml_doc)
                 partwise           = xml_doc.elements["//score-partwise"]
-                # part_list_doc      = partwise.elements["//part_list"]
                 # parts_doc          = partwise.elements["//part"]
 
                 args = {}
