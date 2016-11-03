@@ -36,7 +36,13 @@ module MusicalScore
                 part_list_doc      = partwise.elements["//part_list"]
                 parts_doc          = partwise.elements["//part"]
 
-                identification = MusicalScore::Score::Identification::Identification.create_by_xml(identification_doc)
+                args = {}
+                if (identification_doc)
+                    identification = MusicalScore::Score::Identification::Identification.create_by_xml(identification_doc)
+                    args[:identification] = identification
+                end
+
+                pp args
             end
         end
     end

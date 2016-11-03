@@ -4,13 +4,13 @@ describe MusicalScore::Score::Identification do
         it 'success case' do
             now = Time.now
             creator  = MusicalScore::Score::Identification::Creator.new("hoge", :composer)
-            encoding = MusicalScore::Score::Identification::Encoding.new("music", now, "hogehoge", ["foo"], ["bar"])
+            encoding = MusicalScore::Score::Identification::Encoding.new(now, "hogehoge", ["foo"], ["bar"])
             identification = MusicalScore::Score::Identification::Identification.new(
                 [creator],
-                [encoding],
+                encoding,
             )
             expect(identification.creators[0].name).to eq "hoge"
-            expect(identification.encodings[0].type).to eq "music"
+            expect(identification.encoding.encoding_description).to eq "hogehoge"
         end
     end
 end
