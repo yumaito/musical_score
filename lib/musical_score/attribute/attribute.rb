@@ -7,7 +7,7 @@ Dir[File.expand_path('../', __FILE__) << '/**/*.rb'].each do |file|
 end
 module MusicalScore
     module Attribute
-        class Attribute
+        class Attribute < MusicalScore::ElementBase
             include Contracts
             attr_accessor :divisions, :key, :time, :instruments, :clef
 

@@ -1,7 +1,7 @@
 require "contracts"
 module MusicalScore
     module Attribute
-        class Key
+        class Key < MusicalScore::ElementBase
             include Contracts
             @@mode = %i(major :minor)
             @@circle_of_fifths = [0, 7, 2, 9, 4, 11, 6, 1, 8, 3, 10, 5]

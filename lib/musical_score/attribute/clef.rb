@@ -1,7 +1,7 @@
 require "contracts"
 module MusicalScore
     module Attribute
-        class Clef
+        class Clef < MusicalScore::ElementBase
             include Contracts
             @@sign = %i(G F C percussion TAB jianpu none)
             attr_reader :sign, :line, :clef_octave_change

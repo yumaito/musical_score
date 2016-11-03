@@ -1,7 +1,7 @@
 require 'contracts'
 module MusicalScore
     module Note
-        class TimeModification
+        class TimeModification < MusicalScore::ElementBase
             include Contracts
             attr_reader :actual_notes, :normal_notes
 

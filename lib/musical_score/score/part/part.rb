@@ -8,7 +8,7 @@ end
 module MusicalScore
     module Score
         module Part
-            class Part
+            class Part < MusicalScore::ElementBase
                 include Contracts
                 attr_reader :part_name, :part_abbreviation
 
