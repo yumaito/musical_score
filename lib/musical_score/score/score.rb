@@ -31,11 +31,10 @@ module MusicalScore
             Contract REXML::Document => MusicalScore::Score::Score
             def self.create_by_xml(xml_doc)
                 partwise           = xml_doc.elements["//score-partwise"]
-                identification_doc = partwise.elements["//identification"]
-                # part_list_doc      = partwise.elements["//part_list"]
                 # parts_doc          = partwise.elements["//part"]
 
                 args = {}
+                identification_doc = partwise.elements["//identification"]
                 if (identification_doc)
                     identification = MusicalScore::Score::Identification::Identification.create_by_xml(identification_doc)
                     args[:identification] = identification
@@ -45,6 +44,15 @@ module MusicalScore
                     credits.push(element.text)
                 end
                 args[:credits] = credits
+
+                part_list = Array.new
+                partwise.elements.each("//part-list/score-part") do |element|
+                    part_name         = element.elements["part-name"].text
+                    part_abbreviation = element.elements["part-abbreviation"].text
+                    part = MusicalScore::Score::Part::Part.new(part_name, part_abbreviation)
+                    part_list.push(part)
+                end
+                args[:part_list] = part_list
 
                 pp args
             end
