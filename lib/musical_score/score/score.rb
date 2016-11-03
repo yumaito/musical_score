@@ -30,10 +30,13 @@ module MusicalScore
 
             Contract REXML::Document => MusicalScore::Score::Score
             def self.create_by_xml(xml_doc)
-                part = xml_doc.elements["//score-timewise"] ? xml_doc.elements["//score-timewise"] : xml_doc.elements["//score-partwise"]
-                identification_doc = part.elements["//identification"]
-                credit_doc         = part.elements["//credit"]
-                part_lit           = part.elements["//part_lit"]
+                partwise           = xml_doc.elements["//score-partwise"]
+                identification_doc = partwise.elements["//identification"]
+                credit_doc         = partwise.elements["//credit"]
+                part_list_doc      = partwise.elements["//part_list"]
+                parts_doc          = partwise.elements["//part"]
+
+                identification = MusicalScore::Score::Identification::Identification.create_by_xml(identification_doc)
             end
         end
     end

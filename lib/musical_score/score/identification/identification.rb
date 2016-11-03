@@ -16,6 +16,10 @@ module MusicalScore
                     @creators  = creators
                     @encodings = encodings
                 end
+
+                Contract REXML::Element => MusicalScore::Score::Identification::Identification
+                def self.create_by_xml(xml_doc)
+                end
             end
         end
     end
