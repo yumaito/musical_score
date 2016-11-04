@@ -54,6 +54,12 @@ module MusicalScore
                 end
                 args[:part_list] = part_list
 
+                parts = Array.new
+                partwise.elements.each("//part") do |element|
+                    part = MusicalScore::Part::Part.create_by_xml(element)
+                    parts.push(part)
+                end
+
                 pp args
             end
         end
