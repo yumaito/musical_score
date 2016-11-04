@@ -93,6 +93,14 @@ module MusicalScore
                 end
             end
 
+            Contract REXML::Element => MusicalScore::Note::Pitch
+            def self.create_by_xml(xml_doc)
+                step   = xml_doc.elements["step"].text.to_sym
+                octave = xml_doc.elements["octave"].text.to_i
+                alter  = xml_doc.elements["alter"] ? xml_doc.elements["alter"].text.to_i : 0
+                return MusicalScore::Note::Pitch.new(step, alter, octave)
+            end
+
             private
 
             def alter_to_s
