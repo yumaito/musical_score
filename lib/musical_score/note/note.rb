@@ -94,9 +94,9 @@ module MusicalScore
                 end
                 duration = xml_doc.elements["duration"].text.to_i
                 type     = xml_doc.elements["type"].text.to_sym
-                tie      = xml_doc.elements["tie"].attributes["type"].text.to_sym
+                tie      = xml_doc.elements["tie"].attributes["type"].to_sym
 
-                notation_doc = xml_doc.elements["notation"]
+                notation_doc = xml_doc.elements["notations"]
                 notation     = notation_doc ? MusicalScore::Note::Notation::Notation.create_by_xml(notation_doc) : nil
 
                 time_modification_doc = xml_doc.elements["time-modification"]
