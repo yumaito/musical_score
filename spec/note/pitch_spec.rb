@@ -148,4 +148,19 @@ describe MusicalScore::Note::Pitch do
             expect(note == note.clone).to be_truthy
         end
     end
+
+    describe 'create_by_xml' do
+        let(:dummy) {
+            '<pitch>
+              <step>F</step>
+              <alter>1</alter>
+              <octave>4</octave>
+            </pitch>'
+        }
+        it do
+            xml = dummy_xml(dummy)
+            pitch = MusicalScore::Note::Pitch.create_by_xml(xml.elements["pitch"])
+            expect(pitch).to have_attributes(step: :F, alter: 1, octave: 4)
+        end
+    end
 end
