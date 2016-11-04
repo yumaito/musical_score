@@ -34,6 +34,21 @@ module MusicalScore
                 @time        = time
                 @instruments = instruments
             end
+
+            Contract REXML::Element => MusicalScore::Attribute::Attribute
+            def self.create_by_xml(xml_doc)
+                divisions = xml_doc.elements["//divisions"].text.to_i
+                clef_doc  = xml_doc.elements["//clef"]
+                time_doc  = xml_doc.elements["//time"]
+                key_doc   = xml_doc.elements["//key"]
+
+                clef = clef_doc ? MusicalScore::Attribute::Clef.create_by_xml(clef_doc) : nil
+                time = time_doc ? MusicalScore::Attribute::Time.create_by_xml(time_doc) : nil
+                key  = key_doc ? MusicalScore::Attribute::Key.create_by_xml(key_doc) : nil
+
+                attributes = MusicalScore::Attribute::Attribute.new(divisions: divisions, clef: clef, time: time)
+                return attributes
+            end
         end
     end
 end

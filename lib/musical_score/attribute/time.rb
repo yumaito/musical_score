@@ -17,6 +17,13 @@ module MusicalScore
             def to_s
                 return "%d/%d" % [@beats, @beat_type]
             end
+
+            Contract REXML::Element => MusicalScore::Attribute::Time
+            def self.create_by_xml(xml_doc)
+                beats     = xml_doc.elements["beats"].text.to_i
+                beat_type = xml_doc.elements["beat_type"].text.to_i
+                return MusicalScore::Attribute::Time.new(beats, beat_type)
+            end
         end
     end
 end

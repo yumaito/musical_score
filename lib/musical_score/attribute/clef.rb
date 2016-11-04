@@ -17,6 +17,15 @@ module MusicalScore
                 @line               = line
                 @clef_octave_change = clef_octave_change
             end
+
+            Contract REXML::Element => MusicalScore::Attribute::Clef
+            def self.create_by_xml(xml_doc)
+                sign = xml_doc.elements["sign"].to_sym
+                line = xml_doc.elements["line"] ? xml_doc.elements["line"].text.to_i : 0
+                clef_octave_change = xml_doc.elements["clef_octave_change"] ? xml_doc.elements["clef_octave_change"].text.to_i : 0
+                clef = MusicalScore::Attribute::Clef.new(sign, line, clef_octave_change)
+                return clef
+            end
         end
     end
 end
