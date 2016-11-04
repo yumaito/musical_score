@@ -93,8 +93,9 @@ module MusicalScore
                     dots += 1
                 end
                 duration = xml_doc.elements["duration"].text.to_i
-                type     = xml_doc.elements["type"].text.to_sym
-                tie      = xml_doc.elements["tie"].attributes["type"].to_sym
+                type     = MusicalScore::Note::Type.new(xml_doc.elements["type"].text)
+
+                tie = xml_doc.elements["tie"] ? xml_doc.elements["tie"].attributes["type"].to_sym : nil
 
                 notation_doc = xml_doc.elements["notations"]
                 notation     = notation_doc ? MusicalScore::Note::Notation::Notation.create_by_xml(notation_doc) : nil
@@ -103,12 +104,12 @@ module MusicalScore
                 time_modification = time_modification_doc ? MusicalScore::Note::Note.create_by_xml(time_modification) : nil
                 rest = xml_doc.elements["rest"] ? true : false
                 if (rest)
-                    return MusicalScore::Note::Note.new(duration: duration, tie: tie, dot: dot, rest: rest, type: type, time_modification: time_modification, notation: notation)
+                    return MusicalScore::Note::Note.new(duration: duration, tie: tie, dot: dots, rest: rest, type: type, time_modification: time_modification, notation: notation)
                 else
                     pitch = MusicalScore::Note::Pitch.create_by_xml(xml_doc.elements["pitch"])
                     lyric_doc = xml_doc.elements["lyric"]
                     lyric = lyric_doc ? MusicalScore::Note::Lyric.create_by_xml["lyric"] : nil
-                    return MusicalScore::Note::Note.new(duration: duration, tie: tie, dot: dot, type: type, lyric: lyric, pitch: pitch, time_modification: time_modification, notation: notation)
+                    return MusicalScore::Note::Note.new(duration: duration, tie: tie, dot: dots, type: type, lyric: lyric, pitch: pitch, time_modification: time_modification, notation: notation)
                 end
             end
 
