@@ -40,4 +40,32 @@ describe MusicalScore::Attribute::Attribute do
             expect(attribute_guitar.instruments).to eq 'Guitar'
         end
     end
+
+    describe 'create_by_xml' do
+        let(:dummy_attribute) do
+            '<attributes>
+        <divisions>2</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+      </attributes>'
+        end
+        it do
+            xml = dummy_xml(dummy_attribute)
+            attribute = MusicalScore::Attribute::Attribute.create_by_xml(xml.elements["attributes"])
+            expect(attribute.divisions).to eq 2
+            expect(attribute.key).to have_attributes(fifths: 0, mode: :major)
+            expect(attribute.time).to have_attributes(beats: 4, beat_type: 4)
+            expect(attribute.clef).to have_attributes(sign: :G, line: 2, clef_octave_change: 0)
+        end
+    end
 end
