@@ -118,7 +118,7 @@ describe MusicalScore::Note::Note do
           </note>'
             }
 
-            it do
+            it 'normal note' do
                 xml = dummy_xml(dummy)
                 note = MusicalScore::Note::Note.create_by_xml(xml.elements["note"])
                 expect(note.pitch.step).to eq :B
@@ -127,7 +127,7 @@ describe MusicalScore::Note::Note do
                 expect(note.rest).to be_falsey
             end
 
-            it do
+            it 'rest' do
                 xml = dummy_xml(rest)
                 note = MusicalScore::Note::Note.create_by_xml(xml.elements["note"])
                 expect(note.pitch).to eq nil
@@ -136,14 +136,14 @@ describe MusicalScore::Note::Note do
                 expect(note.type.size).to eq "quarter"
             end
 
-            it do
+            it 'tied note' do
                 xml = dummy_xml(tie_note)
                 note = MusicalScore::Note::Note.create_by_xml(xml.elements["note"])
                 expect(note.pitch.step).to eq :C
                 expect(note.tie).to eq :stop
             end
 
-            it do
+            it 'tuplet note' do
                 xml = dummy_xml(dummy_tuplet)
                 note = MusicalScore::Note::Note.create_by_xml(xml.elements["note"])
                 expect(note.pitch.step).to eq :D
