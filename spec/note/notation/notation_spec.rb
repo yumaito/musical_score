@@ -29,4 +29,30 @@ describe MusicalScore::Note::Notation::Notation do
             expect{ MusicalScore::Note::Notation::Notation.new(articulation: :hoge)}.to raise_error(ArgumentError)
         end
     end
+
+    describe 'create_by_xml' do
+        let(:dummy) {
+            '<notations>
+          <articulations>
+            <staccato default-x="3" default-y="-49" placement="below"/>
+          </articulations>
+        </notations>'
+        }
+        let(:dummy_tuplet) {
+            '<notations>
+          <tuplet number="1" placement="above" type="start"/>
+        </notations>'
+        }
+        it do
+            xml = dummy_xml(dummy)
+            notations = MusicalScore::Note::Notation::Notation.create_by_xml(xml.elements["notations"])
+            expect(notations.articulation).to eq :staccato
+        end
+
+        it do
+            xml = dummy_xml(dummy_tuplet)
+            notations = MusicalScore::Note::Notation::Notation.create_by_xml(xml.elements["notations"])
+            expect(notations.tuplet.type).to eq :start
+        end
+    end
 end

@@ -10,11 +10,26 @@ module MusicalScore
         module Identification
             class Identification < MusicalScore::ElementBase
                 include Contracts
-                attr_reader :creators, :encodings
-                Contract ArrayOf[MusicalScore::Score::Identification::Creator], ArrayOf[MusicalScore::Score::Identification::Encoding] => Any
+                attr_reader :creators, :encoding
+                Contract ArrayOf[Maybe[MusicalScore::Score::Identification::Creator]], Maybe[MusicalScore::Score::Identification::Encoding] => Any
                 def initialize(creators, encodings)
-                    @creators  = creators
-                    @encodings = encodings
+                    @creators = creators
+                    @encoding = encodings
+                end
+
+                Contract REXML::Element => MusicalScore::Score::Identification::Identification
+                def self.create_by_xml(xml_doc)
+                    creator_doc  = xml_doc.elements["//creator"]
+                    encoding_doc = xml_doc.elements["//encoding"]
+
+                    creators = Array.new
+                    xml_doc.elements.each("//creator") do |element|
+                        creators.push(MusicalScore::Score::Identification::Creator.create_by_xml(element))
+                    end
+
+                    encoding = encoding_doc ? MusicalScore::Score::Identification::Encoding.create_by_xml(encoding_doc) : nil
+
+                    return MusicalScore::Score::Identification::Identification.new(creators, encoding)
                 end
             end
         end

@@ -66,7 +66,7 @@ def create_partwise_part(measure_num)
     return part
 end
 
-def dummy_xml
+def dummy_nomusicxml
     xml = <<EOM
 <?xml version="1.0" encoding="UTF-8"?>
 <items>
@@ -84,6 +84,15 @@ def dummy_xml
 </items>
 EOM
 
+    doc = REXML::Document.new(xml)
+    return doc
+end
+
+def dummy_xml(str)
+    xml = <<-EOM
+<?xml version="1.0" encoding="UTF-8"?>
+#{str}
+    EOM
     doc = REXML::Document.new(xml)
     return doc
 end

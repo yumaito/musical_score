@@ -10,6 +10,13 @@ module MusicalScore
                     @name = name
                     @type = type
                 end
+
+                Contract REXML::Element => MusicalScore::Score::Identification::Creator
+                def self.create_by_xml(xml_doc)
+                    type = xml_doc.attributes["type"].to_sym
+                    name = xml_doc.text
+                    return MusicalScore::Score::Identification::Creator.new(name, type)
+                end
             end
         end
     end

@@ -11,4 +11,17 @@ describe MusicalScore::Note::Lyric do
             expect{ MusicalScore::Note::Lyric.new('lyric', :one) }.to raise_error(ArgumentError)
         end
     end
+    describe 'create_by_xml' do
+        let(:dummy) {
+            '<lyric default-y="-73" name="verse" number="1">
+          <syllabic>single</syllabic>
+          <text>will</text>
+        </lyric>'
+        }
+        it do
+            xml = dummy_xml(dummy)
+            lyric = MusicalScore::Note::Lyric.create_by_xml(xml.elements["lyric"])
+            expect(lyric).to have_attributes(text: 'will', syllabic: :single, is_extend: false)
+        end
+    end
 end

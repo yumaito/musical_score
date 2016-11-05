@@ -68,6 +68,17 @@ module MusicalScore
                     @tie          = tie
                     @tuplet       = tuplet
                 end
+
+                Contract REXML::Element => MusicalScore::Note::Notation::Notation
+                def self.create_by_xml(xml_doc)
+                    articulation = xml_doc.elements["articulations"] ? xml_doc.elements["articulations"].elements[1].name.to_sym : nil
+                    dynamics     = xml_doc.elements["dynamics"] ? xml_doc.elements["dynamics"].elements[1].name.to_sym : nil
+                    tie_arg      = xml_doc.elements["tied"] ? xml_doc.elements["tied"].attributes["type"].to_sym : nil
+                    tie = tie_arg ? MusicalScore::Note::Notation::Tie.new(tie_arg) : nil
+                    tuplet_arg   = xml_doc.elements["tuplet"] ? xml_doc.elements["tuplet"].attributes["type"].to_sym : nil
+                    tuplet = tuplet_arg ? MusicalScore::Note::Notation::Tuplet.new(tuplet_arg) : nil
+                    return MusicalScore::Note::Notation::Notation.new(articulation: articulation, dynamics: dynamics, tie: tie, tuplet: tuplet)
+                end
             end
         end
     end
