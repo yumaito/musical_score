@@ -118,6 +118,24 @@ describe MusicalScore::Note::Note do
       </note>'
             }
 
+            let(:lyric) {
+                '<note default-x="80">
+        <pitch>
+          <step>F</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>1</duration>
+        <voice>1</voice>
+        <type>eighth</type>
+        <stem default-y="15">up</stem>
+        <beam number="1">begin</beam>
+        <lyric default-y="-73" name="verse" number="1">
+          <syllabic>single</syllabic>
+          <text>I</text>
+        </lyric>
+      </note>'
+            }
+
             it 'normal note' do
                 xml = dummy_xml(dummy)
                 note = MusicalScore::Note::Note.create_by_xml(xml.elements["note"])
@@ -149,6 +167,13 @@ describe MusicalScore::Note::Note do
                 expect(note.pitch.step).to eq :D
                 expect(note.time_modification).to have_attributes(actual_notes: 3, normal_notes: 2)
                 expect(note.notation.tuplet.type).to eq :start
+            end
+
+            it 'lyric note' do
+                xml = dummy_xml(lyric)
+                note = MusicalScore::Note::Note.create_by_xml(xml.elements["note"])
+                expect(note.pitch.step).to eq :F
+                expect(note.lyric.text).to eq "I"
             end
         end
     end

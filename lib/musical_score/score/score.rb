@@ -59,8 +59,9 @@ module MusicalScore
                     part = MusicalScore::Part::Part.create_by_xml(element)
                     parts.push(part)
                 end
+                args[:parts] = parts
 
-                pp args
+                return MusicalScore::Score::Score.new(args)
             end
         end
     end

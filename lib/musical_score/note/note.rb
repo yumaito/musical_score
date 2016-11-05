@@ -108,7 +108,7 @@ module MusicalScore
                 else
                     pitch = MusicalScore::Note::Pitch.create_by_xml(xml_doc.elements["pitch"])
                     lyric_doc = xml_doc.elements["lyric"]
-                    lyric = lyric_doc ? MusicalScore::Note::Lyric.create_by_xml["lyric"] : nil
+                    lyric = lyric_doc ? MusicalScore::Note::Lyric.create_by_xml(lyric_doc) : nil
                     return MusicalScore::Note::Note.new(duration: duration, tie: tie, dot: dots, type: type, lyric: lyric, pitch: pitch, time_modification: time_modification, notation: notation)
                 end
             end
