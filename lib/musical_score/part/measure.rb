@@ -6,7 +6,7 @@ module MusicalScore
     module Part
         class Measure < MusicalScore::ElementBase
             include Contracts
-            attr_reader :attribute, :notes
+            attr_reader :attribute, :notes, :location
             Contract MusicalScore::Notes, Maybe[MusicalScore::Attribute::Attribute]=> Any
             def initialize(notes, attribute = nil)
                 @notes     = notes

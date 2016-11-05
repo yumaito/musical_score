@@ -7,13 +7,7 @@ module MusicalScore
 
         Contract ArrayOf[MusicalScore::Note::Note] => Any
         def initialize(notes)
-            local_location = 0
-            @notes = Array.new
-            notes.each do |note|
-                note.local_location = local_location
-                @notes.push(note)
-                local_location += note.actual_duration
-            end
+            @notes = notes
         end
         def divide_to_notes_and_rests
             divided_array = @notes.partition { |note| note.rest }

@@ -9,5 +9,13 @@ module MusicalScore
         def initialize(measures)
             @measures = measures
         end
+
+        def all_notes
+            result = Array.new
+            @measures.each do |measure|
+                result.concat(measure)
+            end
+            return result
+        end
     end
 end
