@@ -5,7 +5,7 @@
 
 Library for representing and analysing musical score.
 This library is implemented along with the definitions of [MusicXML](http://www.musicxml.com/) mainly.
-The goal of this project is handling any kind of musical score, such as MIDI.
+The goal of this project is handling any kind of musical score as ruby class object.
 
 ## Installation
 
@@ -25,7 +25,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Here is a simple usage to import musicXML file:
+
+```ruby
+require 'musical_score'
+
+musical_score = MusicalScore::IO.import("path/to/musicxml.xml")
+```
+
+Now you can handle the musical score as a ruby class object.
 
 ## Contributing
 
