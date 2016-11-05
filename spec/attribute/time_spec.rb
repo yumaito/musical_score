@@ -13,4 +13,18 @@ describe MusicalScore::Attribute::Time do
             expect(time.to_s).to eq '6/8'
         end
     end
+
+    describe 'create_by_xml' do
+        let(:dummy_time_xml) {
+            '<time>
+          <beats>3</beats>
+          <beat-type>4</beat-type>
+        </time>'
+        }
+        it do
+            xml = dummy_xml(dummy_time_xml)
+            time = MusicalScore::Attribute::Time.create_by_xml(xml.elements["time"])
+            expect(time).to have_attributes(beats: 3, beat_type: 4)
+        end
+    end
 end

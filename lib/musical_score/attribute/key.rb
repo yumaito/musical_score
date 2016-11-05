@@ -51,6 +51,13 @@ module MusicalScore
                     return { :major_pitch => major_pitch, :minor_pitch => minor_pitch, :altered_pitches => altered_pitches }
                 end
             end
+
+            Contract REXML::Element => MusicalScore::Attribute::Key
+            def self.create_by_xml(xml_doc)
+                fifths = xml_doc.elements["fifths"].text.to_i
+                mode   = xml_doc.elements["mode"].text.to_sym
+                return MusicalScore::Attribute::Key.new(fifths, mode)
+            end
         end
     end
 end

@@ -14,6 +14,17 @@ module MusicalScore
             def initialize(measures)
                 @measures = measures
             end
+
+            Contract REXML::Element => MusicalScore::Part::Part
+            def self.create_by_xml(xml_doc)
+                measure_array = Array.new
+                xml_doc.elements.each("//measure") do |element|
+                    measure = MusicalScore::Part::Measure.create_by_xml(element)
+                    measure_array.push(measure)
+                end
+                measures = MusicalScore::Measures.new(measure_array)
+                return MusicalScore::Part::Part.new(measures)
+            end
         end
     end
 end
