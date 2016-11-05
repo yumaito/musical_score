@@ -80,4 +80,18 @@ describe MusicalScore::Attribute::Key do
             ])
         end
     end
+
+    describe 'create_by_xml' do
+        let(:dummy_key_xml) {
+            '<key>
+          <fifths>-3</fifths>
+          <mode>major</mode>
+        </key>'
+        }
+        it do
+            xml = dummy_xml(dummy_key_xml)
+            key = MusicalScore::Attribute::Key.create_by_xml(xml.elements["key"])
+            expect(key).to have_attributes(fifths: -3, mode: :major)
+        end
+    end
 end
