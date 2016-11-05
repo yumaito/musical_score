@@ -31,6 +31,8 @@ module MusicalScore
                 @part_list      = part_list
                 @parts          = parts
                 @file_path      = file_path
+
+                set_location
             end
 
             Contract REXML::Document, String => MusicalScore::Score::Score
@@ -67,6 +69,12 @@ module MusicalScore
                 args[:parts] = parts
 
                 return MusicalScore::Score::Score.new(args)
+            end
+
+            def set_location
+                @parts.each do |part|
+                    part.set_location
+                end
             end
         end
     end
