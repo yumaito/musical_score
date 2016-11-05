@@ -100,22 +100,22 @@ describe MusicalScore::Note::Note do
 
             let(:dummy_tuplet) {
               '<note default-x="117">
-            <pitch>
-              <step>D</step>
-              <octave>5</octave>
-            </pitch>
-            <duration>4</duration>
-            <voice>1</voice>
-            <type>quarter</type>
-            <time-modification>
-              <actual-notes>3</actual-notes>
-              <normal-notes>2</normal-notes>
-            </time-modification>
-            <stem default-y="-45.5">down</stem>
-            <notations>
-              <tuplet bracket="yes" number="1" placement="above" type="start"/>
-            </notations>
-          </note>'
+        <pitch>
+          <step>D</step>
+          <octave>5</octave>
+        </pitch>
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>quarter</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
+        <stem default-y="-45.5">down</stem>
+        <notations>
+          <tuplet bracket="yes" number="1" placement="above" type="start"/>
+        </notations>
+      </note>'
             }
 
             it 'normal note' do
@@ -148,7 +148,7 @@ describe MusicalScore::Note::Note do
                 note = MusicalScore::Note::Note.create_by_xml(xml.elements["note"])
                 expect(note.pitch.step).to eq :D
                 expect(note.time_modification).to have_attributes(actual_notes: 3, normal_notes: 2)
-                expect(note.notations.tuplet.type).to eq :start
+                expect(note.notation.tuplet.type).to eq :start
             end
         end
     end

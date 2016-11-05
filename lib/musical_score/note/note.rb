@@ -101,7 +101,7 @@ module MusicalScore
                 notation     = notation_doc ? MusicalScore::Note::Notation::Notation.create_by_xml(notation_doc) : nil
 
                 time_modification_doc = xml_doc.elements["time-modification"]
-                time_modification = time_modification_doc ? MusicalScore::Note::Note.create_by_xml(time_modification) : nil
+                time_modification = time_modification_doc ? MusicalScore::Note::TimeModification.create_by_xml(time_modification_doc) : nil
                 rest = xml_doc.elements["rest"] ? true : false
                 if (rest)
                     return MusicalScore::Note::Note.new(duration: duration, tie: tie, dot: dots, rest: rest, type: type, time_modification: time_modification, notation: notation)
