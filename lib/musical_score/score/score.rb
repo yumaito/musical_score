@@ -9,31 +9,36 @@ module MusicalScore
     module Score
         class Score < MusicalScore::ElementBase
             include Contracts
+
+            attr_reader :file_path
             attr_accessor :credits, :identification, :part_list, :parts
             Contract KeywordArgs[
                 :credits        => Optional[ArrayOf[String]],
                 :identification => Optional[MusicalScore::Score::Identification::Identification],
                 :part_list      => ArrayOf[MusicalScore::Score::Part::Part],
                 :parts          => ArrayOf[MusicalScore::Part::Part],
+                :file_path      => Optional[String],
             ] => Any
             def initialize(
                 credits: nil,
                 identification: nil,
                 part_list:,
-                parts:
+                parts:,
+                file_path: nil
                 )
                 @credits        = credits
                 @identification = identification
                 @part_list      = part_list
                 @parts          = parts
+                @file_path      = file_path
             end
 
-            Contract REXML::Document => MusicalScore::Score::Score
-            def self.create_by_xml(xml_doc)
+            Contract REXML::Document, String => MusicalScore::Score::Score
+            def self.create_by_xml(xml_doc, file_path)
                 partwise           = xml_doc.elements["//score-partwise"]
-                # parts_doc          = partwise.elements["//part"]
 
                 args = {}
+                args[:file_path] = file_path
                 identification_doc = partwise.elements["//identification"]
                 if (identification_doc)
                     identification = MusicalScore::Score::Identification::Identification.create_by_xml(identification_doc)
