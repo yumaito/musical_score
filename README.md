@@ -1,8 +1,11 @@
 # MusicalScore
 
 [![Build Status](https://travis-ci.org/yumaito/musical_score.svg?branch=master)](https://travis-ci.org/yumaito/musical_score)
+[![Code Climate](https://codeclimate.com/github/yumaito/musical_score/badges/gpa.svg)](https://codeclimate.com/github/yumaito/musical_score)
 
 Library for representing and analysing musical score.
+This library is implemented along with the definitions of [MusicXML](http://www.musicxml.com/) mainly.
+The goal of this project is handling any kind of musical score as ruby class object.
 
 ## Installation
 
@@ -22,7 +25,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Here is a simple usage to import musicXML file:
+
+```ruby
+require 'musical_score'
+
+musical_score = MusicalScore::IO.import("path/to/musicxml.xml")
+```
+
+Now you can handle the musical score as a ruby class object.
 
 ## Contributing
 
