@@ -1,6 +1,5 @@
 require 'musical_score'
 require 'rexml/document'
-require 'pp'
 module MusicalScore
     module IO
         def import(file)
@@ -14,7 +13,7 @@ module MusicalScore
         end
         def import_xml(file_path)
             doc = REXML::Document.new(File.new(file_path))
-            score = MusicalScore::Score::Score.create_by_xml(doc)
+            score = MusicalScore::Score::Score.create_by_xml(doc, file_path)
             return score
         end
 

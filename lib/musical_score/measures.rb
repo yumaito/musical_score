@@ -9,5 +9,22 @@ module MusicalScore
         def initialize(measures)
             @measures = measures
         end
+
+        def all_notes
+            result = Array.new
+            @measures.each do |measure|
+                result.concat(measure)
+            end
+            return result
+        end
+
+        def set_location
+            current_location = Rational(0)
+            @measures.each do |measure|
+                measure.location = current_location
+                measure.notes.set_location(measure.location)
+                current_location += measure.notes.duration
+            end
+        end
     end
 end

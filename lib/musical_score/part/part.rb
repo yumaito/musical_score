@@ -25,6 +25,11 @@ module MusicalScore
                 measures = MusicalScore::Measures.new(measure_array)
                 return MusicalScore::Part::Part.new(measures)
             end
+
+            def set_location
+                division = 4
+                @measures.set_location
+            end
         end
     end
 end
