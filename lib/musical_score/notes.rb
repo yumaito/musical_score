@@ -14,13 +14,13 @@ module MusicalScore
             return { note: divided_array[1], rest: divided_array[0] }
         end
 
-        def set_location(location)
-            current_location = location
+        def set_location(location, number)
+            current_location = MusicalScore::Location.new(number, location)
             @notes.each do |note|
                 note.location = current_location
-                current_location += note.actual_duration
+                current_location = MusicalScore::Location.new(number, current_location.location + note.actual_duration)
             end
-            @duration = current_location - location
+            @duration = current_location.location - location
         end
     end
 end

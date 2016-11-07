@@ -47,7 +47,7 @@ end
 def create_measures(num)
     result = Array.new
     num.times do |index|
-        result.push(create_measure(index))
+        result.push(create_measure(index + 1))
     end
     return result
 end

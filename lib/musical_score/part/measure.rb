@@ -6,7 +6,6 @@ module MusicalScore
     module Part
         class Measure < MusicalScore::ElementBase
             include Contracts
-            attr_accessor :location
             attr_reader :attribute, :number, :notes
             Contract MusicalScore::Notes, Nat, Maybe[MusicalScore::Attribute::Attribute]=> Any
             def initialize(notes, number, attribute = nil)
@@ -27,6 +26,10 @@ module MusicalScore
                 end
                 notes = MusicalScore::Notes.new(note_array)
                 return MusicalScore::Part::Measure.new(notes, number, attributes)
+            end
+
+            def location
+                return @notes.notes[0].location
             end
         end
     end
