@@ -21,8 +21,8 @@ module MusicalScore
         def set_location
             current_location = Rational(0)
             @measures.each do |measure|
-                measure.location = current_location
-                measure.notes.set_location(measure.location)
+                number = measure.number
+                measure.notes.set_location(current_location, number)
                 current_location += measure.notes.duration
             end
         end

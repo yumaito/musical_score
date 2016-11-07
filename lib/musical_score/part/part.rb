@@ -27,7 +27,6 @@ module MusicalScore
             end
 
             def set_location
-                division = 4
                 @measures.set_location
             end
         end
