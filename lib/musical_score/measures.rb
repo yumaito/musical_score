@@ -10,6 +10,10 @@ module MusicalScore
             @measures = measures
         end
 
+        def [](index)
+            return @measures[index]
+        end
+
         def all_notes
             result = Array.new
             @measures.each do |measure|

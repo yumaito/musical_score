@@ -29,7 +29,7 @@ module MusicalScore
             end
 
             def location
-                return @notes.notes[0].location
+                return @notes[0].location
             end
         end
     end

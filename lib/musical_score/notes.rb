@@ -14,6 +14,10 @@ module MusicalScore
             return { note: divided_array[1], rest: divided_array[0] }
         end
 
+        def [](index)
+            return @notes[index]
+        end
+
         def set_location(location, number)
             current_location = MusicalScore::Location.new(number, location)
             @notes.each do |note|
