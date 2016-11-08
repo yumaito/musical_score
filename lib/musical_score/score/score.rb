@@ -37,7 +37,7 @@ module MusicalScore
 
             Contract REXML::Document, String => MusicalScore::Score::Score
             def self.create_by_xml(xml_doc, file_path)
-                partwise           = xml_doc.elements["//score-partwise"]
+                partwise = xml_doc.elements["//score-partwise"]
 
                 args = {}
                 args[:file_path] = file_path
@@ -69,6 +69,34 @@ module MusicalScore
                 args[:parts] = parts
 
                 return MusicalScore::Score::Score.new(args)
+            end
+
+            def export_xml(path)
+                doc = REXML::Document.new
+                doc << REXML::XMLDecl.new('1.0', 'UTF-8')
+                doc << REXML::DocType.new("score-partwise", 'PUBLIC "-//Recordare//DTD MusicXML 3.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd"')
+
+                score_partwise = REXML::Element.new('score-partwise')
+                if (@identification)
+                    score_partwise.add_element(@identification.export_xml)
+                end
+
+                part_list = REXML::Element.new('part_list')
+                @part_list.each_with_index do |part, index|
+                    part_list.add_element(part.export_xml, index)
+                end
+                score_partwise.add_element(part_list)
+
+                @parts.each_with_index do |part, index|
+                    score_partwise.add_element(part.export_xml, index)
+                end
+
+                doc.add_element(score_partwise)
+
+                xml = ''
+                formatter = REXML::Formatters::Pretty.new(4)
+                formatter.write(doc, xml)
+                puts xml
             end
 
             def set_location
