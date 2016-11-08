@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pp'
 
 describe MusicalScore::Measures do
     describe 'initialize' do
