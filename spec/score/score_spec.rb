@@ -18,9 +18,12 @@ describe MusicalScore::Score::Score do
             part      = create_partwise_part(4)
             part_list = MusicalScore::Score::Part::Part.new("Guitar", "Gt.")
             score     = MusicalScore::Score::Score.new(
+                credits: [ "hoge" ],
                 part_list: [ part_list ],
                 parts: [ part ],
             )
+            # test credit element
+            # test the other elemets on the other individual test
             score.export_xml("hoge")
         end
     end

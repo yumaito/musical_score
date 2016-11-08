@@ -74,23 +74,37 @@ module MusicalScore
             def export_xml(path)
                 doc = REXML::Document.new
                 doc << REXML::XMLDecl.new('1.0', 'UTF-8')
-                doc << REXML::DocType.new("score-partwise", 'PUBLIC "-//Recordare//DTD MusicXML 3.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd"')
+                doc << REXML::Document.new(<<-EOS).doctype
+                <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 3.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
+                EOS
 
                 score_partwise = REXML::Element.new('score-partwise')
-                if (@identification)
-                    score_partwise.add_element(@identification.export_xml)
-                end
+                # if (@identification)
+                #     score_partwise.add_element(@identification.export_xml)
+                # end
+                #
+                if (@credits)
+                    @credits.each_with_index do |credit, index|
+                        credit_element = REXML::Element.new('credit')
+                        credit_element.add_attribute('page', index + 1)
 
-                part_list = REXML::Element.new('part_list')
-                @part_list.each_with_index do |part, index|
-                    part_list.add_element(part.export_xml, index)
-                end
-                score_partwise.add_element(part_list)
+                        credit_word = REXML::Element.new('credit-words')
+                        credit_word.add_text(credit)
 
-                @parts.each_with_index do |part, index|
-                    score_partwise.add_element(part.export_xml, index)
+                        credit_element.add_element(credit_word)
+                        score_partwise.add_element(credit_element)
+                    end
                 end
-
+                # part_list = REXML::Element.new('part_list')
+                # @part_list.each_with_index do |part, index|
+                #     part_list.add_element(part.export_xml, index)
+                # end
+                # score_partwise.add_element(part_list)
+                #
+                # @parts.each_with_index do |part, index|
+                #     score_partwise.add_element(part.export_xml, index)
+                # end
+                #
                 doc.add_element(score_partwise)
 
                 xml = ''
