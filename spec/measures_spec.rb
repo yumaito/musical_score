@@ -16,9 +16,9 @@ describe MusicalScore::Measures do
             measures      = MusicalScore::Measures.new(measure_array)
             measures.set_location
 
-            measures.measures.each do |measure|
+            measures.each do |measure|
                 number = measure.number
-                measure.notes.notes.each_with_index do |note, index|
+                measure.notes.each_with_index do |note, index|
                     location = (number - 1) * 4 * 4 + index * 4
                     expect(note.location.measure_number).to eq number
                     expect(note.location.location).to eq Rational(location)

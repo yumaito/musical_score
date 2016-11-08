@@ -3,11 +3,22 @@ require 'musical_score/part/measure'
 module MusicalScore
     class Measures < MusicalScore::ElementBase
         include Contracts
+        include Enumerable
         attr_reader :measures
 
         Contract ArrayOf[MusicalScore::Part::Measure] => Any
         def initialize(measures)
             @measures = measures
+        end
+
+        def [](index)
+            return @measures[index]
+        end
+
+        def each
+            @measures.each do |measure|
+                yield measure
+            end
         end
 
         def all_notes

@@ -3,6 +3,7 @@ require 'musical_score/note/note'
 module MusicalScore
     class Notes < MusicalScore::ElementBase
         include Contracts
+        include Enumerable
         attr_reader :notes, :duration
 
         Contract ArrayOf[MusicalScore::Note::Note] => Any
@@ -12,6 +13,16 @@ module MusicalScore
         def divide_to_notes_and_rests
             divided_array = @notes.partition { |note| note.rest }
             return { note: divided_array[1], rest: divided_array[0] }
+        end
+
+        def [](index)
+            return @notes[index]
+        end
+
+        def each
+            @notes.each do |note|
+                yield note
+            end
         end
 
         def set_location(location, number)
