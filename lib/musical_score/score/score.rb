@@ -79,10 +79,10 @@ module MusicalScore
                 EOS
 
                 score_partwise = REXML::Element.new('score-partwise')
-                # if (@identification)
-                #     score_partwise.add_element(@identification.export_xml)
-                # end
-                #
+                if (@identification)
+                    score_partwise.add_element(@identification.export_xml)
+                end
+
                 if (@credits)
                     @credits.each_with_index do |credit, index|
                         credit_element = REXML::Element.new('credit')

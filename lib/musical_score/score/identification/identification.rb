@@ -31,6 +31,16 @@ module MusicalScore
 
                     return MusicalScore::Score::Identification::Identification.new(creators, encoding)
                 end
+
+                def export_xml
+                    identification = REXML::Element.new('identification')
+                    @creators.each do |creator|
+                        identification.add_element(creator.export_xml)
+                    end
+                    identification.add_element(@encoding.export_xml)
+
+                    return identification
+                end
             end
         end
     end
