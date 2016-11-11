@@ -33,7 +33,6 @@ module MusicalScore
                             supports.push(element.attributes["element"])
                         end
                     end
-
                     return MusicalScore::Score::Identification::Encoding.new(encoding_date, encoding_description, softwares, supports)
                 end
 
@@ -51,10 +50,13 @@ module MusicalScore
                         supports_e = REXML::Element.new('supports')
                         supports_e.add_attribute('type','yes')
                         supports_e.add_attribute('element',support)
+                        encoding.add_element(supports_e)
                     end
                     desc_e = REXML::Element.new('encoding-description')
-                    desc_e.add_element(@encoding_description)
-                    encoding.add_element(desc_e)
+                    if (@encoding_description != '')
+                        desc_e.add_text(@encoding_description)
+                        encoding.add_element(desc_e)
+                    end
 
                     return encoding
                 end
