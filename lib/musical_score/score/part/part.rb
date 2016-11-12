@@ -17,6 +17,20 @@ module MusicalScore
                     @part_name         = part_name
                     @part_abbreviation = part_abbreviation
                 end
+
+                def export_xml(index)
+                    score_part_element = REXML::Element.new('score-part')
+                    score_part_element.add_attribute('id', "P" + index.to_s)
+
+                    part_name_element  = REXML::Element.new('part-name')
+                    part_name_element.add_text(@part_name)
+                    part_abbreviation_element = REXML::Element.new('part-abbreviation')
+                    part_abbreviation_element.add_text(@part_abbreviation)
+                    score_part_element.add_element(part_name_element)
+                    score_part_element.add_element(part_abbreviation_element)
+
+                    return score_part_element
+                end
             end
         end
     end

@@ -95,6 +95,11 @@ module MusicalScore
                         score_partwise.add_element(credit_element)
                     end
                 end
+                part_list_element = REXML::Element.new('part-list')
+                @part_list.each_with_index do |part, index|
+                    part_list_element.add_element(index + 1)
+                end
+                score_partwise.add_element(part_list_element)
                 # part_list = REXML::Element.new('part_list')
                 # @part_list.each_with_index do |part, index|
                 #     part_list.add_element(part.export_xml, index)
