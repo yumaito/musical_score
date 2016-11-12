@@ -30,7 +30,7 @@ describe MusicalScore::Attribute::Time do
 
     describe 'export_xml' do
         it do
-            xml = dummy_xml(dummy_time_xml)
+            xml  = dummy_xml(dummy_time_xml)
             time = MusicalScore::Attribute::Time.create_by_xml(xml.elements["time"])
             expect(format_xml(time.export_xml)).to eq format_xml(xml.elements["time"])
         end
