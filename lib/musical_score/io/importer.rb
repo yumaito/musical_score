@@ -1,6 +1,5 @@
 require 'musical_score'
 require 'rexml/document'
-require 'rexml/formatters/pretty'
 module MusicalScore
     module IO
         def import(file)
