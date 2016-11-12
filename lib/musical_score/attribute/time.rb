@@ -24,6 +24,20 @@ module MusicalScore
                 beat_type = xml_doc.elements["beat-type"].text.to_i
                 return MusicalScore::Attribute::Time.new(beats, beat_type)
             end
+
+            def export_xml
+                time      = REXML::Element.new('time')
+                beats     = REXML::Element.new('beats')
+                beat_type = REXML::Element.new('beat-type')
+
+                beats.add_text(@beats.to_s)
+                beat_type.add_text(@beat_type.to_s)
+
+                time.add_element(beats)
+                time.add_element(beat_type)
+
+                return time
+            end
         end
     end
 end
