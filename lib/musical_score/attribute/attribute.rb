@@ -49,6 +49,21 @@ module MusicalScore
                 attributes = MusicalScore::Attribute::Attribute.new(divisions: divisions, clef: clef, time: time)
                 return attributes
             end
+
+            def export_xml
+                attribute_element = REXML::Element.new('attributes')
+                divisions_element = REXML::Element.new('divisions').add_text(@divisions.to_s)
+                key_element       = @key.export_xml
+                time_element      = @time.export_xml
+                clef_element      = @clef.export_xml
+
+                attribute_element.add_element(divisions_element)
+                attribute_element.add_element(key_element)
+                attribute_element.add_element(time_element)
+                attribute_element.add_element(clef_element)
+
+                return attribute_element
+            end
         end
     end
 end
