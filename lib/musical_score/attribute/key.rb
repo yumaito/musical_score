@@ -58,6 +58,17 @@ module MusicalScore
                 mode   = xml_doc.elements["mode"].text.to_sym
                 return MusicalScore::Attribute::Key.new(fifths, mode)
             end
+
+            def export_xml
+                key_element    = REXML::Element.new('key')
+                fifths_element = REXML::Element.new('fifths').add_text(@fifths.to_s)
+                mode_element   = REXML::Element.new('mode').add_text(@mode.to_s)
+
+                key_element.add_element(fifths_element)
+                key_element.add_element(mode_element)
+
+                return key_element
+            end
         end
     end
 end

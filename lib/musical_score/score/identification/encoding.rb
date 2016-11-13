@@ -33,8 +33,32 @@ module MusicalScore
                             supports.push(element.attributes["element"])
                         end
                     end
-
                     return MusicalScore::Score::Identification::Encoding.new(encoding_date, encoding_description, softwares, supports)
+                end
+
+                def export_xml
+                    encoding = REXML::Element.new('encoding')
+                    @softwares.each do |software|
+                        software_e = REXML::Element.new('software')
+                        software_e.add_text(software)
+                        encoding.add_element(software_e)
+                    end
+                    encoding_date = REXML::Element.new('encoding-date')
+                    encoding_date.add_text(@encoding_date.strftime("%Y-%m-%d"))
+                    encoding.add_element(encoding_date)
+                    @supports.each do |support|
+                        supports_e = REXML::Element.new('supports')
+                        supports_e.add_attribute('type','yes')
+                        supports_e.add_attribute('element',support)
+                        encoding.add_element(supports_e)
+                    end
+                    desc_e = REXML::Element.new('encoding-description')
+                    if (@encoding_description != '')
+                        desc_e.add_text(@encoding_description)
+                        encoding.add_element(desc_e)
+                    end
+
+                    return encoding
                 end
             end
         end

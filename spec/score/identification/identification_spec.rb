@@ -13,31 +13,30 @@ describe MusicalScore::Score::Identification do
             expect(identification.encoding.encoding_description).to eq "hogehoge"
         end
     end
-
-    describe 'create_by_xml' do
-        let(:dummy_identification_xml) {
-            '<identification>
+    let(:dummy_identification_xml) {
+        '<identification>
     <creator type="composer">Ludwig van Beethoven</creator>
     <encoding>
-      <software>Finale 2012 for Windows</software>
-      <software>Dolet Light for Finale 2012</software>
-      <encoding-date>2012-09-06</encoding-date>
-      <supports attribute="new-system" element="print" type="yes" value="yes"/>
-      <supports attribute="new-page" element="print" type="yes" value="yes"/>
+        <software>Finale 2012 for Windows</software>
+        <software>Dolet Light for Finale 2012</software>
+        <encoding-date>2012-09-06</encoding-date>
+        <supports type="yes" element="print"/>
+        <supports type="yes" element="print"/>
     </encoding>
-  </identification>'
+</identification>'
         }
         let(:no_creator) {
             '<identification>
     <encoding>
-      <software>Finale 2012 for Windows</software>
-      <software>Dolet Light for Finale 2012</software>
-      <encoding-date>2012-09-06</encoding-date>
-      <supports attribute="new-system" element="print" type="yes" value="yes"/>
-      <supports attribute="new-page" element="print" type="yes" value="yes"/>
+        <software>Finale 2012 for Windows</software>
+        <software>Dolet Light for Finale 2012</software>
+        <encoding-date>2012-09-06</encoding-date>
+        <supports type="yes" element="print"/>
+        <supports type="yes" element="print"/>
     </encoding>
-  </identification>'
-        }
+</identification>'
+    }
+    describe 'create_by_xml' do
         it do
             xml = dummy_xml(dummy_identification_xml)
             identification = MusicalScore::Score::Identification::Identification.create_by_xml(xml.elements["//identification"])
@@ -49,6 +48,19 @@ describe MusicalScore::Score::Identification do
             identification = MusicalScore::Score::Identification::Identification.create_by_xml(xml.elements["//identification"])
             expect(identification.creators).to match([])
             expect(identification.encoding.supports).to match(['print', 'print'])
+        end
+    end
+
+    describe 'export_xml' do
+        it do
+            xml = dummy_xml(dummy_identification_xml)
+            identification = MusicalScore::Score::Identification::Identification.create_by_xml(xml.elements["//identification"])
+            expect(format_xml(identification.export_xml)).to eq format_xml(xml.elements["//identification"])
+        end
+        it do
+            xml = dummy_xml(no_creator)
+            identification = MusicalScore::Score::Identification::Identification.create_by_xml(xml.elements["//identification"])
+            expect(format_xml(identification.export_xml)).to eq format_xml(xml.elements["//identification"])
         end
     end
 end

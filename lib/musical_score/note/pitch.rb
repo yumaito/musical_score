@@ -27,7 +27,6 @@ module MusicalScore
             #
             Contract Enum[*@@key.keys], Enum[*AVAILABLE_NUMBERS_OF_ALTER], Nat => Any
             def initialize(step, alter = 0, octave = 0)
-
                 @step   = step.to_sym
                 @alter  = alter
                 @octave = octave
@@ -99,6 +98,21 @@ module MusicalScore
                 octave = xml_doc.elements["octave"].text.to_i
                 alter  = xml_doc.elements["alter"] ? xml_doc.elements["alter"].text.to_i : 0
                 return MusicalScore::Note::Pitch.new(step, alter, octave)
+            end
+
+            def export_xml
+                pitch_element  = REXML::Element.new('pitch')
+                step_element   = REXML::Element.new('step').add_text(@step.to_s)
+                octave_element = REXML::Element.new('octave').add_text(@octave.to_s)
+
+                pitch_element.add_element(step_element)
+                if (@alter != 0)
+                    alter_element = REXML::Element.new('alter').add_text(@alter.to_s)
+                    pitch_element.add_element(alter_element)
+                end
+                pitch_element.add_element(octave_element)
+
+                return pitch_element
             end
 
             private

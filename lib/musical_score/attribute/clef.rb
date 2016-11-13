@@ -26,6 +26,19 @@ module MusicalScore
                 clef = MusicalScore::Attribute::Clef.new(sign, line, clef_octave_change)
                 return clef
             end
+
+            def export_xml
+                clef_element  = REXML::Element.new('clef')
+                sign_element = REXML::Element.new('sign').add_text(@sign.to_s)
+                line_element = @line != 0 ? REXML::Element.new('line').add_text(@line.to_s) : nil
+                clef_octave_change_element = @clef_octave_change != 0 ? REXML::Element.new('clef-octave-change').add_text(@clef_octave_change.to_s) : nil
+
+                clef_element.add_element(sign_element)
+                clef_element.add_element(line_element) if line_element
+                clef_element.add_element(clef_octave_change_element) if clef_octave_change_element
+
+                return clef_element
+            end
         end
     end
 end

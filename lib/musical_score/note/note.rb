@@ -113,6 +113,20 @@ module MusicalScore
                 end
             end
 
+            def export_xml
+                note_element = REXML::Element.new('note')
+                note_element.add_element('rest') if @rest
+                note_element.add_element(@pitch.export_xml) if @pitch
+                note_element.add_element('duration').add_text(@duration.to_s)
+                note_element.add_element('tie').add_attribute('type', @tie.to_s) if @tie
+                note_element.add_element(@type.export_xml)
+                note_element.add_element(@time_modification.export_xml) if @time_modification
+                note_element.add_element(@lyric.export_xml(1)) if @lyric
+                note_element.add_element(@notation.export_xml) if @notation
+
+                return note_element
+            end
+
             private
             def set_actual_duration
                 unless(@time_modification)

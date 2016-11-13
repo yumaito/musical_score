@@ -17,6 +17,12 @@ module MusicalScore
                     name = xml_doc.text
                     return MusicalScore::Score::Identification::Creator.new(name, type)
                 end
+                def export_xml
+                    creator = REXML::Element.new('creator')
+                    creator.add_attribute('type', @type)
+                    creator.add_text(@name)
+                    return creator
+                end
             end
         end
     end

@@ -26,6 +26,17 @@ module MusicalScore
                 return MusicalScore::Part::Part.new(measures)
             end
 
+            def export_xml(number)
+                part = REXML::Element.new('part')
+                part.add_attribute('id', "P" + number.to_s)
+
+                @measures.each do |measure|
+                    part.add_element(measure.export_xml)
+                end
+
+                return part
+            end
+
             def set_location
                 @measures.set_location
             end

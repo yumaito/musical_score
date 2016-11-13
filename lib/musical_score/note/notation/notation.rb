@@ -79,6 +79,26 @@ module MusicalScore
                     tuplet = tuplet_arg ? MusicalScore::Note::Notation::Tuplet.new(tuplet_arg) : nil
                     return MusicalScore::Note::Notation::Notation.new(articulation: articulation, dynamics: dynamics, tie: tie, tuplet: tuplet)
                 end
+
+                def export_xml
+                    notations_element    = REXML::Element.new('notations')
+                    articulation_element = REXML::Element.new('articulations')
+                    dynamics_element     = REXML::Element.new('dynamics')
+
+                    if (@articulation)
+                        articulation_element.add_element(REXML::Element.new(@articulation.to_s))
+                        notations_element.add_element(articulation_element)
+                    end
+                    if (@dynamics)
+                        dynamics_element.add_element(REXML::Element.new(@dynamics.to_s))
+                        notations_element.add_element(dynamics_element)
+                    end
+
+                    notations_element.add_element(@tie.export_xml) if @tie
+                    notations_element.add_element(@tuplet.export_xml) if @tuplet
+
+                    return notations_element
+                end
             end
         end
     end

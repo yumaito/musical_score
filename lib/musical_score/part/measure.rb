@@ -28,6 +28,18 @@ module MusicalScore
                 return MusicalScore::Part::Measure.new(notes, number, attributes)
             end
 
+            def export_xml
+                measure_element = REXML::Element.new('measure')
+                measure_element.add_attribute('number',@number.to_s)
+                measure_element.add_element(@attribute.export_xml) if @attribute
+
+                @notes.each do |note|
+                    measure_element.add_element(note.export_xml)
+                end
+
+                return measure_element
+            end
+
             def location
                 return @notes[0].location
             end

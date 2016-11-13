@@ -14,17 +14,25 @@ describe MusicalScore::Attribute::Time do
         end
     end
 
+    let(:dummy_time_xml) {
+        '<time>
+    <beats>3</beats>
+    <beat-type>4</beat-type>
+</time>'
+    }
     describe 'create_by_xml' do
-        let(:dummy_time_xml) {
-            '<time>
-          <beats>3</beats>
-          <beat-type>4</beat-type>
-        </time>'
-        }
         it do
             xml = dummy_xml(dummy_time_xml)
             time = MusicalScore::Attribute::Time.create_by_xml(xml.elements["time"])
             expect(time).to have_attributes(beats: 3, beat_type: 4)
+        end
+    end
+
+    describe 'export_xml' do
+        it do
+            xml  = dummy_xml(dummy_time_xml)
+            time = MusicalScore::Attribute::Time.create_by_xml(xml.elements["time"])
+            expect(format_xml(time.export_xml)).to eq format_xml(xml.elements["time"])
         end
     end
 end
