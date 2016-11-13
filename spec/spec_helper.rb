@@ -101,6 +101,7 @@ end
 def format_xml(xml_doc)
     result = ''
     formatter = REXML::Formatters::Pretty.new(4)
+    formatter.compact = true
     formatter.write(xml_doc, result)
     return result
 end

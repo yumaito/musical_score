@@ -110,6 +110,7 @@ module MusicalScore
 
                 xml = ''
                 formatter = REXML::Formatters::Pretty.new(4)
+                formatter.compact = true
                 formatter.write(doc, xml)
 
                 # puts xml
