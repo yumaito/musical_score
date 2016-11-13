@@ -30,19 +30,19 @@ describe MusicalScore::Note::Notation::Notation do
         end
     end
 
+    let(:dummy) {
+        '<notations>
+    <articulations>
+        <staccato />
+    </articulations>
+</notations>'
+    }
+    let(:dummy_tuplet) {
+        '<notations>
+    <tuplet type="start"/>
+</notations>'
+    }
     describe 'create_by_xml' do
-        let(:dummy) {
-            '<notations>
-          <articulations>
-            <staccato default-x="3" default-y="-49" placement="below"/>
-          </articulations>
-        </notations>'
-        }
-        let(:dummy_tuplet) {
-            '<notations>
-          <tuplet number="1" placement="above" type="start"/>
-        </notations>'
-        }
         it do
             xml = dummy_xml(dummy)
             notations = MusicalScore::Note::Notation::Notation.create_by_xml(xml.elements["notations"])
@@ -53,6 +53,18 @@ describe MusicalScore::Note::Notation::Notation do
             xml = dummy_xml(dummy_tuplet)
             notations = MusicalScore::Note::Notation::Notation.create_by_xml(xml.elements["notations"])
             expect(notations.tuplet.type).to eq :start
+        end
+    end
+    describe 'export_xml' do
+        it do
+            xml = dummy_xml(dummy)
+            notations = MusicalScore::Note::Notation::Notation.create_by_xml(xml.elements["notations"])
+            expect(format_xml(notations.export_xml)).to eq format_xml(xml.elements["notations"])
+        end
+        it do
+            xml = dummy_xml(dummy_tuplet)
+            notations = MusicalScore::Note::Notation::Notation.create_by_xml(xml.elements["notations"])
+            expect(format_xml(notations.export_xml)).to eq format_xml(xml.elements["notations"])
         end
     end
 end
