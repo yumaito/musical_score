@@ -17,6 +17,7 @@ describe MusicalScore::Measures do
 
             measures.each do |measure|
                 number = measure.number
+                expect(measure.length).to eq 16
                 measure.notes.each_with_index do |note, index|
                     location = (number - 1) * 4 * 4 + index * 4
                     expect(note.location.measure_number).to eq number

@@ -35,6 +35,7 @@ module MusicalScore
                 number = measure.number
                 measure.notes.set_location(current_location, number)
                 current_location += measure.notes.duration
+                measure.length = measure.notes.duration
             end
         end
     end
