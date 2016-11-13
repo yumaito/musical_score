@@ -11,7 +11,7 @@ module MusicalScore
                 end
 
                 def export_xml
-                    tie_element = REXML::Element.new('tie')
+                    tie_element = REXML::Element.new('tied')
                     tie_element.add_attribute('type',@type.to_s)
 
                     return tie_element
