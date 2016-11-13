@@ -94,4 +94,12 @@ describe MusicalScore::Attribute::Key do
             expect(key).to have_attributes(fifths: -3, mode: :major)
         end
     end
+
+    describe 'export_xml' do
+        it do
+            xml = dummy_xml(dummy_key_xml)
+            key = MusicalScore::Attribute::Key.create_by_xml(xml.elements["key"])
+            expect(format_xml(key.export_xml)).to eq format_xml(xml.elements["key"])
+        end
+    end
 end
