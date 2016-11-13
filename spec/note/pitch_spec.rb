@@ -149,18 +149,25 @@ describe MusicalScore::Note::Pitch do
         end
     end
 
+    let(:dummy) {
+        '<pitch>
+    <step>F</step>
+    <alter>1</alter>
+    <octave>4</octave>
+</pitch>'
+    }
     describe 'create_by_xml' do
-        let(:dummy) {
-            '<pitch>
-              <step>F</step>
-              <alter>1</alter>
-              <octave>4</octave>
-            </pitch>'
-        }
         it do
             xml = dummy_xml(dummy)
             pitch = MusicalScore::Note::Pitch.create_by_xml(xml.elements["pitch"])
             expect(pitch).to have_attributes(step: :F, alter: 1, octave: 4)
+        end
+    end
+    describe 'export_xml' do
+        it do
+            xml = dummy_xml(dummy)
+            pitch = MusicalScore::Note::Pitch.create_by_xml(xml.elements["pitch"])
+            expect(format_xml(pitch.export_xml)).to eq format_xml(xml.elements["pitch"])
         end
     end
 end

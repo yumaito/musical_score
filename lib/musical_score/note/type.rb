@@ -20,6 +20,10 @@ module MusicalScore
             def initialize(size)
                 @size = size
             end
+
+            def export_xml
+                return REXML::Element.new('type').add_text(@size.to_s)
+            end
         end
     end
 end

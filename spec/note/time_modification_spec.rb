@@ -8,17 +8,24 @@ describe MusicalScore::Note::TimeModification do
         end
     end
 
+    let(:dummy) {
+        '<time-modification>
+    <actual-notes>3</actual-notes>
+    <normal-notes>2</normal-notes>
+</time-modification>'
+    }
     describe 'create_by_xml' do
-        let(:dummy) {
-            '<time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-        </time-modification>'
-        }
         it do
             xml = dummy_xml(dummy)
             time_modification = MusicalScore::Note::TimeModification.create_by_xml(xml.elements["time-modification"])
             expect(time_modification).to have_attributes(actual_notes: 3, normal_notes: 2)
+        end
+    end
+    describe 'export_xml' do
+        it do
+            xml = dummy_xml(dummy)
+            time_modification = MusicalScore::Note::TimeModification.create_by_xml(xml.elements["time-modification"])
+            expect(format_xml(time_modification.export_xml)).to eq format_xml(xml.elements["time-modification"])
         end
     end
 end

@@ -24,6 +24,20 @@ module MusicalScore
                 is_extend = xml_doc.elements["extend"] ? true : false
                 return MusicalScore::Note::Lyric.new(text, syllabic, is_extend)
             end
+
+            def export_xml(number)
+                lyric_element = REXML::Element.new('lyric')
+                lyric_element.add_attribute('number', number.to_s)
+                text_element  = REXML::Element.new('text').add_text(@text.to_s)
+
+                if (@syllabic)
+                    syllabic_element = REXML::Element.new('syllabic').add_text(@syllabic.to_s)
+                    lyric_element.add_element(syllabic_element)
+                end
+                lyric_element.add_element(text_element)
+
+                return lyric_element
+            end
         end
     end
 end
