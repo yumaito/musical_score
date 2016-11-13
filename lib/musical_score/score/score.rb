@@ -102,10 +102,10 @@ module MusicalScore
                 end
                 score_partwise.add_element(part_list)
                 #
-                # @parts.each_with_index do |part, index|
-                #     score_partwise.add_element(part.export_xml, index)
-                # end
-                #
+                @parts.each_with_index do |part, index|
+                    score_partwise.add_element(part.export_xml(index + 1))
+                end
+
                 doc.add_element(score_partwise)
 
                 xml = ''
