@@ -15,8 +15,8 @@ describe MusicalScore::IO do
             expect{ MusicalScore::IO.import("hoge.jpg") }.to raise_error(MusicalScore::InvalidFileType)
         end
 
-        xit 'benchmark' do
-            Benchmark.bm 10 do |r|
+        it 'benchmark' do
+            Benchmark.bmbm 10 do |r|
                 r.report "import xml" do
                     path = File.expand_path('../../sample/grandfathers_clock.xml', __FILE__)
                     MusicalScore::IO::import(path)
