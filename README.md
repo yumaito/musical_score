@@ -1,8 +1,11 @@
 # MusicalScore
 
 [![Build Status](https://travis-ci.org/yumaito/musical_score.svg?branch=master)](https://travis-ci.org/yumaito/musical_score)
+[![Code Climate](https://codeclimate.com/github/yumaito/musical_score/badges/gpa.svg)](https://codeclimate.com/github/yumaito/musical_score)
 
 Library for representing and analysing musical score.
+This library is implemented along with the definitions of [MusicXML](http://www.musicxml.com/) mainly.
+The goal of this project is handling any kind of musical score as ruby class object.
 
 ## Installation
 
@@ -14,7 +17,7 @@ gem 'musical_score'
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
@@ -22,20 +25,21 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Here is a simple usage to import musicXML file:
 
-## Development
+```ruby
+require 'musical_score'
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+musical_score = MusicalScore::IO.import("path/to/musicxml.xml")
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+Now you can handle the musical score as a ruby class object.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/musical_score. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/yumaito/musical_score. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-

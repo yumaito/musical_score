@@ -1,3 +1,3 @@
 module MusicalScore
-    class InvalidNote < StandardError; end
+    class InvalidFileType < StandardError; end
 end
