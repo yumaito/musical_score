@@ -100,6 +100,7 @@ module MusicalScore
                 return MusicalScore::Note::Pitch.new(step, alter, octave)
             end
 
+            Contract HashOf[String => Any] => MusicalScore::Note::Pitch
             def self.create_by_hash(doc)
                 step   = doc["step"][0].to_sym
                 octave = doc["octave"][0].to_i

@@ -80,6 +80,7 @@ module MusicalScore
                     return MusicalScore::Note::Notation::Notation.new(articulation: articulation, dynamics: dynamics, tie: tie, tuplet: tuplet)
                 end
 
+                Contract HashOf[String => Any] => MusicalScore::Note::Notation::Notation
                 def self.create_by_hash(doc)
                     articulation = doc.has_key?("articulations") ? doc["articulations"][0].keys[0].to_sym : nil
                     dynamics     = doc.has_key?("dynamics") ? doc["dynamics"][0].keys[0].to_sym : nil
