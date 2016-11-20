@@ -72,6 +72,7 @@ module MusicalScore
                 return MusicalScore::Score::Score.new(args)
             end
 
+            Contract HashOf[String => Any], Maybe[String] => MusicalScore::Score::Score
             def self.create_by_hash(doc, file_path)
                 args = {}
                 args[:file_path] = file_path

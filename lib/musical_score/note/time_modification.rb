@@ -18,6 +18,7 @@ module MusicalScore
                 return MusicalScore::Note::TimeModification.new(actual_notes, normal_notes)
             end
 
+            Contract HashOf[String => Any] => MusicalScore::Note::TimeModification
             def self.create_by_hash(doc)
                 actual_notes = doc["actual-notes"][0].to_i
                 normal_notes = doc["normal-notes"][0].to_i

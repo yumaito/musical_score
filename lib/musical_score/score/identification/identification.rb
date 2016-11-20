@@ -32,6 +32,7 @@ module MusicalScore
                     return MusicalScore::Score::Identification::Identification.new(creators, encoding)
                 end
 
+                Contract HashOf[String => Any] => MusicalScore::Score::Identification::Identification
                 def self.create_by_hash(doc)
                     creators = Array.new
                     if (doc.has_key?("creator"))

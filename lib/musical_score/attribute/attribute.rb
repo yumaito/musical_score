@@ -50,6 +50,7 @@ module MusicalScore
                 return attributes
             end
 
+            Contract HashOf[String => Any] => MusicalScore::Attribute::Attribute
             def self.create_by_hash(doc)
                 divisions = doc["divisions"][0].to_i
                 clef      = doc.has_key?("clef") ? MusicalScore::Attribute::Clef.create_by_hash(doc["clef"][0]) : nil

@@ -25,6 +25,7 @@ module MusicalScore
                 return MusicalScore::Note::Lyric.new(text, syllabic, is_extend)
             end
 
+            Contract HashOf[String => Any] => MusicalScore::Note::Lyric
             def self.create_by_hash(doc)
                 syllabic  = doc.has_key?("syllabic") ? doc["syllabic"][0].to_sym : nil
                 text      = doc["text"][0]

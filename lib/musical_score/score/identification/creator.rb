@@ -18,6 +18,7 @@ module MusicalScore
                     return MusicalScore::Score::Identification::Creator.new(name, type)
                 end
 
+                Contract HashOf[String => Any] => MusicalScore::Score::Identification::Creator
                 def self.create_by_hash(doc)
                     type = doc["type"].to_sym
                     name = doc["content"]

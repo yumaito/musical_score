@@ -27,6 +27,7 @@ module MusicalScore
                 return clef
             end
 
+            Contract HashOf[String => Any] => MusicalScore::Attribute::Clef
             def self.create_by_hash(doc)
                 sign = doc["sign"][0].to_sym
                 line = doc.has_key?("line") ? doc["line"][0].to_i : 0

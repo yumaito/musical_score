@@ -113,6 +113,7 @@ module MusicalScore
                 end
             end
 
+            Contract HashOf[String => Any] => MusicalScore::Note::Note
             def self.create_by_hash(doc)
                 dots     = doc.has_key?("dot") ? doc["dot"].size : 0
                 duration = doc["duration"][0].to_i
