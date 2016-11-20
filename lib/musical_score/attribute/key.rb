@@ -59,6 +59,7 @@ module MusicalScore
                 return MusicalScore::Attribute::Key.new(fifths, mode)
             end
 
+            Contract HashOf[String => Any] => MusicalScore::Attribute::Key
             def self.create_by_hash(doc)
                 fifths = doc["fifths"][0].to_i
                 mode   = doc["mode"][0].to_sym
