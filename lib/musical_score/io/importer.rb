@@ -1,7 +1,6 @@
 require 'musical_score'
 require 'rexml/document'
 require 'xmlsimple'
-require 'pp'
 module MusicalScore
     module IO
         def import(file)
@@ -22,6 +21,7 @@ module MusicalScore
         def import_xml_via_hash(file_path)
             doc = XmlSimple.xml_in(open(file_path))
             score = MusicalScore::Score::Score.create_by_hash(doc, file_path)
+            return score
         end
 
         module_function :import, :import_xml, :import_xml_via_hash
