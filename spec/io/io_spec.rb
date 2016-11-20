@@ -3,9 +3,9 @@ require 'spec_helper'
 describe MusicalScore::IO do
     describe 'import' do
         it do
-            allow(MusicalScore::IO).to receive(:import_xml)
+            allow(MusicalScore::IO).to receive(:import_xml_via_hash)
             MusicalScore::IO.import("hoge.xml")
-            expect(MusicalScore::IO).to have_received(:import_xml).once
+            expect(MusicalScore::IO).to have_received(:import_xml_via_hash).once
         end
 
         it do
@@ -15,7 +15,7 @@ describe MusicalScore::IO do
             expect{ MusicalScore::IO.import("hoge.jpg") }.to raise_error(MusicalScore::InvalidFileType)
         end
 
-        xit 'benchmark' do
+        it 'benchmark' do
             Benchmark.bmbm 10 do |r|
                 r.report "import xml" do
                     path = File.expand_path('../../sample/grandfathers_clock.xml', __FILE__)
