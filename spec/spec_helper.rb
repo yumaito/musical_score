@@ -2,6 +2,7 @@ $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
 require "musical_score"
 require "rexml/document"
 require "rexml/formatters/pretty"
+require "benchmark"
 
 # create dummy notes
 def create_notes(num)
