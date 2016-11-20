@@ -168,6 +168,49 @@ describe MusicalScore::Note::Note do
             end
         end
 
+        describe 'create_by_hash' do
+
+            it 'normal note' do
+                doc = dummy_xml_hash(dummy)
+                note = MusicalScore::Note::Note.create_by_hash(doc)
+                expect(note.pitch.step).to eq :B
+                expect(note.duration).to eq 16
+                expect(note.type.size).to eq "eighth"
+                expect(note.rest).to be_falsey
+            end
+
+            it 'rest' do
+                doc = dummy_xml_hash(rest)
+                note = MusicalScore::Note::Note.create_by_hash(doc)
+                expect(note.pitch).to eq nil
+                expect(note.rest).to be_truthy
+                expect(note.duration).to eq 4
+                expect(note.type.size).to eq "quarter"
+            end
+
+            it 'tied note' do
+                doc = dummy_xml_hash(tie_note)
+                note = MusicalScore::Note::Note.create_by_hash(doc)
+                expect(note.pitch.step).to eq :C
+                expect(note.tie).to eq :stop
+            end
+
+            it 'tuplet note' do
+                doc = dummy_xml_hash(dummy_tuplet)
+                note = MusicalScore::Note::Note.create_by_hash(doc)
+                expect(note.pitch.step).to eq :D
+                expect(note.time_modification).to have_attributes(actual_notes: 3, normal_notes: 2)
+                expect(note.notation.tuplet.type).to eq :start
+            end
+
+            it 'lyric note' do
+                doc = dummy_xml_hash(lyric)
+                note = MusicalScore::Note::Note.create_by_hash(doc)
+                expect(note.pitch.step).to eq :F
+                expect(note.lyric.text).to eq "I"
+            end
+        end
+
         describe 'export_xml' do
             it do
                 xml = dummy_xml(dummy)

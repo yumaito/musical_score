@@ -39,6 +39,18 @@ describe MusicalScore::Score::Identification::Encoding do
         end
     end
 
+    describe 'create_by_hash' do
+        it do
+            doc      = dummy_xml_hash(dummy_encoding_xml)
+            encoding = MusicalScore::Score::Identification::Encoding.create_by_hash(doc)
+            encoding_date = Time.local(2012, 9, 6)
+            expect(encoding.encoding_date).to eq encoding_date
+            expect(encoding.encoding_description).to eq ""
+            expect(encoding.softwares).to match(['Finale 2012 for Windows', 'Dolet Light for Finale 2012'])
+            expect(encoding.supports).to match(['print', 'print'])
+        end
+    end
+
     describe 'export_xml' do
         it do
             xml = dummy_xml(dummy_encoding_xml)

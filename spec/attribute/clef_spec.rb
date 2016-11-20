@@ -38,6 +38,19 @@ describe MusicalScore::Attribute::Clef do
         end
     end
 
+    describe 'create_by_hash' do
+        it do
+            doc = dummy_xml_hash(dummy_clef_xml)
+            clef = MusicalScore::Attribute::Clef.create_by_hash(doc)
+            expect(clef).to have_attributes(sign: :G, line: 2, clef_octave_change: -1 )
+        end
+        it do
+            doc = dummy_xml_hash(dummy_clef_xml_g)
+            clef = MusicalScore::Attribute::Clef.create_by_hash(doc)
+            expect(clef).to have_attributes(sign: :G, line: 2, clef_octave_change: 0)
+        end
+    end
+
     describe 'export_xml' do
         it do
             xml = dummy_xml(dummy_clef_xml)

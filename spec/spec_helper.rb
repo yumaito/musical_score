@@ -2,6 +2,8 @@ $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
 require "musical_score"
 require "rexml/document"
 require "rexml/formatters/pretty"
+require "benchmark"
+require "xmlsimple"
 
 # create dummy notes
 def create_notes(num)
@@ -95,6 +97,11 @@ def dummy_xml(str)
 #{str}
     EOM
     doc = REXML::Document.new(xml)
+    return doc
+end
+
+def dummy_xml_hash(str)
+    doc = XmlSimple.xml_in(str)
     return doc
 end
 

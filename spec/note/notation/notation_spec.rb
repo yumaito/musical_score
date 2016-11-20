@@ -55,6 +55,21 @@ describe MusicalScore::Note::Notation::Notation do
             expect(notations.tuplet.type).to eq :start
         end
     end
+
+    describe 'create_by_hash' do
+        it do
+            doc = dummy_xml_hash(dummy)
+            notations = MusicalScore::Note::Notation::Notation.create_by_hash(doc)
+            expect(notations.articulation).to eq :staccato
+        end
+
+        it do
+            doc = dummy_xml_hash(dummy_tuplet)
+            notations = MusicalScore::Note::Notation::Notation.create_by_hash(doc)
+            expect(notations.tuplet.type).to eq :start
+        end
+    end
+
     describe 'export_xml' do
         it do
             xml = dummy_xml(dummy)

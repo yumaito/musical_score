@@ -28,6 +28,14 @@ describe MusicalScore::Attribute::Time do
         end
     end
 
+    describe 'create_by_hash' do
+        it do
+            doc = dummy_xml_hash(dummy_time_xml)
+            time = MusicalScore::Attribute::Time.create_by_hash(doc)
+            expect(time).to have_attributes(beats: 3, beat_type: 4)
+        end
+    end
+
     describe 'export_xml' do
         it do
             xml  = dummy_xml(dummy_time_xml)

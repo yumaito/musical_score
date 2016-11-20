@@ -32,6 +32,18 @@ module MusicalScore
                     return MusicalScore::Score::Identification::Identification.new(creators, encoding)
                 end
 
+                Contract HashOf[String => Any] => MusicalScore::Score::Identification::Identification
+                def self.create_by_hash(doc)
+                    creators = Array.new
+                    if (doc.has_key?("creator"))
+                        doc["creator"].each do |element|
+                            creators.push(MusicalScore::Score::Identification::Creator.create_by_hash(element))
+                        end
+                    end
+                    encoding = doc.has_key?("encoding") ? MusicalScore::Score::Identification::Encoding.create_by_hash(doc["encoding"][0]) : nil
+                    return MusicalScore::Score::Identification::Identification.new(creators, encoding)
+                end
+
                 def export_xml
                     identification = REXML::Element.new('identification')
                     @creators.each do |creator|

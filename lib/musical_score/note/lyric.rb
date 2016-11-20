@@ -25,6 +25,14 @@ module MusicalScore
                 return MusicalScore::Note::Lyric.new(text, syllabic, is_extend)
             end
 
+            Contract HashOf[String => Any] => MusicalScore::Note::Lyric
+            def self.create_by_hash(doc)
+                syllabic  = doc.has_key?("syllabic") ? doc["syllabic"][0].to_sym : nil
+                text      = doc["text"][0]
+                is_extend = doc.has_key?("extend")
+                return MusicalScore::Note::Lyric.new(text, syllabic, is_extend)
+            end
+
             def export_xml(number)
                 lyric_element = REXML::Element.new('lyric')
                 lyric_element.add_attribute('number', number.to_s)
