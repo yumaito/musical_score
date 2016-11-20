@@ -72,6 +72,16 @@ module MusicalScore
                 return MusicalScore::Score::Score.new(args)
             end
 
+            def self.create_by_hash(doc, file_path)
+                args = {}
+                args[:file_path] = file_path
+
+                if doc.has_key?("identification")
+                    identification = MusicalScore::Score::Identification::Identification.create_by_hash(doc["identification"][0])
+                    args[:identification] = identification
+                end
+            end
+
             def export_xml()
                 doc = REXML::Document.new
                 doc << REXML::XMLDecl.new('1.0', 'UTF-8')

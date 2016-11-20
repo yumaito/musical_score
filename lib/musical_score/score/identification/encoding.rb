@@ -36,6 +36,27 @@ module MusicalScore
                     return MusicalScore::Score::Identification::Encoding.new(encoding_date, encoding_description, softwares, supports)
                 end
 
+                def self.create_by_hash(doc)
+                    encoding_date = Time.new
+                    if (doc.has_key?("encoding-date"))
+                        encoding_date = Time.parse(doc["encoding-date"][0])
+                    end
+                    encoding_description = doc.has_key?("encoding_description") ? doc["encoding_date"] : ''
+                    softwares = Array.new
+                    if doc.has_key?("software")
+                        doc["software"].each do |element|
+                            softwares.push(element)
+                        end
+                    end
+                    supports = Array.new
+                    doc["supports"].each do |element|
+                        if (element["type"] == "yes")
+                            supports.push(element["element"])
+                        end
+                    end
+                    return MusicalScore::Score::Identification::Encoding.new(encoding_date, encoding_description, softwares, supports)
+                end
+
                 def export_xml
                     encoding = REXML::Element.new('encoding')
                     @softwares.each do |software|

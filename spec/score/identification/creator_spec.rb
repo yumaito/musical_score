@@ -22,6 +22,14 @@ describe MusicalScore::Score::Identification::Creator do
         end
     end
 
+    describe 'create_by_hash' do
+        it do
+            doc     = dummy_xml_hash(dummy_creator_xml)
+            creator = MusicalScore::Score::Identification::Creator.create_by_hash(doc)
+            expect(creator).to have_attributes(name: "Ludwig van Beethoven", type: :composer)
+        end
+    end
+
     describe 'export_xml' do
         it do
             xml = dummy_xml(dummy_creator_xml)
