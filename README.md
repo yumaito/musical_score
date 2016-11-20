@@ -33,8 +33,14 @@ require 'musical_score'
 
 musical_score = MusicalScore::IO.import("path/to/musicxml.xml")
 ```
-
 Now you can handle the musical score as a ruby class object.
+
+For example, if you want to know the pitch of the first note information:
+```ruby
+pitch = musical_score.part[0].measures[0].notes[0].pitch
+puts pitch
+# E3
+```
 
 ## Contributing
 
