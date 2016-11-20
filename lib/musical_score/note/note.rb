@@ -113,6 +113,25 @@ module MusicalScore
                 end
             end
 
+            def self.create_by_hash(doc)
+                dots     = doc.has_key?("dot") ? doc["dot"].size : 0
+                duration = doc["duration"][0].to_i
+                type     = MusicalScore::Note::Type.new(doc["type"][0])
+                tie      = doc.has_key?("tie") ? doc.dig("tie", 0, "type").to_sym : nil
+                notation = doc.has_key?("notations") ? MusicalScore::Note::Notation::Notation.create_by_hash(doc["notations"][0]) : nil
+                time_modification = doc.has_key?("time-modification") ? MusicalScore::Note::TimeModification.create_by_hash(doc["time-modification"][0]) : nil
+                rest = doc.has_key?("rest")
+
+                if (rest)
+                    return MusicalScore::Note::Note.new(duration: duration, tie: tie, dot: dots, rest: rest, type: type, time_modification: time_modification, notation: notation)
+                else
+                    pitch = MusicalScore::Note::Pitch.create_by_hash(doc["pitch"][0])
+                    lyric = doc.has_key?("lyric") ? MusicalScore::Note::Lyric.create_by_hash(doc["lyric"][0]) : nil
+                    return MusicalScore::Note::Note.new(duration: duration, tie: tie, dot: dots, type: type, lyric: lyric, pitch: pitch, time_modification: time_modification, notation: notation)
+                end
+
+            end
+
             def export_xml
                 note_element = REXML::Element.new('note')
                 note_element.add_element('rest') if @rest

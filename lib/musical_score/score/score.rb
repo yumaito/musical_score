@@ -72,6 +72,41 @@ module MusicalScore
                 return MusicalScore::Score::Score.new(args)
             end
 
+            def self.create_by_hash(doc, file_path)
+                args = {}
+                args[:file_path] = file_path
+
+                if doc.has_key?("identification")
+                    identification = MusicalScore::Score::Identification::Identification.create_by_hash(doc["identification"][0])
+                    args[:identification] = identification
+                end
+
+                credits = Array.new
+                doc["credit"].each do |element|
+                    if (element.has_key?("credit-words"))
+                        credits.push(element.dig("credit-words", 0, "content"))
+                    end
+                end
+                args[:credits] = credits
+
+                part_list = Array.new
+                doc.dig("part-list", 0, "score-part").each do |element|
+                    part_name         = element["part-name"][0]
+                    part_abbreviation = element["part-abbreviation"][0]
+                    part = MusicalScore::Score::Part::Part.new(part_name, part_abbreviation)
+                    part_list.push(part)
+                end
+                args[:part_list] = part_list
+
+                parts = Array.new
+                doc["part"].each do |element|
+                    part = MusicalScore::Part::Part.create_by_hash(element)
+                    parts.push(part)
+                end
+                args[:parts] = parts
+                return MusicalScore::Score::Score.new(args)
+            end
+
             def export_xml()
                 doc = REXML::Document.new
                 doc << REXML::XMLDecl.new('1.0', 'UTF-8')

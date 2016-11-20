@@ -21,6 +21,10 @@ module MusicalScore
             end
         end
 
+        def last
+            return @measures[@measures.size-1]
+        end
+
         def all_notes
             result = Array.new
             @measures.each do |measure|

@@ -38,4 +38,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "yard-contracts"
 
   spec.add_dependency "contracts"
+  spec.add_dependency "xml-simple"
 end

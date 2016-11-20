@@ -100,6 +100,13 @@ module MusicalScore
                 return MusicalScore::Note::Pitch.new(step, alter, octave)
             end
 
+            def self.create_by_hash(doc)
+                step   = doc["step"][0].to_sym
+                octave = doc["octave"][0].to_i
+                alter  = doc.has_key?("alter") ? doc["alter"][0].to_i : 0
+                return MusicalScore::Note::Pitch.new(step, alter, octave)
+            end
+
             def export_xml
                 pitch_element  = REXML::Element.new('pitch')
                 step_element   = REXML::Element.new('step').add_text(@step.to_s)
