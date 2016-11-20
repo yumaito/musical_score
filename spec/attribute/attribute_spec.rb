@@ -69,6 +69,17 @@ describe MusicalScore::Attribute::Attribute do
         end
     end
 
+    describe 'create_by_hash' do
+        it do
+            doc = dummy_xml_hash(dummy_attribute)
+            attribute = MusicalScore::Attribute::Attribute.create_by_hash(doc)
+            expect(attribute.divisions).to eq 2
+            expect(attribute.key).to have_attributes(fifths: 0, mode: :major)
+            expect(attribute.time).to have_attributes(beats: 4, beat_type: 4)
+            expect(attribute.clef).to have_attributes(sign: :G, line: 2, clef_octave_change: 0)
+        end
+    end
+
     describe 'export_xml' do
         it do
             xml = dummy_xml(dummy_attribute)

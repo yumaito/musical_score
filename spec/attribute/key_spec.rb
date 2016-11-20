@@ -95,6 +95,14 @@ describe MusicalScore::Attribute::Key do
         end
     end
 
+    describe 'create_by_hash' do
+        it do
+            doc = dummy_xml_hash(dummy_key_xml)
+            key = MusicalScore::Attribute::Key.create_by_hash(doc)
+            expect(key).to have_attributes(fifths: -3, mode: :major)
+        end
+    end
+
     describe 'export_xml' do
         it do
             xml = dummy_xml(dummy_key_xml)

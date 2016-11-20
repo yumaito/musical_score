@@ -96,6 +96,13 @@ module MusicalScore
                     part_list.push(part)
                 end
                 args[:part_list] = part_list
+
+                parts = Array.new
+                doc["part"].each do |element|
+                    part = MusicalScore::Part::Part.create_by_hash(element)
+                    parts.push(part)
+                end
+                args[:parts] = parts
             end
 
             def export_xml()

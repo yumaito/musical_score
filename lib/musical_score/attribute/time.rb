@@ -25,6 +25,12 @@ module MusicalScore
                 return MusicalScore::Attribute::Time.new(beats, beat_type)
             end
 
+            def self.create_by_hash(doc)
+                beats     = doc["beats"][0].to_i
+                beat_type = doc["beat-type"][0].to_i
+                return MusicalScore::Attribute::Time.new(beats, beat_type)
+            end
+
             def export_xml
                 time      = REXML::Element.new('time')
                 beats     = REXML::Element.new('beats')

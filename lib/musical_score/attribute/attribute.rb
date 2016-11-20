@@ -50,6 +50,16 @@ module MusicalScore
                 return attributes
             end
 
+            def self.create_by_hash(doc)
+                divisions = doc["divisions"][0].to_i
+                clef      = doc.has_key?("clef") ? MusicalScore::Attribute::Clef.create_by_hash(doc["clef"][0]) : nil
+                time      = doc.has_key?("time") ? MusicalScore::Attribute::Time.create_by_hash(doc["time"][0]) : nil
+                key       = doc.has_key?("key") ? MusicalScore::Attribute::Key.create_by_hash(doc["key"][0]) : nil
+
+                attributes = MusicalScore::Attribute::Attribute.new(divisions: divisions, clef: clef, key: key, time: time)
+                return attributes
+            end
+
             def export_xml
                 attribute_element = REXML::Element.new('attributes')
                 divisions_element = REXML::Element.new('divisions').add_text(@divisions.to_s)

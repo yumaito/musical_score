@@ -26,6 +26,15 @@ module MusicalScore
                 return MusicalScore::Part::Part.new(measures)
             end
 
+            def self.create_by_hash(doc)
+                measure_array = Array.new
+                doc["measure"].each do |element|
+                    measure = MusicalScore::Part::Measure.create_by_hash(element)
+                    measure_array.push(measure)
+                end
+                measures = MusicalScore::Measures.new(measure_array)
+            end
+
             def export_xml(number)
                 part = REXML::Element.new('part')
                 part.add_attribute('id', "P" + number.to_s)
