@@ -87,6 +87,7 @@ module MusicalScore
                         credits.push(element.dig("credit-words", 0, "content"))
                     end
                 end
+                args[:credits] = credits
 
                 part_list = Array.new
                 doc.dig("part-list", 0, "score-part").each do |element|
@@ -103,6 +104,7 @@ module MusicalScore
                     parts.push(part)
                 end
                 args[:parts] = parts
+                return MusicalScore::Score::Score.new(args)
             end
 
             def export_xml()

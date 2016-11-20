@@ -33,6 +33,7 @@ module MusicalScore
                     measure_array.push(measure)
                 end
                 measures = MusicalScore::Measures.new(measure_array)
+                return MusicalScore::Part::Part.new(measures)
             end
 
             def export_xml(number)
