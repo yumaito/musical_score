@@ -29,6 +29,7 @@ module MusicalScore
                 return MusicalScore::Part::Measure.new(notes, number, attributes)
             end
 
+            Contract HashOf[String => Any] => MusicalScore::Part::Measure
             def self.create_by_hash(doc)
                 number = doc["number"].to_i
                 attributes = doc.has_key?("attributes") ? MusicalScore::Attribute::Attribute.create_by_hash(doc["attributes"][0]) : nil

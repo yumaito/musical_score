@@ -36,6 +36,7 @@ module MusicalScore
                     return MusicalScore::Score::Identification::Encoding.new(encoding_date, encoding_description, softwares, supports)
                 end
 
+                Contract HashOf[String => Any] => MusicalScore::Score::Identification::Encoding
                 def self.create_by_hash(doc)
                     encoding_date = Time.new
                     if (doc.has_key?("encoding-date"))

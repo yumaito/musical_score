@@ -26,6 +26,7 @@ module MusicalScore
                 return MusicalScore::Part::Part.new(measures)
             end
 
+            Contract HashOf[String => Any] => MusicalScore::Part::Part
             def self.create_by_hash(doc)
                 measure_array = Array.new
                 doc["measure"].each do |element|
