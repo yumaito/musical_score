@@ -1,12 +1,13 @@
 require 'musical_score'
 require 'rexml/document'
+require 'xmlsimple'
 module MusicalScore
     module IO
         def import(file)
             extname = File.extname(file)
             case extname
             when ".xml"
-                return import_xml(file)
+                return import_xml_via_hash(file)
             else
                 raise MusicalScore::InvalidFileType
             end
@@ -17,6 +18,12 @@ module MusicalScore
             return score
         end
 
-        module_function :import, :import_xml
+        def import_xml_via_hash(file_path)
+            doc = XmlSimple.xml_in(open(file_path))
+            score = MusicalScore::Score::Score.create_by_hash(doc, file_path)
+            return score
+        end
+
+        module_function :import, :import_xml, :import_xml_via_hash
     end
 end

@@ -80,6 +80,17 @@ module MusicalScore
                     return MusicalScore::Note::Notation::Notation.new(articulation: articulation, dynamics: dynamics, tie: tie, tuplet: tuplet)
                 end
 
+                Contract HashOf[String => Any] => MusicalScore::Note::Notation::Notation
+                def self.create_by_hash(doc)
+                    articulation = doc.has_key?("articulations") ? doc["articulations"][0].keys[0].to_sym : nil
+                    dynamics     = doc.has_key?("dynamics") ? doc["dynamics"][0].keys[0].to_sym : nil
+                    tie_arg      = doc.has_key?("tied") ? doc.dig("tied", 0, "type").to_sym : nil
+                    tie          = tie_arg ? MusicalScore::Note::Notation::Tie.new(tie_arg) : nil
+                    tuplet_arg   = doc.has_key?("tuplet") ? doc.dig("tuplet", 0, "type").to_sym : nil
+                    tuplet = tuplet_arg ? MusicalScore::Note::Notation::Tuplet.new(tuplet_arg) : nil
+                    return MusicalScore::Note::Notation::Notation.new(articulation: articulation, dynamics: dynamics, tie: tie, tuplet: tuplet)
+                end
+
                 def export_xml
                     notations_element    = REXML::Element.new('notations')
                     articulation_element = REXML::Element.new('articulations')

@@ -18,6 +18,13 @@ module MusicalScore
                 return MusicalScore::Note::TimeModification.new(actual_notes, normal_notes)
             end
 
+            Contract HashOf[String => Any] => MusicalScore::Note::TimeModification
+            def self.create_by_hash(doc)
+                actual_notes = doc["actual-notes"][0].to_i
+                normal_notes = doc["normal-notes"][0].to_i
+                return MusicalScore::Note::TimeModification.new(actual_notes, normal_notes)
+            end
+
             def export_xml
                 time_modification_element = REXML::Element.new('time-modification')
                 actual_notes_element      = REXML::Element.new('actual-notes').add_text(@actual_notes.to_s)

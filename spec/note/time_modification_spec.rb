@@ -21,6 +21,13 @@ describe MusicalScore::Note::TimeModification do
             expect(time_modification).to have_attributes(actual_notes: 3, normal_notes: 2)
         end
     end
+    describe 'create_by_hash' do
+        it do
+            doc = dummy_xml_hash(dummy)
+            time_modification = MusicalScore::Note::TimeModification.create_by_hash(doc)
+            expect(time_modification).to have_attributes(actual_notes: 3, normal_notes: 2)
+        end
+    end
     describe 'export_xml' do
         it do
             xml = dummy_xml(dummy)

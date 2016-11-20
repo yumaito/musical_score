@@ -51,6 +51,21 @@ describe MusicalScore::Score::Identification do
         end
     end
 
+    describe 'create_by_hash' do
+        it do
+            doc            = dummy_xml_hash(dummy_identification_xml)
+            identification = MusicalScore::Score::Identification::Identification.create_by_hash(doc)
+            expect(identification.creators[0].name).to eq "Ludwig van Beethoven"
+            expect(identification.encoding.supports).to match(['print', 'print'])
+        end
+        it do
+            doc            = dummy_xml_hash(no_creator)
+            identification = MusicalScore::Score::Identification::Identification.create_by_hash(doc)
+            expect(identification.creators).to match([])
+            expect(identification.encoding.supports).to match(['print', 'print'])
+        end
+    end
+
     describe 'export_xml' do
         it do
             xml = dummy_xml(dummy_identification_xml)

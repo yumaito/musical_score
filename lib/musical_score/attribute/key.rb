@@ -3,7 +3,7 @@ module MusicalScore
     module Attribute
         class Key < MusicalScore::ElementBase
             include Contracts
-            @@mode = %i(major :minor)
+            @@mode = %i(major minor)
             @@circle_of_fifths = [0, 7, 2, 9, 4, 11, 6, 1, 8, 3, 10, 5]
 
             attr_reader :fifths, :mode
@@ -56,6 +56,13 @@ module MusicalScore
             def self.create_by_xml(xml_doc)
                 fifths = xml_doc.elements["fifths"].text.to_i
                 mode   = xml_doc.elements["mode"].text.to_sym
+                return MusicalScore::Attribute::Key.new(fifths, mode)
+            end
+
+            Contract HashOf[String => Any] => MusicalScore::Attribute::Key
+            def self.create_by_hash(doc)
+                fifths = doc["fifths"][0].to_i
+                mode   = doc["mode"][0].to_sym
                 return MusicalScore::Attribute::Key.new(fifths, mode)
             end
 

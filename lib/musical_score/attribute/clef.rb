@@ -27,6 +27,15 @@ module MusicalScore
                 return clef
             end
 
+            Contract HashOf[String => Any] => MusicalScore::Attribute::Clef
+            def self.create_by_hash(doc)
+                sign = doc["sign"][0].to_sym
+                line = doc.has_key?("line") ? doc["line"][0].to_i : 0
+                clef_octave_change = doc.has_key?("clef-octave-change") ? doc["clef-octave-change"][0].to_i : 0
+                clef = MusicalScore::Attribute::Clef.new(sign, line, clef_octave_change)
+                return clef
+            end
+
             def export_xml
                 clef_element  = REXML::Element.new('clef')
                 sign_element = REXML::Element.new('sign').add_text(@sign.to_s)

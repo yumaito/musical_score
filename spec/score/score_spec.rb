@@ -15,6 +15,7 @@ describe MusicalScore::Score::Score do
 
     describe 'export_xml' do
         it do
+            allow(MusicalScore::Score).to receive(:export_xml)
             part      = create_partwise_part(4)
             part_list = MusicalScore::Score::Part::Part.new("Guitar", "Gt.")
             score     = MusicalScore::Score::Score.new(
@@ -24,7 +25,7 @@ describe MusicalScore::Score::Score do
             )
             # test credit element
             # test the other elemets on the other individual test
-            score.export_xml("hoge")
+            score.export_xml
         end
     end
 end
