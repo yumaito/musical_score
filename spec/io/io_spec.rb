@@ -24,4 +24,18 @@ describe MusicalScore::IO do
             end
         end
     end
+    describe 'export' do
+        it do
+            allow(MusicalScore::IO).to receive(:export_xml)
+            part      = create_partwise_part(4)
+            part_list = MusicalScore::Score::Part::Part.new("Guitar", "Gt.")
+            score     = MusicalScore::Score::Score.new(
+                credits: [ "hoge" ],
+                part_list: [ part_list ],
+                parts: [ part ],
+            )
+            path = File.expand_path('../../sample/output.xml', __FILE__)
+            MusicalScore::IO::export_xml(path, score)
+        end
+    end
 end

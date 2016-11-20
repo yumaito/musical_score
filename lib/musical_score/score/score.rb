@@ -72,7 +72,7 @@ module MusicalScore
                 return MusicalScore::Score::Score.new(args)
             end
 
-            def export_xml(path)
+            def export_xml()
                 doc = REXML::Document.new
                 doc << REXML::XMLDecl.new('1.0', 'UTF-8')
                 doc << REXML::Document.new(<<-EOS).doctype
@@ -108,12 +108,7 @@ module MusicalScore
 
                 doc.add_element(score_partwise)
 
-                xml = ''
-                formatter = REXML::Formatters::Pretty.new(4)
-                formatter.compact = true
-                formatter.write(doc, xml)
-
-                # puts xml
+                return doc
             end
 
             def set_location
