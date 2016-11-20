@@ -163,6 +163,13 @@ describe MusicalScore::Note::Pitch do
             expect(pitch).to have_attributes(step: :F, alter: 1, octave: 4)
         end
     end
+    describe 'create_by_hash' do
+        it do
+            doc = dummy_xml_hash(dummy)
+            pitch = MusicalScore::Note::Pitch.create_by_hash(doc)
+            expect(pitch).to have_attributes(step: :F, alter: 1, octave: 4)
+        end
+    end
     describe 'export_xml' do
         it do
             xml = dummy_xml(dummy)
