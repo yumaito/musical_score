@@ -131,13 +131,13 @@ module MusicalScore
                     return ""
                 elsif (@alter < 0)
                     result = ''
-                    num.times do |i|
+                    num.times do
                         result += 'b'
                     end
                     return result
                 else
                     result = ''
-                    num.times do |i|
+                    num.times do
                         result += '#'
                     end
                     return result

@@ -46,7 +46,7 @@ module MusicalScore
                 time = time_doc ? MusicalScore::Attribute::Time.create_by_xml(time_doc) : nil
                 key  = key_doc ? MusicalScore::Attribute::Key.create_by_xml(key_doc) : nil
 
-                attributes = MusicalScore::Attribute::Attribute.new(divisions: divisions, clef: clef, time: time)
+                attributes = MusicalScore::Attribute::Attribute.new(divisions: divisions, clef: clef, key: key, time: time)
                 return attributes
             end
 

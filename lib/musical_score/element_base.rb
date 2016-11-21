@@ -6,11 +6,11 @@ module MusicalScore
         include Contracts
 
         Contract Or[REXML::Document, REXML::Element] => Any
-        def self.create_by_xml(element)
+        def self.create_by_xml(*)
             raise "Called abstract method: create_by_xml"
         end
 
-        def self.create_by_hash(hash)
+        def self.create_by_hash(*)
             raise "Called abstract method: create_by_hash"
         end
 

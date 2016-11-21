@@ -8,7 +8,7 @@ end
 module MusicalScore
     module Note
         class Note < MusicalScore::ElementBase
-            attr_accessor  :lyric, :location
+            attr_accessor :lyric, :location
             attr_reader :duration, :tie, :dot, :time_modification, :actual_duration, :pitch, :rest, :type, :notation
             include Contracts
 
@@ -89,7 +89,7 @@ module MusicalScore
             Contract REXML::Element => MusicalScore::Note::Note
             def self.create_by_xml(xml_doc)
                 dots = 0
-                xml_doc.elements.each("dot") do |elemet|
+                xml_doc.elements.each("dot") do
                     dots += 1
                 end
                 duration = xml_doc.elements["duration"].text.to_i
