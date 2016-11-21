@@ -36,6 +36,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.1"
   spec.add_development_dependency "yard"
   spec.add_development_dependency "yard-contracts"
+  spec.add_development_dependency "simplecov"
+  spec.add_development_dependency "codeclimate-test-reporter", "~> 1.0.0"
 
   spec.add_dependency "contracts"
   spec.add_dependency "xml-simple"
