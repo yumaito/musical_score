@@ -19,7 +19,6 @@ module MusicalScore
 
                 Contract REXML::Element => MusicalScore::Score::Identification::Identification
                 def self.create_by_xml(xml_doc)
-                    creator_doc  = xml_doc.elements["//creator"]
                     encoding_doc = xml_doc.elements["//encoding"]
 
                     creators = Array.new
