@@ -1,3 +1,6 @@
+require 'SimpleCov'
+SimpleCov.start
+
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
 require "musical_score"
 require "rexml/document"

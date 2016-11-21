@@ -5,3 +5,6 @@ rvm:
 before_install: gem install bundler -v 1.13.5
 notifications:
   email: false
+addons:
+  code_climate:
+    repo_token: d5a9caad0c616994fd66a6edbed26b661e7ea57d1976d96ff1b5b5ad5c8298ff
