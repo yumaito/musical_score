@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/yumaito/musical_score.svg?branch=master)](https://travis-ci.org/yumaito/musical_score)
 [![Code Climate](https://codeclimate.com/github/yumaito/musical_score/badges/gpa.svg)](https://codeclimate.com/github/yumaito/musical_score)
+[![Test Coverage](https://codeclimate.com/github/yumaito/musical_score/badges/coverage.svg)](https://codeclimate.com/github/yumaito/musical_score/coverage)
 [![Gem Version](https://badge.fury.io/rb/musical_score.svg)](https://badge.fury.io/rb/musical_score)
 
 Library for representing and analysing musical score.
