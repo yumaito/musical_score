@@ -147,6 +147,12 @@ module MusicalScore
                 return note_element
             end
 
+            def divide(*rate)
+                if (rate.length <= 1)
+                    return self
+                end
+            end
+
             private
             def set_actual_duration
                 unless(@time_modification)
