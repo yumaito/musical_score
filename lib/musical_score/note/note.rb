@@ -147,10 +147,6 @@ module MusicalScore
                 return note_element
             end
 
-            def modify(hash)
-
-            end
-
             def divide(*rate)
                 if (rate.length <= 1)
                     return self
@@ -159,9 +155,8 @@ module MusicalScore
                     notes = Array.new
                     rate.each do |element|
                         tmp_duration = @duration * Rational(element, sum_of_rate)
-                        cloned_note = self.clone
-                        cloned_note.duration = tmp_duration
-                        notes.push(cloned_note)
+                        marshal_note = Marshal.load(Marshal.dump(self))
+                        notes.push(marshal_note)
                     end
                     result = MusicalScore::Notes.new(notes)
                     result.set_location(@location.location, @location.measure_number)

@@ -250,7 +250,6 @@ describe MusicalScore::Note::Note do
                 type: MusicalScore::Note::Type.new("eighth")
             )
             it 'no argumrnts' do
-                p ObjectUtil.toString(note)
                 divided = note.divide
                 expect(divided).to have_attributes(duration: note.duration, pitch: note.pitch, location: note.location)
             end
@@ -265,6 +264,9 @@ describe MusicalScore::Note::Note do
 
                 expect(divided[0].location).to have_attributes(measure_number: 1, location: Rational(0))
                 expect(divided[1].location).to have_attributes(measure_number: 1, location: Rational(3))
+                # 念のための確認
+                divided[0].lyric.text = "hoge"
+                expect(note.lyric).to_not eq divided[0].lyric
             end
         end
     end
