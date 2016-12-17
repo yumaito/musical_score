@@ -239,5 +239,20 @@ describe MusicalScore::Note::Note do
                 expect(format_xml(note.export_xml)).to eq format_xml(xml.elements["note"])
             end
         end
+
+        describe 'divide' do
+            it do
+                note = MusicalScore::Note::Note.new(
+                    duration: 4,
+                    tie: nil,
+                    dot: 1,
+                    lyric: MusicalScore::Note::Lyric.new("all", :single),
+                    pitch: MusicalScore::Note::Pitch.new(:C),
+                    type: MusicalScore::Note::Type.new("eighth")
+                )
+                divided = note.divide
+                expect(divided).to have_attributes(duration: note.duration, pitch: note.pitch, location: note.location)
+            end
+        end
     end
 end
