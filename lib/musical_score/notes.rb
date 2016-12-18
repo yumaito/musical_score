@@ -25,6 +25,13 @@ module MusicalScore
             end
         end
 
+        def divide(index, *rate)
+            note = @notes[index]
+            divided_notes = @notes[index].divide(*rate)
+            @notes.delete_at(index)
+            @notes.insert(index, *divided_notes)
+        end
+
         def set_location(location, number)
             current_location = MusicalScore::Location.new(number, location)
             @notes.each do |note|

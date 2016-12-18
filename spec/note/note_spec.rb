@@ -239,5 +239,35 @@ describe MusicalScore::Note::Note do
                 expect(format_xml(note.export_xml)).to eq format_xml(xml.elements["note"])
             end
         end
+
+        describe 'divide' do
+            note = MusicalScore::Note::Note.new(
+                duration: 4,
+                tie: nil,
+                dot: 1,
+                lyric: MusicalScore::Note::Lyric.new("all", :single),
+                pitch: MusicalScore::Note::Pitch.new(:C),
+                type: MusicalScore::Note::Type.new("eighth")
+            )
+            it 'no argumrnts' do
+                divided = note.divide
+                expect(divided).to have_attributes(duration: note.duration, pitch: note.pitch, location: note.location)
+            end
+            it 'divide' do
+                note.location = MusicalScore::Location.new(1, Rational(0))
+                divided = note.divide(3,1)
+                expect(divided[0].duration).to eq 3
+                expect(divided[1].duration).to eq 1
+
+                expect(divided[0].pitch).to eq note.pitch
+                expect(divided[1].pitch).to eq note.pitch
+
+                expect(divided[0].location).to have_attributes(measure_number: 1, location: Rational(0))
+                expect(divided[1].location).to have_attributes(measure_number: 1, location: Rational(3))
+                # 念のための確認
+                divided[0].lyric.text = "hoge"
+                expect(note.lyric).to_not eq divided[0].lyric
+            end
+        end
     end
 end

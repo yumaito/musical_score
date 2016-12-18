@@ -8,8 +8,8 @@ end
 module MusicalScore
     module Note
         class Note < MusicalScore::ElementBase
-            attr_accessor :lyric, :location
-            attr_reader :duration, :tie, :dot, :time_modification, :actual_duration, :pitch, :rest, :type, :notation
+            attr_accessor :lyric, :location, :duration
+            attr_reader :tie, :dot, :time_modification, :actual_duration, :pitch, :rest, :type, :notation
             include Contracts
 
             # constructor for rest note
@@ -147,7 +147,25 @@ module MusicalScore
                 return note_element
             end
 
-            private
+            def divide(*rate)
+                if (rate.length <= 1)
+                    return self
+                else
+                    sum_of_rate = rate.inject { |sum, n| sum + n }
+                    notes = Array.new
+                    rate.each do |element|
+                        tmp_duration = @duration * Rational(element, sum_of_rate)
+                        marshal_note = Marshal.load(Marshal.dump(self))
+                        marshal_note.duration = tmp_duration
+                        marshal_note.set_actual_duration
+                        notes.push(marshal_note)
+                    end
+                    result = MusicalScore::Notes.new(notes)
+                    result.set_location(@location.location, @location.measure_number)
+                    return result.notes
+                end
+            end
+
             def set_actual_duration
                 unless(@time_modification)
                     @actual_duration = Rational(@duration, 1)

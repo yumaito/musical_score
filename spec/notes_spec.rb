@@ -16,5 +16,25 @@ describe MusicalScore::Notes do
             expect(rest_of_notes).to all(be_falsey)
             expect(rest_of_rests).to all(be_truthy)
         end
+
+        it 'divide' do
+            notes = MusicalScore::Notes.new(create_notes(4))
+            notes.set_location(Rational(0), 1)
+            durations_before = notes.notes.collect { |note| note.duration }
+            expect(notes).to match([
+                have_attributes(duration: 4),
+                have_attributes(duration: 4),
+                have_attributes(duration: 4),
+                have_attributes(duration: 4),
+            ])
+            notes.divide(1,1,1)
+            expect(notes).to match([
+                have_attributes(duration: 4),
+                have_attributes(duration: 2),
+                have_attributes(duration: 2),
+                have_attributes(duration: 4),
+                have_attributes(duration: 4),
+            ])
+        end
     end
 end
